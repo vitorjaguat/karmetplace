@@ -18,6 +18,7 @@ import CartButton from './CartButton'
 import { AccountSidebar } from 'components/navbar/AccountSidebar'
 
 import * as HoverCard from '@radix-ui/react-hover-card'
+import ChainToggle from 'components/common/ChainToggle'
 
 export const NAVBAR_HEIGHT = 81
 export const NAVBAR_HEIGHT_MOBILE = 77
@@ -28,8 +29,6 @@ const Navbar = () => {
   const isMobile = useMediaQuery({ query: '(max-width: 960px' })
   const isMounted = useMounted()
   const { routePrefix } = useMarketplaceChain()
-  const { address } = useAccount();
-
 
   let searchRef = useRef<HTMLInputElement>(null)
 
@@ -66,18 +65,22 @@ const Navbar = () => {
         <Flex align="center">
           <Link href={`/${routePrefix}`}>
             <Box css={{ width: 46, cursor: 'pointer' }}>
-              <Image
+              {/* <Image
                 src="/reservoirLogo.svg"
                 width={36}
                 height={36}
                 alt="Reservoir"
-              />
+              /> */}
+              <div id="logoAnimation" className="mr-7 scale-[0.8]">
+                <div className="logo-animation"></div>
+              </div>
             </Box>
           </Link>
         </Flex>
       </Box>
       <Flex align="center" css={{ gap: '$3' }}>
-        <MobileSearch key={`${router.asPath}-search`} />
+        {/* <MobileSearch key={`${router.asPath}-search`} /> */}
+        <ChainToggle />
         <CartButton />
         <HamburgerMenu key={`${router.asPath}-hamburger`} />
       </Flex>
@@ -115,12 +118,15 @@ const Navbar = () => {
         <Flex align="center">
           <Link href={`/${routePrefix}`}>
             <Box css={{ cursor: 'pointer' }}>
-              <Image
+              {/* <Image
                 src="/reservoirLogo.svg"
                 width={36}
                 height={36}
                 alt="Reservoir"
-              />
+              /> */}
+              <div id="logoAnimation" className="mr-7 scale-[0.8]">
+                <div className="logo-animation"></div>
+              </div>
             </Box>
           </Link>
           <Flex
@@ -131,10 +137,10 @@ const Navbar = () => {
             }}
           >
             <Link href={`/${routePrefix}`}>
-              <NavItem>Explore</NavItem>
+              <NavItem>About</NavItem>
             </Link>
             <Link href={`/${routePrefix}/collections/trending`}>
-              <NavItem>Trending</NavItem>
+              <NavItem>How to</NavItem>
             </Link>
 
             {/* <HoverCard.Root openDelay={200}>
@@ -169,7 +175,7 @@ const Navbar = () => {
               </HoverCard.Content>
             </HoverCard.Root> */}
 
-            {false && (
+            {/* {false && (
               <Link href={`/${routePrefix}/collections/minting`}>
                 <NavItem>Mints</NavItem>
               </Link>
@@ -178,18 +184,18 @@ const Navbar = () => {
               <Link href="/swap">
                 <NavItem>Tokens</NavItem>
               </Link>
-            )}
+            )} */}
           </Flex>
         </Flex>
       </Box>
-      <Box css={{ flex: 1, px: '$5' }}>
+      {/* <Box css={{ flex: 1, px: '$5' }}>
         <GlobalSearch
           ref={searchRef}
           placeholder="Search collections and addresses"
           containerCss={{ width: '100%' }}
           key={router.asPath}
         />
-      </Box>
+      </Box> */}
 
       <Flex
         css={{
@@ -202,7 +208,7 @@ const Navbar = () => {
         justify="end"
         align="center"
       >
-        <Flex css={{ gap: '$5', mr: 12 }}>
+        {/* <Flex css={{ gap: '$5', mr: 12 }}>
           <Box>
             <HoverCard.Root openDelay={120}>
               <HoverCard.Trigger>
@@ -246,13 +252,15 @@ const Navbar = () => {
             </HoverCard.Root>
           </Box>
           {isConnected && (
-            <Link href={`/portfolio/${address || ''}`}>
+            <Link href={`/portfolio`}>
               <Box css={{ mr: '$2' }}>
                 <NavItem>Portfolio</NavItem>
               </Box>
             </Link>
           )}
-        </Flex>
+        </Flex> */}
+
+        <ChainToggle />
 
         {isConnected ? (
           <AccountSidebar />

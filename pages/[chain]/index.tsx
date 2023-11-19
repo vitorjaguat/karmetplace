@@ -10,7 +10,7 @@ import {
 import Layout from 'components/Layout'
 import { paths } from '@reservoir0x/reservoir-sdk'
 import { useContext, useEffect, useState } from 'react'
-import { Footer } from 'components/home/Footer'
+// import { Footer } from 'components/home/Footer'
 import { useMarketplaceChain, useMounted } from 'hooks'
 import supportedChains, { DefaultChain } from 'utils/chains'
 import { Head } from 'components/Head'
@@ -26,6 +26,7 @@ import ChainToggle from 'components/common/ChainToggle'
 import optimizeImage from 'utils/optimizeImage'
 import { MarkdownLink } from 'components/primitives/MarkdownLink'
 import { useRouter } from 'next/router'
+import Header from 'components/home/Header'
 
 const StyledImage = styled('img', {})
 
@@ -43,30 +44,85 @@ const Home: NextPage<any> = ({ ssr }) => {
     }
   }, [nextTheme])
 
-  const { chain } = useContext(ChainContext)
+  const { chain, switchCurrentChain } = useContext(ChainContext)
 
-  const { data: topSellingCollectionsData } = useTopSellingCollections(
-    {
-      period: '24h',
-      includeRecentSales: true,
-      limit: 9,
-      fillType: 'sale',
-    },
-    {
-      revalidateOnMount: true,
-      refreshInterval: 300000,
-      fallbackData: ssr.topSellingCollections[marketplaceChain.id]?.collections
-        ? ssr.topSellingCollections[marketplaceChain.id]
-        : null,
-    },
-    isMounted ? chain?.id : undefined
-  )
+  //handles for collections/chains
+  const handleGoerli = () => {
+    const newChain = supportedChains?.find((ch) => ch?.routePrefix == 'goerli')
+    if (newChain) {
+      //   const newUrl = router.asPath.replace(
+      //     chain.routePrefix,
+      //     newChain?.routePrefix
+      //   )
+      //   console.log(newUrl)
+      switchCurrentChain(newChain?.id)
+      router.push(
+        `/goerli/collection/0x01a8c25b7f28443875d982c8236c59699ce70dd9`,
+        undefined,
+        { scroll: false }
+      )
+    }
+  }
 
-  const topCollection = topSellingCollectionsData?.collections?.[0]
+  const handleEthereum = () => {
+    const newChain = supportedChains?.find(
+      (ch) => ch?.routePrefix == 'ethereum'
+    )
+    if (newChain) {
+      //   const newUrl = router.asPath.replace(
+      //     chain.routePrefix,
+      //     newChain?.routePrefix
+      //   )
+      //   console.log(newUrl)
+      switchCurrentChain(newChain?.id)
+      router.push(
+        `/ethereum/collection/0x69b377c8dddc25ae26c422d39b45744bb67aab4b`,
+        undefined,
+        { scroll: false }
+      )
+    }
+  }
+
+  const handleZora = () => {
+    const newChain = supportedChains?.find((ch) => ch?.routePrefix == 'zora')
+    if (newChain) {
+      //   const newUrl = router.asPath.replace(
+      //     chain.routePrefix,
+      //     newChain?.routePrefix
+      //   )
+      //   console.log(newUrl)
+      switchCurrentChain(newChain?.id)
+      router.push(
+        `/zora/collection/0xe27f011e8eb90b4d42fa7658fbe44e240d9c5f03`,
+        undefined,
+        { scroll: false }
+      )
+    }
+  }
+
+  const handleSapo = () => {
+    const newChain = supportedChains?.find(
+      (ch) => ch?.routePrefix == 'ethereum'
+    )
+    if (newChain) {
+      //   const newUrl = router.asPath.replace(
+      //     chain.routePrefix,
+      //     newChain?.routePrefix
+      //   )
+      //   console.log(newUrl)
+      switchCurrentChain(newChain?.id)
+      router.push(
+        `/ethereum/collection/0x9523e213d3929be2c6f48e5dafe2b8a3d4fd3e39`,
+        undefined,
+        { scroll: false }
+      )
+    }
+  }
 
   return (
     <Layout>
       <Head />
+      {/* <Header /> */}
       <Box
         css={{
           p: 24,
@@ -79,155 +135,170 @@ const Home: NextPage<any> = ({ ssr }) => {
           },
         }}
       >
-        <Link href={`/${chain.routePrefix}/collection/${topCollection?.id}`}>
-          <Flex>
-            <Flex
-              css={{
-                '&:hover button': {
-                  background: theme == 'light' ? '$primary11' : '$gray2',
-                },
-                minHeight: 540,
-                flex: 1,
-                overflow: 'hidden',
-                position: 'relative',
-                gap: '$5',
-                p: '$4',
-                display: 'none',
-                '@md': {
-                  p: '$5',
-                  gap: '$4',
-                  flexDirection: 'column',
-                  display: 'flex',
-                },
-                '@lg': {
-                  flexDirection: 'row',
-                  p: '$5',
-                  gap: '$5',
-                  mt: '$4',
-                },
-                '@xl': {
-                  p: '$6',
-                  gap: '$6',
-                },
-
-                mb: '$6',
-                maxWidth: 1820,
-                mx: 'auto',
-                borderRadius: 16,
-                backgroundSize: 'cover',
-                border: `1px solid $gray5`,
-                backgroundImage:
-                  theme === 'light'
-                    ? `url(${optimizeImage(topCollection?.banner, 1820)})`
-                    : '$gray3',
-                backgroundColor: '$gray5',
-              }}
-            >
-              <Box
+        <div className="md:grid md:grid-cols-2">
+          <Link href="/ethereum/collection/0x69b377c8dddc25ae26c422d39b45744bb67aab4b">
+            <Flex>
+              <Flex
                 css={{
-                  position: 'absolute',
-                  top: 0,
-                  display: theme === 'light' ? 'block' : 'none',
-                  zIndex: 0,
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  backdropFilter: 'blur(20px)',
-                  background: 'rgba(255, 255, 255, 0.9)',
-                }}
-              />
+                  '&:hover button': {
+                    background: theme == 'light' ? '$primary11' : '$gray2',
+                  },
+                  minHeight: 540,
+                  flex: 1,
+                  overflow: 'hidden',
+                  position: 'relative',
+                  gap: '$3',
+                  p: '$4',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  '@md': {
+                    p: '$5',
+                    gap: '$4',
+                    flexDirection: 'column',
+                    display: 'flex',
+                  },
+                  '@lg': {
+                    flexDirection: 'row',
+                    p: '$5',
+                    gap: '$5',
+                    mt: '$4',
+                  },
+                  '@xl': {
+                    p: '$6',
+                    gap: '$6',
+                  },
 
-              {topSellingCollectionsData && (
-                <>
+                  mb: '$6',
+                  maxWidth: 1820,
+                  mx: 'auto',
+                  // borderRadius: 16,
+                  // backgroundSize: 'cover',
+                  // border: `1px solid $gray5`,
+                  // backgroundImage: theme === 'light' ? `$gray2` : '$gray3',
+                  // backgroundColor: '$gray5',
+                }}
+              >
+                <Box
+                  css={{
+                    position: 'absolute',
+                    top: 0,
+                    display: theme === 'light' ? 'block' : 'none',
+                    zIndex: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    backdropFilter: 'blur(20px)',
+                    // background: 'rgba(255, 255, 255, 0.9)',
+                  }}
+                />
+
+                <Box
+                  css={{
+                    flex: 2,
+                    position: 'relative',
+                    zIndex: 5,
+                    '@xl': {
+                      flex: 3,
+                    },
+                  }}
+                >
+                  <StyledImage
+                    src={optimizeImage(
+                      // topCollection?.banner ??
+                      //   topCollection?.image ??
+                      //   topCollection?.recentSales?.[0]?.collection?.image ??
+                      //   topCollection?.recentSales?.[0]?.token?.image,
+                      '/assets/collection1.jpg',
+                      1820
+                    )}
+                    css={{
+                      width: '100%',
+                      borderRadius: 8,
+                      height: 320,
+                      '@lg': {
+                        height: 540,
+                      },
+                      objectFit: 'cover',
+                    }}
+                  />
                   <Box
                     css={{
-                      flex: 2,
-                      position: 'relative',
-                      zIndex: 5,
-                      '@xl': {
-                        flex: 3,
+                      position: 'absolute',
+                      left: '$4',
+                      display: 'none',
+                      aspectRatio: 'square',
+                      '@md': {
+                        display: 'block',
                       },
+                      '@lg': {
+                        top: '$4',
+                      },
+                      bottom: '$4',
                     }}
                   >
-                    <StyledImage
-                      src={optimizeImage(
-                        topCollection?.banner ||
-                          topCollection?.image ||
-                          topCollection?.recentSales?.[0]?.collection?.image ||
-                          topCollection?.recentSales?.[0]?.token?.image,
-                        1820
-                      )}
-                      css={{
-                        width: '100%',
+                    <Img
+                      alt="collection image"
+                      width={80}
+                      height={80}
+                      style={{
+                        display: 'block',
                         borderRadius: 8,
-                        height: 320,
-                        '@lg': {
-                          height: 540,
-                        },
-                        objectFit: 'cover',
+                        border: '2px solid rgba(255,255,255,0.6)',
+                        aspectRatio: 'square',
+                        minHeight: 80,
                       }}
+                      src={
+                        optimizeImage(
+                          // topCollection?.image,
+                          '/assets/collection1.jpg',
+                          200
+                        ) as string
+                      }
                     />
-                    <Box
-                      css={{
-                        position: 'absolute',
-                        left: '$4',
-                        '@lg': {
-                          top: '$4',
-                        },
-                        bottom: '$4',
-                      }}
-                    >
-                      <Img
-                        alt="collection image"
-                        width={100}
-                        height={100}
-                        style={{
-                          display: 'block',
-                          borderRadius: 8,
-                          border: '2px solid rgba(255,255,255,0.6)',
-                        }}
-                        src={optimizeImage(topCollection?.image, 200) as string}
-                      />
-                    </Box>
                   </Box>
-                  <Box css={{ flex: 2, zIndex: 4 }}>
-                    <Flex direction="column" css={{ height: '100%' }}>
-                      <Box css={{ flex: 1 }}>
-                        <Text style="h3" css={{ mt: '$3', mb: '$2' }} as="h3">
-                          {topCollection?.name}
-                        </Text>
+                </Box>
+                <Box css={{ flex: 2, zIndex: 4 }}>
+                  <Flex direction="column" css={{ height: '100%' }}>
+                    <Box css={{ flex: 1 }}>
+                      <Text style="h3" css={{ mt: '$3', mb: '$2' }} as="h3">
+                        Spherical GeNFT
+                      </Text>
 
-                        <Box
-                          css={{
-                            maxWidth: 720,
-                            lineHeight: 1.5,
-                            fontSize: 16,
-                            fontWeight: 400,
-                            display: '-webkit-box',
-                            color: '$gray12',
-                            fontFamily: '$body',
-                            WebkitLineClamp: 3,
-                            WebkitBoxOrient: 'vertical',
-                            overflow: 'hidden',
-                            textOverflow: 'ellipsis',
-                          }}
-                        >
-                          <ReactMarkdown
+                      <Box
+                        css={{
+                          maxWidth: 720,
+                          lineHeight: 1.5,
+                          fontSize: 16,
+                          fontWeight: 400,
+                          display: '-webkit-box',
+                          color: '$gray12',
+                          fontFamily: '$body',
+                          WebkitLineClamp: 3,
+                          WebkitBoxOrient: 'vertical',
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                        }}
+                      >
+                        {/* <ReactMarkdown
                             children={topCollection?.description || ''}
                             components={{
                               a: MarkdownLink,
                               p: Text as any,
                             }}
-                          />
-                        </Box>
+                          /> */}
+                        The Spherical GeNFTs are dynamic on-chain generative
+                        artworks that evolve over time as an expression of
+                        membership in The Sphere. The particularities of the
+                        holder's wallet become the seed for an ongoing creation.
+                      </Box>
 
-                        <Flex css={{ mt: '$4' }}>
-                          <Box css={{ mr: '$5' }}>
-                            <Text style="subtitle2" color="subtle">
-                              FLOOR
-                            </Text>
-                            <Box css={{ mt: 2 }}>
-                              <FormatCryptoCurrency
+                      <Flex css={{ mt: '$4' }}>
+                        <Box css={{ mr: '$5' }}>
+                          <Text style="subtitle2" color="subtle">
+                            FLOOR
+                          </Text>
+                          <Box css={{ mt: 2 }}>
+                            {/* <FormatCryptoCurrency
                                 amount={
                                   topCollection?.floorAsk?.price?.amount
                                     ?.native ?? 0
@@ -238,20 +309,21 @@ const Home: NextPage<any> = ({ ssr }) => {
                                   topCollection?.floorAsk?.price?.currency
                                     ?.contract
                                 }
-                              />
-                            </Box>
+                              /> */}
+                            floor value
                           </Box>
+                        </Box>
 
-                          <Box css={{ mr: '$4' }}>
+                        {/* <Box css={{ mr: '$4' }}>
                             <Text style="subtitle2" color="subtle">
                               24H SALES
                             </Text>
                             <Text style="h4" as="h4" css={{ mt: 2 }}>
                               {topCollection?.count?.toLocaleString()}
                             </Text>
-                          </Box>
-                        </Flex>
-                        <Box
+                          </Box> */}
+                      </Flex>
+                      {/* <Box
                           css={{
                             display: 'none',
                             '@lg': {
@@ -316,231 +388,347 @@ const Home: NextPage<any> = ({ ssr }) => {
                             <Box css={{ flex: 1 }} />
                             <Box css={{ flex: 1 }} />
                           </Flex>
-                        </Box>
-                      </Box>
-                      <Flex css={{ gap: '$4', mt: '$5' }}>
-                        {theme == 'light' ? (
-                          <Button as="button" color="primary" size="large">
-                            Explore Collection
-                          </Button>
-                        ) : (
-                          <Button as="button" color="gray4" size="large">
-                            Explore Collection
-                          </Button>
-                        )}
-                      </Flex>
+                        </Box> */}
+                    </Box>
+                    <Flex css={{ gap: '$4', mt: '$4' }}>
+                      {theme == 'light' ? (
+                        <Button
+                          as="button"
+                          color="primary"
+                          size="large"
+                          className="w-full justify-center"
+                        >
+                          Explore
+                        </Button>
+                      ) : (
+                        <Button
+                          as="button"
+                          color="gray4"
+                          size="large"
+                          className="w-full justify-center"
+                        >
+                          Explore
+                        </Button>
+                      )}
                     </Flex>
-                  </Box>
-                </>
-              )}
+                  </Flex>
+                </Box>
+              </Flex>
             </Flex>
-          </Flex>
-        </Link>
-        <Flex
-          justify="between"
-          align="center"
-          css={{ flexWrap: 'wrap', mb: '$4', gap: '$3' }}
-        >
-          <Text style="h4" as="h4">
-            Trending Collections
-          </Text>
-          <ChainToggle />
-        </Flex>
-        <Box
-          css={{
-            pt: '$2',
-            mb: '$4',
-            display: 'grid',
-            gap: '$4',
-            gridTemplateColumns: 'repeat(1, 1fr)',
-            '@sm': {
-              gridTemplateColumns: 'repeat(2, 1fr)',
-            },
+          </Link>
 
-            '@lg': {
-              gridTemplateColumns: 'repeat(4, 1fr)',
-            },
-          }}
-        >
-          {topSellingCollectionsData?.collections &&
-            topSellingCollectionsData.collections.length &&
-            topSellingCollectionsData.collections
-              .slice(1, 9)
-              .map((collection) => {
-                return (
-                  <Link
-                    key={collection.id}
-                    href={`/${marketplaceChain.routePrefix}/collection/${collection.id}`}
-                    style={{ display: 'grid' }}
+          <Link href="/zora/collection/0xe27f011e8eb90b4d42fa7658fbe44e240d9c5f03">
+            <Flex>
+              <Flex
+                css={{
+                  '&:hover button': {
+                    background: theme == 'light' ? '$primary11' : '$gray2',
+                  },
+                  minHeight: 540,
+                  flex: 1,
+                  overflow: 'hidden',
+                  position: 'relative',
+                  gap: '$3',
+                  p: '$4',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  '@md': {
+                    p: '$5',
+                    gap: '$4',
+                    flexDirection: 'column',
+                    display: 'flex',
+                  },
+                  '@lg': {
+                    flexDirection: 'row',
+                    p: '$5',
+                    gap: '$5',
+                    mt: '$4',
+                  },
+                  '@xl': {
+                    p: '$6',
+                    gap: '$6',
+                  },
+
+                  mb: '$6',
+                  maxWidth: 1820,
+                  mx: 'auto',
+                  // borderRadius: 16,
+                  // backgroundSize: 'cover',
+                  // border: `1px solid $gray5`,
+                  // backgroundImage: theme === 'light' ? `$gray2` : '$gray3',
+                  // backgroundColor: '$gray5',
+                }}
+              >
+                <Box
+                  css={{
+                    position: 'absolute',
+                    top: 0,
+                    display: theme === 'light' ? 'block' : 'none',
+                    zIndex: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    backdropFilter: 'blur(20px)',
+                    // background: 'rgba(255, 255, 255, 0.9)',
+                  }}
+                />
+
+                <Box
+                  css={{
+                    flex: 2,
+                    position: 'relative',
+                    zIndex: 5,
+                    '@xl': {
+                      flex: 3,
+                    },
+                  }}
+                >
+                  <StyledImage
+                    src={optimizeImage(
+                      // topCollection?.banner ??
+                      //   topCollection?.image ??
+                      //   topCollection?.recentSales?.[0]?.collection?.image ??
+                      //   topCollection?.recentSales?.[0]?.token?.image,
+                      '/assets/collection2.jpg',
+                      1820
+                    )}
+                    css={{
+                      width: '100%',
+                      borderRadius: 8,
+                      height: 320,
+                      '@lg': {
+                        height: 540,
+                      },
+                      objectFit: 'cover',
+                    }}
+                  />
+                  <Box
+                    css={{
+                      position: 'absolute',
+                      left: '$4',
+                      display: 'none',
+                      aspectRatio: 'square',
+                      '@md': {
+                        display: 'block',
+                      },
+                      '@lg': {
+                        top: '$4',
+                      },
+                      bottom: '$4',
+                    }}
                   >
-                    <Flex
-                      direction="column"
-                      css={{
-                        flex: 1,
-                        width: '100%',
-                        borderRadius: 12,
-                        cursor: 'pointer',
-                        height: '100%',
-                        background: '$neutralBgSubtle',
-                        $$shadowColor: '$colors$panelShadow',
-                        boxShadow: '0 0px 12px 0px $$shadowColor',
-
-                        overflow: 'hidden',
-                        position: 'relative',
-                        p: '$3',
-                        '&:hover > div > div> img:nth-child(1)': {
-                          transform: 'scale(1.075)',
-                        },
+                    <Img
+                      alt="collection image"
+                      width={80}
+                      height={80}
+                      style={{
+                        display: 'block',
+                        borderRadius: 8,
+                        border: '2px solid rgba(255,255,255,0.6)',
+                        aspectRatio: 'square',
+                        minHeight: 80,
                       }}
-                    >
-                      <Flex
-                        direction="column"
+                      src={
+                        optimizeImage(
+                          // topCollection?.image,
+                          '/assets/collection2.jpg',
+                          200
+                        ) as string
+                      }
+                    />
+                  </Box>
+                </Box>
+                <Box css={{ flex: 2, zIndex: 4 }}>
+                  <Flex direction="column" css={{ height: '100%' }}>
+                    <Box css={{ flex: 1 }}>
+                      <Text style="h3" css={{ mt: '$3', mb: '$2' }} as="h3">
+                        GRAFS
+                      </Text>
+
+                      <Box
                         css={{
-                          zIndex: 2,
-                          position: 'relative',
-                          flex: 1,
-                          width: '100%',
+                          maxWidth: 720,
+                          lineHeight: 1.5,
+                          fontSize: 16,
+                          fontWeight: 400,
+                          display: '-webkit-box',
+                          color: '$gray12',
+                          fontFamily: '$body',
+                          WebkitLineClamp: 3,
+                          WebkitBoxOrient: 'vertical',
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
                         }}
                       >
-                        <Box
-                          css={{
-                            position: 'relative',
-                            overflow: 'hidden',
-                            borderRadius: 8,
-                          }}
-                        >
-                          {collection?.banner?.length ||
-                          collection.recentSales?.[0]?.token?.image?.length ? (
-                            <img
-                              loading="lazy"
-                              src={optimizeImage(
-                                collection?.banner ||
-                                  collection.recentSales?.[0]?.token?.image ||
-                                  collection.recentSales?.[0]?.collection
-                                    ?.image,
-                                800
-                              )}
-                              style={{
-                                transition: 'transform 300ms ease-in-out',
-                                width: '100%',
-                                borderRadius: 8,
-                                height: 250,
-                                objectFit: 'cover',
-                              }}
-                            />
-                          ) : (
-                            <Box
-                              css={{
-                                width: '100%',
-                                borderRadius: 8,
-                                height: 250,
-                                background: '$gray3',
-                              }}
-                            />
-                          )}
-                          <Img
-                            src={
-                              optimizeImage(collection?.image, 72 * 2) as string
-                            }
-                            alt={collection?.name as string}
-                            width={72}
-                            height={72}
-                            css={{
-                              width: 72,
-                              height: 72,
-                              border: '2px solid rgba(255,255,255,0.6)',
-                              position: 'absolute',
-                              bottom: '$3',
-                              left: '$3',
-                              borderRadius: 8,
-                            }}
-                          />
-                        </Box>
-                        <Flex
-                          css={{ my: '$4', mb: '$2' }}
-                          justify="between"
-                          align="center"
-                        >
-                          <Text style="h5" as="h5" ellipsify css={{ flex: 1 }}>
-                            {collection?.name}
-                          </Text>
-                        </Flex>
-
-                        <Box
-                          css={{
-                            maxWidth: 720,
-                            lineHeight: 1.5,
-                            fontSize: 16,
-                            flex: 1,
-                            fontWeight: 400,
-                            display: '-webkit-box',
-                            color: '$gray12',
-                            fontFamily: '$body',
-                            WebkitLineClamp: 3,
-                            WebkitBoxOrient: 'vertical',
-                            overflow: 'hidden',
-                            textOverflow: 'ellipsis',
-                            '& a': {
-                              fontWeight: 500,
-                              cursor: 'pointer',
-                              textDecoration: 'underline',
-                            },
-                          }}
-                        >
-                          <ReactMarkdown
-                            children={collection?.description || ''}
+                        {/* <ReactMarkdown
+                            children={topCollection?.description || ''}
                             components={{
                               a: MarkdownLink,
                               p: Text as any,
                             }}
-                          />
+                          /> */}
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Expedita voluptatem vitae, animi placeat, necessitatibus
+                        eaque molestiae explicabo aut architecto sequi inventore
+                        officia. Voluptatum explicabo, dicta assumenda rerum
+                        officia distinctio voluptatibus!
+                      </Box>
+
+                      <Flex css={{ mt: '$4' }}>
+                        <Box css={{ mr: '$5' }}>
+                          <Text style="subtitle2" color="subtle">
+                            FLOOR
+                          </Text>
+                          <Box css={{ mt: 2 }}>
+                            {/* <FormatCryptoCurrency
+                                amount={
+                                  topCollection?.floorAsk?.price?.amount
+                                    ?.native ?? 0
+                                }
+                                textStyle={'h4'}
+                                logoHeight={20}
+                                address={
+                                  topCollection?.floorAsk?.price?.currency
+                                    ?.contract
+                                }
+                              /> */}
+                            floor value
+                          </Box>
                         </Box>
 
-                        <Flex css={{ mt: '$4' }}>
-                          <Box css={{ mr: '$5' }}>
-                            <Text
-                              style="subtitle2"
-                              color="subtle"
-                              as="p"
-                              css={{ mb: 2 }}
-                            >
-                              FLOOR
-                            </Text>
-                            <FormatCryptoCurrency
-                              amount={
-                                collection?.floorAsk?.price?.amount?.native ?? 0
-                              }
-                              textStyle={'h6'}
-                              logoHeight={12}
-                              address={
-                                collection?.floorAsk?.price?.currency?.contract
-                              }
-                            />
-                          </Box>
-
-                          <Box css={{ mr: '$4' }}>
-                            <Text style="subtitle2" color="subtle" as="p">
+                        {/* <Box css={{ mr: '$4' }}>
+                            <Text style="subtitle2" color="subtle">
                               24H SALES
                             </Text>
-                            <Text style="h6" as="h4" css={{ mt: 2 }}>
-                              {collection.count?.toLocaleString()}
+                            <Text style="h4" as="h4" css={{ mt: 2 }}>
+                              {topCollection?.count?.toLocaleString()}
                             </Text>
-                          </Box>
-                        </Flex>
+                          </Box> */}
                       </Flex>
+                      {/* <Box
+                          css={{
+                            display: 'none',
+                            '@lg': {
+                              display: 'block',
+                            },
+                          }}
+                        >
+                          <Text
+                            style="subtitle2"
+                            color="subtle"
+                            as="p"
+                            css={{ mt: '$4' }}
+                          >
+                            RECENT SALES
+                          </Text>
+                          <Flex
+                            css={{
+                              mt: '$2',
+                              gap: '$3',
+                            }}
+                          >
+                            {topCollection?.recentSales
+                              ?.slice(0, 4)
+                              ?.map((sale, i) => (
+                                <Box
+                                  css={{
+                                    aspectRatio: '1/1',
+                                    maxWidth: 120,
+                                  }}
+                                  key={i}
+                                  onClick={(e) => {
+                                    e.stopPropagation()
+                                    e.preventDefault()
+                                    if (
+                                      sale?.collection?.id &&
+                                      sale?.token?.id
+                                    ) {
+                                      router.push(
+                                        `/${chain.routePrefix}/asset/${sale?.collection?.id}:${sale?.token?.id}`
+                                      )
+                                    }
+                                  }}
+                                >
+                                  <img
+                                    style={{ borderRadius: 4 }}
+                                    src={optimizeImage(
+                                      sale?.token?.image ||
+                                        topCollection?.image,
+                                      250
+                                    )}
+                                  />
+                                  <Box css={{ mt: '$1' }}>
+                                    <FormatCryptoCurrency
+                                      amount={sale?.price?.amount?.decimal ?? 0}
+                                      textStyle={'h6'}
+                                      logoHeight={16}
+                                      address={sale?.price?.currency?.contract}
+                                    />
+                                  </Box>
+                                </Box>
+                              ))}
+                            <Box css={{ flex: 1 }} />
+                            <Box css={{ flex: 1 }} />
+                          </Flex>
+                        </Box> */}
+                    </Box>
+                    <Flex css={{ gap: '$4', mt: '$4' }}>
+                      {theme == 'light' ? (
+                        <Button
+                          as="button"
+                          color="primary"
+                          size="large"
+                          className="w-full justify-center"
+                        >
+                          Explore
+                        </Button>
+                      ) : (
+                        <Button
+                          as="button"
+                          color="gray4"
+                          size="large"
+                          className="w-full justify-center"
+                        >
+                          Explore
+                        </Button>
+                      )}
                     </Flex>
-                  </Link>
-                )
-              })}
-        </Box>
-        <Box css={{ my: '$5' }}>
-          <Link href={`/${marketplaceChain.routePrefix}/collections/trending`}>
-            <Button>See More</Button>
+                  </Flex>
+                </Box>
+              </Flex>
+            </Flex>
           </Link>
-        </Box>
+        </div>
+
+        <div className="relative flex flex-col gap-2 mb-32 text-center z-[5]">
+          <div
+            className="cursor-pointer py-5 bg-white rounded-md text-black border-[1px] border-black"
+            onClick={handleGoerli}
+          >
+            Goerli
+          </div>
+          <div
+            className="cursor-pointer py-5 bg-[#01ff00] rounded-md text-black"
+            onClick={handleEthereum}
+          >
+            Ethereum
+          </div>
+          <div
+            className="cursor-pointer py-5 bg-[#a0a0ff] rounded-md text-black"
+            onClick={handleZora}
+          >
+            Zora
+          </div>
+          <div
+            className="cursor-pointer py-5 bg-[#1d6e24] rounded-md text-black"
+            onClick={handleSapo}
+          >
+            View to nothingness (2008-2012)
+          </div>
+        </div>
       </Box>
 
-      <Footer />
+      {/* <Footer /> */}
     </Layout>
   )
 }

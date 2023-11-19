@@ -4,6 +4,9 @@ import AnalyticsProvider, {
 initializeAnalytics()
 import ErrorTrackingProvider from 'components/ErrorTrackingProvider'
 
+import '/styles/globals.css'
+import 'react-responsive-modal/styles.css'
+
 import { Inter } from '@next/font/google'
 import type { AppContext, AppProps } from 'next/app'
 import { default as NextApp } from 'next/app'
