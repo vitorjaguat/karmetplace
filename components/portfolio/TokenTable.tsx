@@ -135,6 +135,7 @@ export const TokenTable = forwardRef<TokenTableRef, Props>(
       revalidateOnMount: true,
       fallbackData: [],
     })
+    console.log(tokens)
 
     useEffect(() => {
       mutate()

@@ -199,6 +199,7 @@ function MyApp({
             // Note that this impacts orders created on your marketplace (offers/listings)
             // marketplaceFee: 250,
             // marketplaceFeeRecipient: "0xabc"
+            disablePoweredByReservoir: true,
           }}
           theme={reservoirKitTheme}
         >

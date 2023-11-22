@@ -85,6 +85,8 @@ const IndexPage: NextPage = () => {
   let collectionQuery: Parameters<typeof useUserCollections>['1'] = {
     limit: 100,
     excludeSpam: hideSpam,
+    // collectionsSetId:
+    //   '5213bc89ad6f83413e7d0d0f568a389c2afdf6437fda900ad57543e38b91e569',
   }
 
   const { chain } = useContext(ChainContext)
@@ -100,6 +102,7 @@ const IndexPage: NextPage = () => {
     isLoading: collectionsLoading,
     fetchNextPage,
   } = useUserCollections(isMounted ? (address as string) : '', collectionQuery)
+  console.log(collections)
 
   // Batch listing logic
   const [showListingPage, setShowListingPage] = useState(false)
