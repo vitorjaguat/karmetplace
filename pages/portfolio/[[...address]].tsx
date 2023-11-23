@@ -181,6 +181,8 @@ const IndexPage: NextPage = () => {
         <Flex
           direction="column"
           css={{
+            position: 'relative',
+            zIndex: 1,
             px: '$4',
             py: 40,
             '@sm': {

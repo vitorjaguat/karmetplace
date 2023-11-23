@@ -115,8 +115,10 @@ export default [
     routePrefix: 'zora',
     coingeckoId: 'ethereum',
     checkPollingInterval: reservoirChains.zora.checkPollingInterval,
-    collectionSetId:
-      'fca7e824931f8de80afa6645a8a872acd4376af6005646a3f9d1f46e9360b781',
+    // wssUrl: 'wss://ws-zora.reservoir.tools',
+    // collectionSetId: '0xe27f011e8eb90b4d42fa7658fbe44e240d9c5f03'
+    // collectionSetId:
+    //   'fca7e824931f8de80afa6645a8a872acd4376af6005646a3f9d1f46e9360b781',
     // collectionSetId:
     //   '4ec91c8de958925ef99b639420a0cab81c5a33f089b5e156c4fe4da6c46b98c6',
   },

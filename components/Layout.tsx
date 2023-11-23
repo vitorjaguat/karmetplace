@@ -23,6 +23,15 @@ const Layout: FC<Props> = ({ children }) => {
           <main>{children}</main>
           <Footer />
         </Box>
+        <div className="site-background">
+          <div className="star-container">
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+          </div>
+        </div>
       </Box>
     </>
   )

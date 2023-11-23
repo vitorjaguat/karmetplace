@@ -71,6 +71,8 @@ export const Footer = () => {
       css={{
         borderTop: '1px solid $gray7',
         borderStyle: 'solid',
+        position: 'relative',
+        zIndex: 1,
         p: '$5',
         '@lg': {
           p: '$6',

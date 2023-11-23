@@ -353,6 +353,27 @@ const CollectionPage: NextPage<Props> = ({ id, ssr }) => {
   let nativePrice = collection?.floorAsk?.price?.amount?.native
   let topBidPrice = collection?.topBid?.price?.amount?.native
 
+  //get owners for collection:
+  // const [owners, setOwners] = useState<any[]>([])
+  // const options = {
+  //   method: 'GET',
+  //   headers: { accept: '*/*', 'x-api-key': 'demo-api-key' },
+  // }
+
+  // useEffect(() => {
+  //   let collection
+  //   console.log(id)
+  //   fetch(
+  //     `https://api.reservoir.tools/owners/v2?collection=${id}&limit=500`,
+  //     options
+  //   )
+  //     .then((response) => response.json())
+  //     .then((response) => setOwners(response?.owners))
+  //     .catch((err) => console.error(err))
+  // }, [id])
+
+  // console.log(owners)
+
   return (
     <Layout>
       <Head
@@ -374,6 +395,8 @@ const CollectionPage: NextPage<Props> = ({ id, ssr }) => {
           <Flex
             direction="column"
             css={{
+              position: 'relative',
+              zIndex: 1,
               px: '$4',
               pt: '$4',
               pb: 0,
@@ -427,10 +450,16 @@ const CollectionPage: NextPage<Props> = ({ id, ssr }) => {
                         }
                       />
                     </Flex>
-                     <Flex css={{
-                      gap: '$3',
-                      ...(isSmallDevice && { display: 'grid', gridTemplateColumns: '1fr 1fr' }),
-                    }} align="center">
+                    <Flex
+                      css={{
+                        gap: '$3',
+                        ...(isSmallDevice && {
+                          display: 'grid',
+                          gridTemplateColumns: '1fr 1fr',
+                        }),
+                      }}
+                      align="center"
+                    >
                       <CopyText
                         text={collection.id as string}
                         css={{
@@ -554,10 +583,11 @@ const CollectionPage: NextPage<Props> = ({ id, ssr }) => {
                           {isSmallDevice && (
                             <FontAwesomeIcon icon={faSeedling} />
                           )}
-                          {!isSmallDevice && (                         
-                          <Text style="h6" as="h6" css={{ color: '$bg' }}>
-                            Mint
-                          </Text>)}
+                          {!isSmallDevice && (
+                            <Text style="h6" as="h6" css={{ color: '$bg' }}>
+                              Mint
+                            </Text>
+                          )}
 
                           {!isSmallDevice && (
                             <Text
@@ -600,6 +630,7 @@ const CollectionPage: NextPage<Props> = ({ id, ssr }) => {
               <TabsTrigger value="items">Items</TabsTrigger>
               <TabsTrigger value="details">Details</TabsTrigger>
               <TabsTrigger value="activity">Activity</TabsTrigger>
+              {/* <TabsTrigger value="owners">Owners</TabsTrigger> */}
             </TabsList>
 
             <TabsContent value="items">
