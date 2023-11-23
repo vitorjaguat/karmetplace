@@ -53,19 +53,32 @@ const HamburgerMenu = () => {
             py: '$4',
             px: '$4',
             width: '100%',
-            borderBottom: '1px solid $gray4',
+            // borderBottom: '1px solid $gray4',
           }}
           align="center"
           justify="between"
         >
           <Link href="/">
-            <Box css={{ width: 46, cursor: 'pointer' }}>
-              <Image
+            <Box
+              css={{
+                width: 46,
+                cursor: 'pointer',
+                height: 'fit-content',
+                margin: 0,
+              }}
+            >
+              {/* <Image
                 src="/reservoirLogo.svg"
                 width={36}
                 height={36}
                 alt="Reservoir"
-              />
+              /> */}
+              <div
+                id="logoAnimation"
+                className="my-[-20px] p-0 mr-7 scale-[0.6]"
+              >
+                <div className="logo-animation"></div>
+              </div>
             </Box>
           </Link>
           <RadixDialog.Close>
@@ -92,6 +105,8 @@ const HamburgerMenu = () => {
             css={{
               flexDirection: 'column',
               justifyContent: 'flex-start',
+              // alignItems: 'center',
+              // width: '100%',
               height: '100%',
               py: '$5',
               px: '$4',
@@ -102,11 +117,19 @@ const HamburgerMenu = () => {
                 css={{
                   justifyContent: 'space-between',
                   alignItems: 'center',
+                  // width: '100%',
                   cursor: 'pointer',
                   pb: '$4',
                 }}
               >
-                <Flex css={{ alignItems: 'center' }}>
+                <Flex
+                  css={{
+                    alignItems: 'center',
+                    // justifyContent: 'center',
+                    width: '100%',
+                    // pr: '$4',
+                  }}
+                >
                   {ensAvatar ? (
                     <Avatar size="medium" src={ensAvatar} />
                   ) : (
@@ -121,7 +144,7 @@ const HamburgerMenu = () => {
                 </Flex>
               </Flex>
             </Link>
-            <Link href={`/${routePrefix}/collection-rankings`} legacyBehavior>
+            <Link href={`/${routePrefix}/about`} legacyBehavior>
               <Text
                 style="subtitle1"
                 css={{
@@ -131,10 +154,10 @@ const HamburgerMenu = () => {
                   pt: '24px',
                 }}
               >
-                Explore
+                About
               </Text>
             </Link>
-            <Link href="/ethereum/collection-rankings" legacyBehavior>
+            <Link href={`/${routePrefix}/faq`} legacyBehavior>
               <Text
                 style="subtitle1"
                 css={{
@@ -144,11 +167,11 @@ const HamburgerMenu = () => {
                   pt: '24px',
                 }}
               >
-                Trending
+                FAQ
               </Text>
             </Link>
 
-            <Anchor
+            {/* <Anchor
               href="https://docs.reservoir.tools/docs"
               target="_blank"
               css={{
@@ -160,12 +183,12 @@ const HamburgerMenu = () => {
               }}
             >
               <Text style="subtitle1">Developers</Text>
-            </Anchor>
+            </Anchor> */}
             <Link href="/portfolio" legacyBehavior>
               <Flex
                 direction="column"
                 css={{
-                  borderBottom: '1px solid $gray4',
+                  // borderBottom: '1px solid $gray4',
                   cursor: 'pointer',
                   pb: '$4',
                   pt: '24px',
@@ -184,18 +207,21 @@ const HamburgerMenu = () => {
                 justifyContent: 'space-between',
                 cursor: 'pointer',
                 alignItems: 'center',
-                borderBottom: '1px solid $gray4',
+                // borderBottom: '1px solid $gray4',
+                borderRadius: 8,
+                backgroundColor: '$gray3',
+                mt: '$4',
+                px: '$4',
               }}
               onClick={() => disconnect()}
             >
               <Text
                 style="subtitle1"
                 css={{
-                  pb: '$4',
-                  pt: '24px',
+                  py: '$3',
                 }}
               >
-                Logout
+                Disconnect
               </Text>
               <Box css={{ color: '$gray10' }}>
                 <FontAwesomeIcon

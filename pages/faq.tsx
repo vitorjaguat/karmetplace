@@ -2,10 +2,10 @@ import { NextPage } from 'next'
 import { Text, Flex, Box } from 'components/primitives'
 import Layout from 'components/Layout'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faWarning } from '@fortawesome/free-solid-svg-icons'
+import { faFolderOpen } from '@fortawesome/free-solid-svg-icons'
 import { Head } from 'components/Head'
 
-const IndexPage: NextPage = () => {
+const AboutPage: NextPage = () => {
   return (
     <Layout>
       <Head />
@@ -21,17 +21,17 @@ const IndexPage: NextPage = () => {
         }}
       >
         <Box css={{ color: '$gray11', mb: '30px' }}>
-          <FontAwesomeIcon icon={faWarning} size="2xl" />
+          <FontAwesomeIcon icon={faFolderOpen} size="2xl" />
         </Box>
         <Text style="body1" color="subtle" css={{ mb: '$1' }}>
-          500 Error.
+          404 Error.
         </Text>
         <Text style="body1" color="subtle">
-          Something went wrong. Try refreshing or check back soon.
+          The requested URL was not found on the server.
         </Text>
       </Flex>
     </Layout>
   )
 }
 
-export default IndexPage
+export default AboutPage

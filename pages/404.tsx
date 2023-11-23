@@ -3,14 +3,22 @@ import { Text, Flex, Box } from 'components/primitives'
 import Layout from 'components/Layout'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFolderOpen } from '@fortawesome/free-solid-svg-icons'
+import { Head } from 'components/Head'
 
 const IndexPage: NextPage = () => {
   return (
     <Layout>
+      <Head />
       <Flex
         direction="column"
         align="center"
-        css={{ py: '200px', px: '$3', textAlign: 'center' }}
+        css={{
+          py: '200px',
+          px: '$3',
+          textAlign: 'center',
+          position: 'relative',
+          zIndex: 1,
+        }}
       >
         <Box css={{ color: '$gray11', mb: '30px' }}>
           <FontAwesomeIcon icon={faFolderOpen} size="2xl" />

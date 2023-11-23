@@ -71,7 +71,7 @@ const Navbar = () => {
                 height={36}
                 alt="Reservoir"
               /> */}
-              <div id="logoAnimation" className="mr-7 scale-[0.8]">
+              <div id="logoAnimation" className="mr-7 scale-[0.6]">
                 <div className="logo-animation"></div>
               </div>
             </Box>
@@ -136,11 +136,14 @@ const Navbar = () => {
               ml: '$5',
             }}
           >
-            <Link href={`/${routePrefix}`}>
+            <Link
+              // href={`/${routePrefix}/about`}
+              href="/about"
+            >
               <NavItem>About</NavItem>
             </Link>
-            <Link href={`/${routePrefix}/collections/trending`}>
-              <NavItem>How to</NavItem>
+            <Link href={`/${routePrefix}/faq`}>
+              <NavItem>FAQ</NavItem>
             </Link>
 
             {/* <HoverCard.Root openDelay={200}>
