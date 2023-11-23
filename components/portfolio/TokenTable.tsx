@@ -15,6 +15,7 @@ import { useConnectModal } from '@rainbow-me/rainbowkit'
 import { ToastContext } from 'context/ToastContextProvider'
 import { useMarketplaceChain } from 'hooks'
 import { createPortal } from 'react-dom'
+import { useTheme } from 'next-themes'
 
 import { Modal } from 'react-responsive-modal'
 
@@ -420,41 +421,41 @@ const TokenTableRow: FC<TokenTableRowProps> = ({
     // console.log(heartValue)
 
     //list heart useEffect
-    const heartPortalRef = useRef()
-    const HeartModal = ({}) => {
-      return (
-        <div className="sticky top-0 left-0 h-screen w-screen bg-black/30 flex items-center justify-center z-[1000000000] text-black">
-          <div className="flex flex-col items-center justify-center p-4 w-1/2 h-1/2 bg-white ">
-            <div className="">
-              Você é bonzinho e quer doar uma porcentagem para o projeto?
-            </div>
-            <form>
-              <input
-                type="number"
-                name="percentage"
-                id="percentage"
-                placeholder="0"
-                defaultValue="0"
-                onChange={(e) => setHeartValue(+e.target.value)}
-              />
-              <button
-                onClick={() => {
-                  setOpenHeart(false)
-                  // +open real List!
-                }}
-              >
-                ok
-              </button>
-            </form>
-          </div>
-        </div>
-      )
-    }
-    useEffect(() => {
-      if (openHeart) {
-        createPortal(<HeartModal />, document.body, 'heart')
-      }
-    }, [openHeart])
+    // const heartPortalRef = useRef()
+    // const HeartModal = ({}) => {
+    //   return (
+    //     <div className="sticky top-0 left-0 h-screen w-screen bg-black/30 flex items-center justify-center z-[1000000000] text-black">
+    //       <div className="flex flex-col items-center justify-center p-4 w-1/2 h-1/2 bg-white ">
+    //         <div className="">
+    //           Você é bonzinho e quer doar uma porcentagem para o projeto?
+    //         </div>
+    //         <form>
+    //           <input
+    //             type="number"
+    //             name="percentage"
+    //             id="percentage"
+    //             placeholder="0"
+    //             defaultValue="0"
+    //             onChange={(e) => setHeartValue(+e.target.value)}
+    //           />
+    //           <button
+    //             onClick={() => {
+    //               setOpenHeart(false)
+    //               // +open real List!
+    //             }}
+    //           >
+    //             ok
+    //           </button>
+    //         </form>
+    //       </div>
+    //     </div>
+    //   )
+    // }
+    // useEffect(() => {
+    //   if (openHeart) {
+    //     createPortal(<HeartModal />, document.body, 'heart')
+    //   }
+    // }, [openHeart])
     // console.log(openHeart)
 
     if (isDisconnected) {
@@ -505,7 +506,7 @@ const TokenTableRow: FC<TokenTableRowProps> = ({
         align="start"
         css={{
           gap: '$3',
-          borderBottom: '1px solid $gray3',
+          borderBottom: '1px solid $gray5',
           py: '$3',
           width: '100%',
           overflow: 'hidden',
@@ -577,7 +578,9 @@ const TokenTableRow: FC<TokenTableRowProps> = ({
             />
           </Flex>
         </Flex>
-        <Flex css={{ gap: '$2', width: '100%' }}>
+        <Flex
+          css={{ gap: '$2', width: '100%', justifyContent: 'space-between' }}
+        >
           {token?.token?.topBid?.price?.amount?.decimal && isOwner ? (
             <AcceptBid
               tokenId={token.token.tokenId}
@@ -615,7 +618,12 @@ const TokenTableRow: FC<TokenTableRowProps> = ({
             <>
               {/* 2 step listing with custom fee: (MOBILE) */}
               <div
-                className="px-5 py-1 bg-neutral-700 font-bold rounded-lg flex items-center cursor-pointer"
+                className={
+                  'px-4 font-bold rounded-lg flex items-center cursor-pointer text-sm h-[32px]' +
+                  (useTheme().theme == 'dark'
+                    ? ' text-white bg-neutral-700'
+                    : ' text-black bg-neutral-300')
+                }
                 onClick={() => setOpenHeart(true)}
               >
                 List
@@ -662,7 +670,7 @@ const TokenTableRow: FC<TokenTableRowProps> = ({
                       <FontAwesomeIcon
                         icon={faHeart}
                         className="duration-300 ease-in-out"
-                        color="purple"
+                        color="#00ff00"
                         size={
                           ((heartValue + 10 - (heartValue % 10)) / 10 +
                             'x') as SizeProp
@@ -897,6 +905,8 @@ const TokenTableRow: FC<TokenTableRowProps> = ({
     )
   }
 
+  const { theme } = useTheme()
+
   return (
     <TableRow
       key={token?.token?.tokenId}
@@ -904,6 +914,12 @@ const TokenTableRow: FC<TokenTableRowProps> = ({
         gridTemplateColumns: isOwner
           ? ownerDesktopTemplateColumns
           : desktopTemplateColumns,
+        backgroundColor: theme === 'dark' ? '#18181a60' : '#ffffff60',
+        // backgroundColor: '$gray4',
+        '&:hover': {
+          backgroundColor: theme === 'dark' ? '#ffffff10' : '#00000010',
+        },
+        borderBottom: '1px solid $gray5',
       }}
     >
       <TableCell css={{ minWidth: 0, overflow: 'hidden' }}>
@@ -1149,7 +1165,12 @@ const TokenTableRow: FC<TokenTableRowProps> = ({
             <>
               {/* 2 step listing with custom fee: (medium) */}
               <div
-                className="px-5 py-1 bg-neutral-700 font-bold rounded-lg flex items-center cursor-pointer"
+                className={
+                  'px-5 py-1 font-bold rounded-lg flex items-center cursor-pointer duration-300' +
+                  (useTheme().theme == 'dark'
+                    ? ' text-white bg-neutral-700 hover:bg-neutral-800'
+                    : ' text-black bg-neutral-300 hover:bg-neutral-400')
+                }
                 onClick={() => setOpenHeart(true)}
               >
                 List
@@ -1208,7 +1229,7 @@ const TokenTableRow: FC<TokenTableRowProps> = ({
                       </div>
                       <FontAwesomeIcon
                         icon={faHeart}
-                        color="purple"
+                        color="#00ff00"
                         className="duration-300 ease-in-out"
                         size={
                           ((heartValue + 10 - (heartValue % 10)) / 10 +
@@ -1432,7 +1453,7 @@ const TableHeading: FC<{ isOwner: boolean }> = ({ isOwner }) => (
         : desktopTemplateColumns,
       position: 'sticky',
       top: NAVBAR_HEIGHT,
-      backgroundColor: '$neutralBg',
+      backgroundColor: useTheme().theme === 'dark' ? '$neutralBg' : '#ffffff99',
     }}
   >
     <TableCell>
