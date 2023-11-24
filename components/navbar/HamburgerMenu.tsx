@@ -144,7 +144,7 @@ const HamburgerMenu = () => {
                 </Flex>
               </Flex>
             </Link>
-            <Link href={`/${routePrefix}/about`} legacyBehavior>
+            <Link href={`/about`} legacyBehavior>
               <Text
                 style="subtitle1"
                 css={{
@@ -157,7 +157,7 @@ const HamburgerMenu = () => {
                 About
               </Text>
             </Link>
-            <Link href={`/${routePrefix}/faq`} legacyBehavior>
+            <Link href={`/faq`} legacyBehavior>
               <Text
                 style="subtitle1"
                 css={{

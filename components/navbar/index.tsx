@@ -142,7 +142,10 @@ const Navbar = () => {
             >
               <NavItem>About</NavItem>
             </Link>
-            <Link href={`/${routePrefix}/faq`}>
+            <Link
+              // href={`/${routePrefix}/faq`}
+              href="/faq"
+            >
               <NavItem>FAQ</NavItem>
             </Link>
 

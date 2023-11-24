@@ -27,7 +27,7 @@ const AboutPage: NextPage = () => {
           <div className="w-full flex justify-between items-center gap-20 ">
             <Box css={{ color: '$gray11', my: '60px' }}>
               {/* <FontAwesomeIcon icon={faFolderOpen} size="2xl" /> */}
-              <div id="logoAnimation" className="mr-7 scale-[1.3] invert">
+              <div id="logoAnimation" className="mr-7 scale-[1.3]">
                 <div className="logo-animation"></div>
               </div>
             </Box>
@@ -39,12 +39,17 @@ const AboutPage: NextPage = () => {
             </div>
           </div>
           <div className="text-lg mt-8 max-w-[800px]">
-            Launched in December 2023, The Sphere Karmetplace emerges as a
-            unique platform, fostering the connection between live art, its
-            creators, and the audiences that support them. Developed by Vitor
-            Butkus (Uint Studio) and powered by the Reservoir Protocol, this
-            marketplace is dedicated to the circulation of live art seeds and
-            derivatives within a collaborative spirit of art creation.
+            <div className="">
+              Launched in December 2023, The Sphere Karmetplace emerges as a
+              unique platform, fostering the connection between live art, its
+              creators, and the audiences that support them.
+            </div>
+            <div className="">
+              Developed by Vitor Butkus (Uint Studio) and powered by the
+              Reservoir Protocol, this marketplace is dedicated to the
+              circulation of live art seeds and derivatives within a
+              collaborative spirit of art creation.
+            </div>
           </div>
           <div className="py-6 mt-20 text-left flex flex-col gap-8">
             <div className="">
