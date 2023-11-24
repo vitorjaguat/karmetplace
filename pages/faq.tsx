@@ -138,15 +138,18 @@ const AboutPage: NextPage = () => {
           // maxWidth: '1000px',
         }}
       >
-        <div className="max-w-[1000px] flex flex-col items-center">
-          <div className="w-full flex justify-between items-center gap-20 ">
+        <div className="w-full max-w-[1000px] flex flex-col items-center px-1 md:px-0">
+          <div className="w-full flex flex-col md:flex-row justify-between items-center gap-8 md:gap-20 ">
             <Box css={{ color: '$gray11', my: '60px' }}>
               {/* <FontAwesomeIcon icon={faFolderOpen} size="2xl" /> */}
-              <div id="logoAnimation" className="mr-7 scale-[1.3]">
+              <div
+                id="logoAnimation"
+                className="md:mr-7 scale-[1] md:scale-[1.3] flex justify-center md:block md:justify-normal"
+              >
                 <div className="logo-animation"></div>
               </div>
             </Box>
-            <div className="text-right">
+            <div className="text-center md:text-right">
               <div className="text-2xl">
                 The Sphere Karmetplace: A Platform for Live Art and
                 Choreographed Value Distribution
