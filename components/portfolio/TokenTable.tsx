@@ -1489,7 +1489,8 @@ const TokenTableRow: FC<TokenTableRowProps> = ({
                           onClick={() =>
                             handleTransferConfirm(
                               token as ReturnType<typeof useTokens>['data'][0],
-                              transferTarget
+                              transferTarget,
+                              transferQuantity
                             )
                           }
                         >
