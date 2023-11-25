@@ -353,26 +353,28 @@ const CollectionPage: NextPage<Props> = ({ id, ssr }) => {
   let nativePrice = collection?.floorAsk?.price?.amount?.native
   let topBidPrice = collection?.topBid?.price?.amount?.native
 
-  //get owners for collection:
-  // const [owners, setOwners] = useState<any[]>([])
-  // const options = {
-  //   method: 'GET',
-  //   headers: { accept: '*/*', 'x-api-key': 'demo-api-key' },
-  // }
+  // get owners for collection:
+  const [owners, setOwners] = useState<any[]>([])
+  const options = {
+    method: 'GET',
+    headers: { accept: '*/*', 'x-api-key': 'demo-api-key' },
+  }
+  console.log(collectionChain)
+  useEffect(() => {
+    let collection
+    console.log(id)
+    fetch(
+      `https://api${
+        collectionChain.id === 7777777 ? '-zora' : ''
+      }.reservoir.tools/owners/v2?collection=${id}&limit=500`,
+      options
+    )
+      .then((response) => response.json())
+      .then((response) => setOwners(response?.owners))
+      .catch((err) => console.error(err))
+  }, [id])
 
-  // useEffect(() => {
-  //   let collection
-  //   console.log(id)
-  //   fetch(
-  //     `https://api.reservoir.tools/owners/v2?collection=${id}&limit=500`,
-  //     options
-  //   )
-  //     .then((response) => response.json())
-  //     .then((response) => setOwners(response?.owners))
-  //     .catch((err) => console.error(err))
-  // }, [id])
-
-  // console.log(owners)
+  console.log(owners)
 
   return (
     <Layout>

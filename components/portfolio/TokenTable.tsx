@@ -1,3 +1,13 @@
+import {
+  getClient,
+  Execute,
+  SignatureStepItem,
+  TransactionStepItem,
+} from '@reservoir0x/reservoir-sdk'
+import { createWalletClient, http, custom } from 'viem'
+import { mainnet, zora, goerli } from 'viem/chains'
+import { useRouter } from 'next/router'
+
 import { ListModal, ListStep, useTokens } from '@reservoir0x/reservoir-kit-ui'
 import { Button } from 'components/primitives'
 import {
@@ -74,6 +84,7 @@ import {
   faRefresh,
   faHeart,
   faAngleDoubleRight,
+  faShareSquare,
 } from '@fortawesome/free-solid-svg-icons'
 import Link from 'next/link'
 import { MutatorCallback } from 'swr'
@@ -905,6 +916,58 @@ const TokenTableRow: FC<TokenTableRowProps> = ({
     )
   }
 
+  // transfer modal
+  const [transferModal, setTransferModal] = useState<any>(false)
+  const [transferModalToken, setTransferModalToken] =
+    useState<ReturnType<typeof useTokens>['data'][0]>()
+  const [transferTarget, setTransferTarget] = useState('')
+  const router = useRouter()
+  const chain = useMarketplaceChain()
+  // console.log(chain)
+
+  const handleTransferConfirm = async (
+    token: ReturnType<typeof useTokens>['data'][0],
+    target: string
+  ) => {
+    const address = router.query.address[0] as string
+
+    const wallet = createWalletClient({
+      account: address as `0x${string}`,
+      // transport: http(),
+      chain:
+        chain.id === 1
+          ? mainnet
+          : chain.id === 5
+          ? goerli
+          : chain.id === 7777777
+          ? zora
+          : undefined,
+      transport: custom(window.ethereum),
+    })
+    console.log(wallet)
+    await wallet.switchChain(
+      chain.id === 1 ? mainnet : chain.id === 5 ? goerli : zora
+    )
+    getClient().actions.transferTokens({
+      to: target as `0x${string}`,
+      items: [
+        {
+          token: (token?.token?.contract +
+            ':' +
+            token?.token?.tokenId) as string,
+          quantity: 1,
+        },
+      ],
+      wallet: wallet,
+      onProgress: (steps) => {
+        console.log(steps)
+      },
+    })
+    // console.log(address)
+    // console.log(token)
+    // console.log(target)
+  }
+
   const { theme } = useTheme()
 
   return (
@@ -1163,6 +1226,89 @@ const TokenTableRow: FC<TokenTableRowProps> = ({
             ) : null}
 
             <>
+              {/* transfer MEDIUM/desktop */}
+              <div
+                className={
+                  'px-5 py-1 font-bold rounded-lg flex items-center cursor-pointer duration-300' +
+                  (useTheme().theme == 'dark'
+                    ? ' text-white bg-neutral-700 hover:bg-neutral-800'
+                    : ' text-black bg-neutral-300 hover:bg-neutral-400')
+                }
+                onClick={() => {
+                  setTransferModal(token)
+                  // setTransferModalToken(token)
+                }}
+              >
+                Transfer
+              </div>
+              <Modal
+                open={transferModal}
+                onClose={() => setTransferModal(false)}
+                classNames={
+                  {
+                    // modal: 'customModal',
+                    // modalContainer: 'customModal',
+                  }
+                }
+                center // transfer modal
+              >
+                <div className="flex flex-col items-center justify-center px-6 pt-16 pb-4 gap-4 bg-slate-600 ">
+                  <div className="flex flex-col gap-3">
+                    <div className="">
+                      Transfer your token to another wallet address.
+                    </div>
+                    <div className="">
+                      You can transfer to any address on the same chain as the
+                      token.
+                    </div>
+                  </div>
+                  <form className="mt-4 flex flex-col gap-6 w-full items-center">
+                    <div className="text-center gap-8 bg-white/20 rounded-lg p-6 pt-10 px-10 w-full">
+                      <input
+                        type="text"
+                        name="newAddress"
+                        id="newAddress"
+                        placeholder="0x..."
+                        className="w-[90%] mb-6 outline-none px-2 py-1 rounded-md"
+                        onChange={(e) => setTransferTarget(e.target.value)}
+                      />
+                      <div className="text-center pb-5 text-neutral-300 flex flex-col justify-center">
+                        Receiver:{' '}
+                        <div className="font-bold min-w-[3rem]">
+                          {transferTarget || '0x...'}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex gap-4 w-full justify-between mt-4">
+                      <div className="flex gap-4 w-full justify-between mt-4">
+                        <button
+                          className="py-2 px-5 rounded-lg bg-[#2c2c59]"
+                          onClick={() => {
+                            setTransferModal(false)
+                          }}
+                        >
+                          Cancel
+                        </button>
+                        <div
+                          className="text-[#00ff00] py-2 px-5 rounded-lg bg-[#2c2c59]"
+                          onClick={() =>
+                            handleTransferConfirm(token, transferTarget)
+                          }
+                        >
+                          <FontAwesomeIcon
+                            icon={faShareSquare}
+                            color="#00ff00"
+                            className="mr-2 duration-300 ease-in-out "
+                            size={20 as unknown as SizeProp}
+                          />
+                          Confirm
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </Modal>
+
               {/* 2 step listing with custom fee: (medium) */}
               <div
                 className={
