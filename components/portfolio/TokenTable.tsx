@@ -1292,7 +1292,10 @@ const TokenTableRow: FC<TokenTableRowProps> = ({
                         <div
                           className="text-[#00ff00] py-2 px-5 rounded-lg bg-[#2c2c59]"
                           onClick={() =>
-                            handleTransferConfirm(token, transferTarget)
+                            handleTransferConfirm(
+                              token as ReturnType<typeof useTokens>['data'][0],
+                              transferTarget
+                            )
                           }
                         >
                           <FontAwesomeIcon
