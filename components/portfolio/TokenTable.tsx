@@ -85,6 +85,7 @@ import {
   faHeart,
   faAngleDoubleRight,
   faShareSquare,
+  faCheck,
 } from '@fortawesome/free-solid-svg-icons'
 import Link from 'next/link'
 import { MutatorCallback } from 'swr'
@@ -509,6 +510,66 @@ const TokenTableRow: FC<TokenTableRowProps> = ({
       )
   }
 
+  // transfer modal
+  const [transferModal, setTransferModal] = useState<any>(false)
+  const [transferModalToken, setTransferModalToken] =
+    useState<ReturnType<typeof useTokens>['data'][0]>()
+  const [transferTarget, setTransferTarget] = useState('')
+  const router = useRouter()
+  const chain = useMarketplaceChain()
+  // console.log(chain)
+  const [transferStep, setTransferStep] = useState<any>('')
+  const [transferProcessingModal, setTransferProcessingModal] =
+    useState<any>(false)
+  const [transferQuantity, setTransferQuantity] = useState(1)
+
+  const handleTransferConfirm = async (
+    token: ReturnType<typeof useTokens>['data'][0],
+    target: string,
+    quantity: number
+  ) => {
+    setTransferModal(false)
+    setTransferProcessingModal(true)
+    const address = router.query.address[0] as string
+
+    const wallet = createWalletClient({
+      account: address as `0x${string}`,
+      // transport: http(),
+      chain:
+        chain.id === 1
+          ? mainnet
+          : chain.id === 5
+          ? goerli
+          : chain.id === 7777777
+          ? zora
+          : undefined,
+      transport: custom(window.ethereum),
+    })
+    console.log(wallet)
+    await wallet.switchChain(
+      chain.id === 1 ? mainnet : chain.id === 5 ? goerli : zora
+    )
+    getClient().actions.transferTokens({
+      to: target as `0x${string}`,
+      items: [
+        {
+          token: (token?.token?.contract +
+            ':' +
+            token?.token?.tokenId) as string,
+          quantity: quantity,
+        },
+      ],
+      wallet: wallet,
+      onProgress: (steps) => {
+        console.log(steps)
+        setTransferStep(steps as Array<object>)
+      },
+    })
+    // console.log(address)
+    // console.log(token)
+    // console.log(target)
+  }
+
   if (isSmallDevice) {
     return (
       <Flex
@@ -626,11 +687,11 @@ const TokenTableRow: FC<TokenTableRowProps> = ({
             />
           ) : null}
           {isOwner ? (
-            <>
+            <div className="flex gap-1">
               {/* 2 step listing with custom fee: (MOBILE) */}
               <div
                 className={
-                  'px-4 font-bold rounded-lg flex items-center cursor-pointer text-sm h-[32px]' +
+                  'px-4 font-bold rounded-lg flex items-center cursor-pointer text-sm h-[32px] w-20 justify-center' +
                   (useTheme().theme == 'dark'
                     ? ' text-white bg-neutral-700'
                     : ' text-black bg-neutral-300')
@@ -743,7 +804,162 @@ const TokenTableRow: FC<TokenTableRowProps> = ({
                   </form>
                 </div>
               </Modal>
-            </>
+
+              {/* transfer modal MOBILE */}
+              <div
+                className={
+                  'px-4 font-bold rounded-lg flex items-center cursor-pointer text-sm h-[32px]' +
+                  (useTheme().theme == 'dark'
+                    ? ' text-white bg-neutral-700'
+                    : ' text-black bg-neutral-300')
+                }
+                onClick={() => {
+                  setTransferModal(token)
+                  // setTransferModalToken(token)
+                }}
+              >
+                Transfer
+              </div>
+              <Modal
+                open={transferModal}
+                onClose={() => setTransferModal(false)}
+                classNames={
+                  {
+                    // modal: 'customModal',
+                    // modalContainer: 'customModal',
+                  }
+                }
+                center // transfer modal
+              >
+                <div className="flex flex-col items-center justify-center px-6 pt-16 pb-4 gap-4 bg-slate-600 overflow-hidden max-w-full">
+                  <div className="flex flex-col gap-3">
+                    <div className="">
+                      Transfer your token to another wallet address.
+                    </div>
+                    <div className="">
+                      You can transfer to any address on the same chain as the
+                      token.
+                    </div>
+                  </div>
+                  <form className="mt-4 flex flex-col gap-6 w-full items-center">
+                    <div className="text-center gap-8 bg-white/20 rounded-lg py-6 px-2 text-xs w-full">
+                      <label
+                        className="text-neutral-300 text-sm"
+                        htmlFor="newAddress"
+                      >
+                        Receiver address:
+                      </label>
+                      <input
+                        type="text"
+                        name="newAddress"
+                        id="newAddress"
+                        placeholder="0x..."
+                        className="w-full mb-6 outline-none px-0 py-1 rounded-md text-xs text-center"
+                        onChange={(e) => setTransferTarget(e.target.value)}
+                      />
+                      <div className="text-center pb-1 text-neutral-300 flex flex-col justify-center text-sm">
+                        Confirm receiver:{' '}
+                        <div className="font-bold min-w-[3rem] text-xs">
+                          {transferTarget || '0x...'}
+                        </div>
+                      </div>
+                      <div className="mt-4 flex flex-col items-center">
+                        <label
+                          className=" text-neutral-300 text-sm"
+                          htmlFor="transferQuantity"
+                        >
+                          Quantity:
+                        </label>
+                        <input
+                          type="number"
+                          name="transferQuantity"
+                          id="transferQuantity"
+                          placeholder="1"
+                          step={1}
+                          className="w-12 outline-none px-0 py-1 rounded-md text-xs text-center"
+                          onChange={(e) => setTransferQuantity(+e.target.value)}
+                        />
+                      </div>
+                      {/* <div className="text-xs text-green-400 w-full flex flex-col items-center">
+                        {transferStep &&
+                          transferStep?.map(
+                            (step: any, i: number, steps: any) => (
+                              <div className="w-[80%] mb-2">
+                                Your transfer is being executed. You must
+                                approve the transaction in your wallet.
+                              </div>
+                            )
+                          )}
+                      </div> */}
+                    </div>
+                    <div className="flex gap-4 w-full justify-between mt-4">
+                      <div className="flex gap-4 w-full justify-between mt-4">
+                        <button
+                          className="py-2 px-5 rounded-lg bg-[#2c2c59]"
+                          onClick={() => {
+                            setTransferModal(false)
+                          }}
+                        >
+                          Cancel
+                        </button>
+                        <div
+                          className="text-[#00ff00] py-2 px-5 rounded-lg bg-[#2c2c59] cursor-pointer"
+                          onClick={() =>
+                            handleTransferConfirm(
+                              token as ReturnType<typeof useTokens>['data'][0],
+                              transferTarget,
+                              transferQuantity
+                            )
+                          }
+                        >
+                          <FontAwesomeIcon
+                            icon={faShareSquare}
+                            color="#00ff00"
+                            className="mr-2 duration-300 ease-in-out "
+                            size={20 as unknown as SizeProp}
+                          />
+                          Confirm
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </Modal>
+
+              {/* transferProcessingModal: */}
+              <Modal
+                open={transferProcessingModal}
+                onClose={() => setTransferProcessingModal(false)}
+                classNames={
+                  {
+                    // modal: 'customModal',
+                    // modalContainer: 'customModal',
+                  }
+                }
+                center // transfer modal
+              >
+                <div className="flex flex-col items-center justify-center px-6 pt-16 pb-6 gap-8 bg-slate-600 ">
+                  <div className="flex flex-col gap-8 items-center">
+                    <div className="">
+                      Please follow the steps in your wallet to complete the
+                      transfer.
+                    </div>
+                    <div
+                      className="text-[#00ff00] py-2 px-5 rounded-lg bg-[#2c2c59] cursor-pointer w-fit"
+                      onClick={() => setTransferProcessingModal(false)}
+                    >
+                      <FontAwesomeIcon
+                        icon={faCheck}
+                        color="#00ff00"
+                        className="mr-2 duration-300 ease-in-out "
+                        size={20 as unknown as SizeProp}
+                      />
+                      Done
+                    </div>
+                  </div>
+                </div>
+              </Modal>
+            </div>
           ) : null}
 
           <Dropdown
@@ -914,58 +1130,6 @@ const TokenTableRow: FC<TokenTableRowProps> = ({
         </Flex>
       </Flex>
     )
-  }
-
-  // transfer modal
-  const [transferModal, setTransferModal] = useState<any>(false)
-  const [transferModalToken, setTransferModalToken] =
-    useState<ReturnType<typeof useTokens>['data'][0]>()
-  const [transferTarget, setTransferTarget] = useState('')
-  const router = useRouter()
-  const chain = useMarketplaceChain()
-  // console.log(chain)
-
-  const handleTransferConfirm = async (
-    token: ReturnType<typeof useTokens>['data'][0],
-    target: string
-  ) => {
-    const address = router.query.address[0] as string
-
-    const wallet = createWalletClient({
-      account: address as `0x${string}`,
-      // transport: http(),
-      chain:
-        chain.id === 1
-          ? mainnet
-          : chain.id === 5
-          ? goerli
-          : chain.id === 7777777
-          ? zora
-          : undefined,
-      transport: custom(window.ethereum),
-    })
-    console.log(wallet)
-    await wallet.switchChain(
-      chain.id === 1 ? mainnet : chain.id === 5 ? goerli : zora
-    )
-    getClient().actions.transferTokens({
-      to: target as `0x${string}`,
-      items: [
-        {
-          token: (token?.token?.contract +
-            ':' +
-            token?.token?.tokenId) as string,
-          quantity: 1,
-        },
-      ],
-      wallet: wallet,
-      onProgress: (steps) => {
-        console.log(steps)
-      },
-    })
-    // console.log(address)
-    // console.log(token)
-    // console.log(target)
   }
 
   const { theme } = useTheme()
@@ -1264,20 +1428,51 @@ const TokenTableRow: FC<TokenTableRowProps> = ({
                   </div>
                   <form className="mt-4 flex flex-col gap-6 w-full items-center">
                     <div className="text-center gap-8 bg-white/20 rounded-lg p-6 pt-10 px-10 w-full">
+                      <label className="text-neutral-300" htmlFor="newAddress">
+                        Receiver address:
+                      </label>
                       <input
                         type="text"
                         name="newAddress"
                         id="newAddress"
                         placeholder="0x..."
-                        className="w-[90%] mb-6 outline-none px-2 py-1 rounded-md"
+                        className="w-full mb-6 outline-none px-2 py-1 rounded-md"
                         onChange={(e) => setTransferTarget(e.target.value)}
                       />
-                      <div className="text-center pb-5 text-neutral-300 flex flex-col justify-center">
-                        Receiver:{' '}
+                      <div className="text-center pb-2 text-neutral-300 flex flex-col justify-center">
+                        Confirm receiver:{' '}
                         <div className="font-bold min-w-[3rem]">
                           {transferTarget || '0x...'}
                         </div>
                       </div>
+                      <div className="mt-4 flex flex-col items-center">
+                        <label
+                          className=" text-neutral-300"
+                          htmlFor="transferQuantity"
+                        >
+                          Quantity:
+                        </label>
+                        <input
+                          type="number"
+                          name="transferQuantity"
+                          id="transferQuantity"
+                          placeholder="1"
+                          step={1}
+                          className="w-12 outline-none px-0 py-1 rounded-md text-center"
+                          onChange={(e) => setTransferQuantity(+e.target.value)}
+                        />
+                      </div>
+                      {/* <div className="text-xs text-green-400 w-full flex flex-col items-center">
+                        {transferStep &&
+                          transferStep?.map(
+                            (step: any, i: number, steps: any) => (
+                              <div className="w-[80%] mb-2">
+                                Your transfer is being executed. You must
+                                approve the transaction in your wallet.
+                              </div>
+                            )
+                          )}
+                      </div> */}
                     </div>
                     <div className="flex gap-4 w-full justify-between mt-4">
                       <div className="flex gap-4 w-full justify-between mt-4">
@@ -1290,7 +1485,7 @@ const TokenTableRow: FC<TokenTableRowProps> = ({
                           Cancel
                         </button>
                         <div
-                          className="text-[#00ff00] py-2 px-5 rounded-lg bg-[#2c2c59]"
+                          className="text-[#00ff00] py-2 px-5 rounded-lg bg-[#2c2c59] cursor-pointer"
                           onClick={() =>
                             handleTransferConfirm(
                               token as ReturnType<typeof useTokens>['data'][0],
@@ -1309,6 +1504,40 @@ const TokenTableRow: FC<TokenTableRowProps> = ({
                       </div>
                     </div>
                   </form>
+                </div>
+              </Modal>
+
+              {/* transferProcessingModal: */}
+              <Modal
+                open={transferProcessingModal}
+                onClose={() => setTransferProcessingModal(false)}
+                classNames={
+                  {
+                    // modal: 'customModal',
+                    // modalContainer: 'customModal',
+                  }
+                }
+                center // transfer modal
+              >
+                <div className="flex flex-col items-center justify-center px-6 pt-16 pb-6 gap-8 bg-slate-600 ">
+                  <div className="flex flex-col gap-8 items-center">
+                    <div className="">
+                      Please follow the steps in your wallet to complete the
+                      transfer.
+                    </div>
+                    <div
+                      className="text-[#00ff00] py-2 px-5 rounded-lg bg-[#2c2c59] cursor-pointer w-fit"
+                      onClick={() => setTransferProcessingModal(false)}
+                    >
+                      <FontAwesomeIcon
+                        icon={faCheck}
+                        color="#00ff00"
+                        className="mr-2 duration-300 ease-in-out "
+                        size={20 as unknown as SizeProp}
+                      />
+                      Done
+                    </div>
+                  </div>
                 </div>
               </Modal>
 
