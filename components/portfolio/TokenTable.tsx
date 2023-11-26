@@ -110,7 +110,7 @@ import optimizeImage from 'utils/optimizeImage'
 import { useState } from 'react'
 import { SizeProp } from '@fortawesome/fontawesome-svg-core'
 import { spanStatusfromHttpCode } from '@sentry/nextjs'
-import filterContracts from 'utils/filterContracts'
+import filterContractsTheSphere from 'utils/filterContractsTheSphere'
 
 type Props = {
   address: Address | undefined
@@ -186,7 +186,7 @@ export const TokenTable = forwardRef<TokenTableRef, Props>(
 
     //Filter only greenlisted contracts:
     const tokens = tokensUnfiltered.filter((token) =>
-      filterContracts.includes(token?.token?.contract ?? '')
+      filterContractsTheSphere.includes(token?.token?.contract ?? '')
     )
 
     useEffect(() => {
