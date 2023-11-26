@@ -81,6 +81,19 @@ const IndexPage: NextPage<Props> = ({ assetId, ssr }) => {
   const { proxyApi } = useMarketplaceChain()
   const contract = collectionId ? collectionId?.split(':')[0] : undefined
 
+  //Prevent that users access non-greenlisted addresses: (see getServerSideProps below)
+  // useEffect(() => {
+  //   if (
+  //     collectionId !== '0x69b377c8dddc25ae26c422d39b45744bb67aab4b' &&
+  //     collectionId !== '0xe27f011e8eb90b4d42fa7658fbe44e240d9c5f03' &&
+  //     collectionId !== '0x01a8c25b7f28443875d982c8236c59699ce70dd9' &&
+  //     collectionId !== '0x9523e213d3929be2c6f48e5dafe2b8a3d4fd3e39'
+  //   ) {
+  //     router.replace('/404')
+  //     return
+  //   }
+  // }, [])
+
   const { data: tokens, mutate } = useDynamicTokens(
     {
       tokens: [`${contract}:${id}`],
@@ -629,6 +642,22 @@ export const getServerSideProps: GetServerSideProps<{
 }> = async ({ params, res }) => {
   const assetId = params?.assetId ? params.assetId.toString().split(':') : []
   let collectionId = assetId[0]
+
+  //preventing that users access non-greenlisted addresses:
+  if (
+    collectionId !== '0x69b377c8dddc25ae26c422d39b45744bb67aab4b' &&
+    collectionId !== '0xe27f011e8eb90b4d42fa7658fbe44e240d9c5f03' &&
+    collectionId !== '0x01a8c25b7f28443875d982c8236c59699ce70dd9' &&
+    collectionId !== '0x9523e213d3929be2c6f48e5dafe2b8a3d4fd3e39'
+  ) {
+    return {
+      redirect: {
+        destination: '/404',
+        permanent: false,
+      },
+    }
+  }
+
   const id = assetId[1]
   const { reservoirBaseUrl } =
     supportedChains.find((chain) => params?.chain === chain.routePrefix) ||

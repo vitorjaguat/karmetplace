@@ -102,18 +102,18 @@ const CollectionPage: NextPage<Props> = ({ id, ssr }) => {
   const sweepOpenState = useState(true)
   const mintOpenState = useState(true)
 
-  //Prevent that users access non-greenlisted addresses:
-  useEffect(() => {
-    if (
-      router.query?.contract !== '0x69b377c8dddc25ae26c422d39b45744bb67aab4b' &&
-      router.query?.contract !== '0xe27f011e8eb90b4d42fa7658fbe44e240d9c5f03' &&
-      router.query?.contract !== '0x01a8c25b7f28443875d982c8236c59699ce70dd9' &&
-      router.query?.contract !== '0x9523e213d3929be2c6f48e5dafe2b8a3d4fd3e39'
-    ) {
-      router.replace('/404')
-      return
-    }
-  }, [])
+  //Prevent that users access non-greenlisted addresses: (see getServersideProps below)
+  // useEffect(() => {
+  //   if (
+  //     router.query?.contract !== '0x69b377c8dddc25ae26c422d39b45744bb67aab4b' &&
+  //     router.query?.contract !== '0xe27f011e8eb90b4d42fa7658fbe44e240d9c5f03' &&
+  //     router.query?.contract !== '0x01a8c25b7f28443875d982c8236c59699ce70dd9' &&
+  //     router.query?.contract !== '0x9523e213d3929be2c6f48e5dafe2b8a3d4fd3e39'
+  //   ) {
+  //     router.replace('/404')
+  //     return
+  //   }
+  // }, [])
 
   const scrollRef = useRef<HTMLDivElement | null>(null)
   const collectionChain =
@@ -950,6 +950,22 @@ export const getServerSideProps: GetServerSideProps<{
   id: string | undefined
 }> = async ({ params, res }) => {
   const id = params?.contract?.toString()
+
+  //preventing that users access non-greenlisted addresses:
+  if (
+    id !== '0x69b377c8dddc25ae26c422d39b45744bb67aab4b' &&
+    id !== '0xe27f011e8eb90b4d42fa7658fbe44e240d9c5f03' &&
+    id !== '0x01a8c25b7f28443875d982c8236c59699ce70dd9' &&
+    id !== '0x9523e213d3929be2c6f48e5dafe2b8a3d4fd3e39'
+  ) {
+    return {
+      redirect: {
+        destination: '/404',
+        permanent: false,
+      },
+    }
+  }
+
   const { reservoirBaseUrl } =
     supportedChains.find((chain) => params?.chain === chain.routePrefix) ||
     DefaultChain
