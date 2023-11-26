@@ -110,6 +110,7 @@ import optimizeImage from 'utils/optimizeImage'
 import { useState } from 'react'
 import { SizeProp } from '@fortawesome/fontawesome-svg-core'
 import { spanStatusfromHttpCode } from '@sentry/nextjs'
+import filterContracts from 'utils/filterContracts'
 
 type Props = {
   address: Address | undefined
@@ -172,7 +173,7 @@ export const TokenTable = forwardRef<TokenTableRef, Props>(
     }
 
     const {
-      data: tokens,
+      data: tokensUnfiltered,
       fetchNextPage,
       mutate,
       setSize,
@@ -182,6 +183,11 @@ export const TokenTable = forwardRef<TokenTableRef, Props>(
       revalidateOnMount: true,
       fallbackData: [],
     })
+
+    //Filter only greenlisted contracts:
+    const tokens = tokensUnfiltered.filter((token) =>
+      filterContracts.includes(token?.token?.contract ?? '')
+    )
 
     useEffect(() => {
       mutate()
@@ -551,7 +557,7 @@ const TokenTableRow: FC<TokenTableRowProps> = ({
           : undefined,
       transport: custom(window.ethereum),
     })
-    console.log(wallet)
+    // console.log(wallet)
     await wallet.switchChain(
       chain.id === 1 ? mainnet : chain.id === 5 ? goerli : zora
     )

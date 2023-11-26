@@ -300,7 +300,7 @@ const IndexPage: NextPage<Props> = ({ assetId, ssr }) => {
         >
           <Box
             css={{
-              backgroundColor: '$gray3',
+              backgroundColor: '$transparent',
               borderRadius: 8,
               '@sm': {
                 button: {
@@ -325,6 +325,7 @@ const IndexPage: NextPage<Props> = ({ assetId, ssr }) => {
                 minHeight: isMounted && isSmallDevice ? 300 : 445,
                 borderRadius: 8,
                 overflow: 'hidden',
+                objectFit: 'contain',
               }}
               onRefreshToken={() => {
                 mutate?.()
@@ -648,7 +649,8 @@ export const getServerSideProps: GetServerSideProps<{
     collectionId !== '0x69b377c8dddc25ae26c422d39b45744bb67aab4b' &&
     collectionId !== '0xe27f011e8eb90b4d42fa7658fbe44e240d9c5f03' &&
     collectionId !== '0x01a8c25b7f28443875d982c8236c59699ce70dd9' &&
-    collectionId !== '0x9523e213d3929be2c6f48e5dafe2b8a3d4fd3e39'
+    collectionId !== '0x9523e213d3929be2c6f48e5dafe2b8a3d4fd3e39' &&
+    collectionId !== '0xf4a007c9f55f2a619002397338091e6d3f3f3453'
   ) {
     return {
       redirect: {
