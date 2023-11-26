@@ -477,7 +477,7 @@ const IndexPage: NextPage<Props> = ({ assetId, ssr }) => {
                           : ' text-black bg-neutral-300 hover:bg-neutral-400')
                       }
                     >
-                      Transfer / List for Sale
+                      Transfer or List for Sale
                     </div>
                   </Link>
                 </Flex>
