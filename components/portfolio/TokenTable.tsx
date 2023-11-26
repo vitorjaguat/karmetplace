@@ -526,8 +526,14 @@ const TokenTableRow: FC<TokenTableRowProps> = ({
   const handleTransferConfirm = async (
     token: ReturnType<typeof useTokens>['data'][0],
     target: string,
-    quantity: number
+    quantity: number,
+    ownership: any
   ) => {
+    console.log(+ownership, +quantity)
+    if (+ownership < +quantity) {
+      alert('You do not own enough of this token to transfer this quantity.')
+      return
+    }
     setTransferModal(false)
     setTransferProcessingModal(true)
     const address = router.query.address[0] as string
@@ -908,7 +914,8 @@ const TokenTableRow: FC<TokenTableRowProps> = ({
                             handleTransferConfirm(
                               token as ReturnType<typeof useTokens>['data'][0],
                               transferTarget,
-                              transferQuantity
+                              transferQuantity,
+                              token?.ownership?.tokenCount
                             )
                           }
                         >
@@ -1478,7 +1485,9 @@ const TokenTableRow: FC<TokenTableRowProps> = ({
                       <div className="flex gap-4 w-full justify-between mt-4">
                         <button
                           className="py-2 px-5 rounded-lg bg-[#2c2c59]"
-                          onClick={() => {
+                          onClick={(e) => {
+                            e.preventDefault()
+                            // console.log(token)
                             setTransferModal(false)
                           }}
                         >
@@ -1490,7 +1499,8 @@ const TokenTableRow: FC<TokenTableRowProps> = ({
                             handleTransferConfirm(
                               token as ReturnType<typeof useTokens>['data'][0],
                               transferTarget,
-                              transferQuantity
+                              transferQuantity,
+                              token?.ownership?.tokenCount
                             )
                           }
                         >
