@@ -77,8 +77,8 @@ export const DefaultChain: ReservoirChain = {
   // collectionSetId: process.env.NEXT_PUBLIC_ETH_COLLECTION_SET_ID,
   // collectionSetId:
   // '5213bc89ad6f83413e7d0d0f568a389c2afdf6437fda900ad57543e38b91e569', //Sphe GeNTF + Grafs
-  collectionSetId:
-    '4ec91c8de958925ef99b639420a0cab81c5a33f089b5e156c4fe4da6c46b98c6', // Hamburguer + Grafs
+  // collectionSetId:
+  //   '4ec91c8de958925ef99b639420a0cab81c5a33f089b5e156c4fe4da6c46b98c6', // Hamburguer + Grafs
   community: process.env.NEXT_PUBLIC_ETH_COMMUNITY,
   wssUrl: 'wss://ws.reservoir.tools',
   listingCurrencies: [
