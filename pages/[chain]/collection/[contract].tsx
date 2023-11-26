@@ -110,7 +110,7 @@ const CollectionPage: NextPage<Props> = ({ id, ssr }) => {
       router.query?.contract !== '0x01a8c25b7f28443875d982c8236c59699ce70dd9' &&
       router.query?.contract !== '0x9523e213d3929be2c6f48e5dafe2b8a3d4fd3e39'
     ) {
-      router.push('/404')
+      router.replace('/404')
       return
     }
   }, [])
