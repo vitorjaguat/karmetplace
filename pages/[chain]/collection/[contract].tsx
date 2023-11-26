@@ -105,7 +105,6 @@ const CollectionPage: NextPage<Props> = ({ id, ssr }) => {
   //Prevent that users access non-greenlisted addresses:
   useEffect(() => {
     if (
-      isMounted &&
       router.query?.contract !== '0x69b377c8dddc25ae26c422d39b45744bb67aab4b' &&
       router.query?.contract !== '0xe27f011e8eb90b4d42fa7658fbe44e240d9c5f03' &&
       router.query?.contract !== '0x01a8c25b7f28443875d982c8236c59699ce70dd9' &&
