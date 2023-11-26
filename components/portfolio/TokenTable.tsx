@@ -529,7 +529,7 @@ const TokenTableRow: FC<TokenTableRowProps> = ({
     quantity: number,
     ownership: any
   ) => {
-    console.log(+ownership, +quantity)
+    // console.log(+ownership, +quantity)
     if (+ownership < +quantity) {
       alert('You do not own enough of this token to transfer this quantity.')
       return

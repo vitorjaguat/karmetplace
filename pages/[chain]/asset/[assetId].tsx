@@ -49,6 +49,7 @@ import { useAccount } from 'wagmi'
 import { Head } from 'components/Head'
 import { OffersTable } from 'components/token/OffersTable'
 import { ListingsTable } from 'components/token/ListingsTable'
+import { useTheme } from 'next-themes'
 
 type Props = InferGetServerSidePropsType<typeof getServerSideProps>
 
@@ -225,6 +226,8 @@ const IndexPage: NextPage<Props> = ({ assetId, ssr }) => {
   const pageTitle = token?.token?.name
     ? token.token.name
     : `${token?.token?.tokenId} - ${token?.token?.collection?.name}`
+
+  const { theme } = useTheme()
 
   return (
     <Layout>
@@ -459,13 +462,23 @@ const IndexPage: NextPage<Props> = ({ assetId, ssr }) => {
                     href={`/portfolio/${account.address || ''}`}
                     legacyBehavior={true}
                   >
-                    <Anchor
+                    {/* <Anchor
                       color="primary"
                       weight="normal"
                       css={{ ml: '$1', fontSize: 12 }}
                     >
                       Sell
-                    </Anchor>
+                    </Anchor> */}
+                    <div
+                      className={
+                        'px-5 py-1 text-sm font-bold rounded-lg flex items-center cursor-pointer duration-300' +
+                        (theme == 'dark'
+                          ? ' text-white bg-neutral-700 hover:bg-neutral-800'
+                          : ' text-black bg-neutral-300 hover:bg-neutral-400')
+                      }
+                    >
+                      Transfer / List for Sale
+                    </div>
                   </Link>
                 </Flex>
               )}

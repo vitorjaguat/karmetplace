@@ -86,6 +86,7 @@ export const TokenActions: FC<Props> = ({
     height: 52,
     justifyContent: 'center',
     minWidth: 'max-content',
+    backgroundColor: '$gray6',
     '@sm': {
       maxWidth: 250,
     },
