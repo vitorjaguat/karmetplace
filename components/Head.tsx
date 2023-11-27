@@ -14,9 +14,9 @@ type Props = {
  * @param description - The description of the page.
  */
 export const Head: FC<Props> = ({
-  ogImage = '/public/ogTheSphere.png',
-  title = 'Karmetplace | The Sphere',
-  description = 'Karmetplace is...',
+  ogImage = '/public/logo_thesphere.png',
+  title = 'The Sphere Karmetplace',
+  description = 'The Sphere Karmetplace is a platform for live art and choreographed value distribution',
 }) => {
   return (
     <NextHead>
@@ -31,14 +31,14 @@ export const Head: FC<Props> = ({
 
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content="@reservoir0x" />
+      <meta name="twitter:site" content="@thesphere_as" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={ogImage} />
 
       {/* Open Graph */}
       <meta property="og:type" content="website" />
-      <meta property="og:determiner" content="the" />
+      {/* <meta property="og:determiner" content="the" /> */}
       <meta property="og:locale" content="en" />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
@@ -46,7 +46,7 @@ export const Head: FC<Props> = ({
       <meta property="og:image:type" content="image/png" />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
-      <meta property="og:image:alt" content="Reservoir NFT Explorer Banner" />
+      <meta property="og:image:alt" content="The Sphere Karmetplace" />
     </NextHead>
   )
 }
