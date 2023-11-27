@@ -14,7 +14,7 @@ type Props = {
  * @param description - The description of the page.
  */
 export const Head: FC<Props> = ({
-  ogImage = '/public/logo_thesphere.png',
+  ogImage = 'https://karmetplace.vercel.app/public/logo_thesphere.png',
   title = 'The Sphere Karmetplace',
   description = 'The Sphere Karmetplace is a platform for live art and choreographed value distribution',
 }) => {
@@ -38,7 +38,8 @@ export const Head: FC<Props> = ({
 
       {/* Open Graph */}
       <meta property="og:type" content="website" />
-      {/* <meta property="og:determiner" content="the" /> */}
+      <meta property="og:determiner" content="the" />
+      <meta property="og:url" content="https://karmetplace.vercel.app" />
       <meta property="og:locale" content="en" />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
