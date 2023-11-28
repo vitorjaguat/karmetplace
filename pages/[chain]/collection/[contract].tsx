@@ -951,6 +951,8 @@ const CollectionPage: NextPage<Props> = ({ id, ssr }) => {
   )
 }
 
+import filterContractsTheSphere from 'utils/filterContractsTheSphere'
+
 export const getServerSideProps: GetServerSideProps<{
   ssr: {
     collection?: paths['/collections/v7']['get']['responses']['200']['schema']
@@ -962,12 +964,7 @@ export const getServerSideProps: GetServerSideProps<{
   const id = params?.contract?.toString()
 
   //preventing that users access non-greenlisted addresses:
-  if (
-    id !== '0x69b377c8dddc25ae26c422d39b45744bb67aab4b' &&
-    id !== '0xe27f011e8eb90b4d42fa7658fbe44e240d9c5f03' &&
-    id !== '0x01a8c25b7f28443875d982c8236c59699ce70dd9' &&
-    id !== '0x9523e213d3929be2c6f48e5dafe2b8a3d4fd3e39'
-  ) {
+  if (!filterContractsTheSphere.includes(id as string)) {
     return {
       redirect: {
         destination: '/404',

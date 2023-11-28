@@ -637,6 +637,8 @@ type SSRProps = {
   tokens?: paths['/tokens/v6']['get']['responses']['200']['schema'] | null
 }
 
+import filterContractsTheSphere from 'utils/filterContractsTheSphere'
+
 export const getServerSideProps: GetServerSideProps<{
   assetId?: string
   ssr: SSRProps
@@ -645,13 +647,7 @@ export const getServerSideProps: GetServerSideProps<{
   let collectionId = assetId[0]
 
   //preventing that users access non-greenlisted addresses:
-  if (
-    collectionId !== '0x69b377c8dddc25ae26c422d39b45744bb67aab4b' &&
-    collectionId !== '0xe27f011e8eb90b4d42fa7658fbe44e240d9c5f03' &&
-    collectionId !== '0x01a8c25b7f28443875d982c8236c59699ce70dd9' &&
-    collectionId !== '0x9523e213d3929be2c6f48e5dafe2b8a3d4fd3e39' &&
-    collectionId !== '0xf4a007c9f55f2a619002397338091e6d3f3f3453'
-  ) {
+  if (!filterContractsTheSphere.includes(collectionId as string)) {
     return {
       redirect: {
         destination: '/404',

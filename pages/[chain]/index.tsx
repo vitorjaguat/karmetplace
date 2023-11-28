@@ -136,7 +136,8 @@ const Home: NextPage<any> = ({ ssr }) => {
         }}
       >
         <div className="md:grid md:grid-cols-2">
-          <Link href="/ethereum/collection/0x69b377c8dddc25ae26c422d39b45744bb67aab4b">
+          {/* THE SPHERE KARMIC OBJECTS — FIRST CYCLE */}
+          <Link href="/ethereum/collection/0x95520e629368c3a08ec6b4d070a130ee72f6e471">
             <Flex>
               <Flex
                 css={{
@@ -144,6 +145,7 @@ const Home: NextPage<any> = ({ ssr }) => {
                     background: theme == 'light' ? '$primary11' : '$gray2',
                   },
                   minHeight: 540,
+
                   flex: 1,
                   overflow: 'hidden',
                   position: 'relative',
@@ -188,6 +190,7 @@ const Home: NextPage<any> = ({ ssr }) => {
                     right: 0,
                     bottom: 0,
                     backdropFilter: 'blur(20px)',
+
                     // background: 'rgba(255, 255, 255, 0.9)',
                   }}
                 />
@@ -197,6 +200,589 @@ const Home: NextPage<any> = ({ ssr }) => {
                     flex: 2,
                     position: 'relative',
                     zIndex: 5,
+
+                    '@xl': {
+                      flex: 3,
+                    },
+                  }}
+                >
+                  <StyledImage
+                    src={optimizeImage(
+                      // topCollection?.banner ??
+                      //   topCollection?.image ??
+                      //   topCollection?.recentSales?.[0]?.collection?.image ??
+                      //   topCollection?.recentSales?.[0]?.token?.image,
+                      '/assets/materia.jpg',
+                      1820
+                    )}
+                    css={{
+                      width: '100%',
+                      borderRadius: 8,
+                      height: 320,
+                      '@lg': {
+                        height: 540,
+                      },
+                      objectFit: 'cover',
+                    }}
+                  />
+                  <Box
+                    css={{
+                      position: 'absolute',
+                      left: '$4',
+                      display: 'none',
+                      aspectRatio: 'square',
+                      '@md': {
+                        display: 'block',
+                      },
+                      '@lg': {
+                        top: '$4',
+                      },
+                      bottom: '$4',
+                    }}
+                  >
+                    <Img
+                      alt="collection image"
+                      width={80}
+                      height={80}
+                      style={{
+                        display: 'block',
+                        borderRadius: 8,
+                        border: '2px solid rgba(255,255,255,0.6)',
+                        aspectRatio: 'square',
+                        minHeight: 80,
+                      }}
+                      src={
+                        optimizeImage(
+                          // topCollection?.image,
+                          '/assets/logo_animation.gif',
+                          200
+                        ) as string
+                      }
+                    />
+                  </Box>
+                </Box>
+                <Box css={{ flex: 2, zIndex: 4 }}>
+                  <Flex direction="column" css={{ height: '100%' }}>
+                    <Box css={{ flex: 1 }}>
+                      <Text style="h3" css={{ mt: '$3', mb: '$2' }} as="h3">
+                        THE SPHERE KARMIC OBJECTS — first cycle
+                      </Text>
+
+                      <Box
+                        css={{
+                          maxWidth: 720,
+                          lineHeight: 1.5,
+                          fontSize: 16,
+                          fontWeight: 400,
+                          display: '-webkit-box',
+                          color: '$gray12',
+                          fontFamily: '$body',
+                          WebkitLineClamp: 3,
+                          WebkitBoxOrient: 'vertical',
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                        }}
+                      >
+                        {/* <ReactMarkdown
+                            children={topCollection?.description || ''}
+                            components={{
+                              a: MarkdownLink,
+                              p: Text as any,
+                            }}
+                          /> */}
+                        The Sphere concludes its first funding cycle with KARMIC
+                        OBJECTS, a unique collection of six artworks (five in
+                        editions of 150, one in 250) blending circus, dance, and
+                        art with blockchain. KARMIC001 is comprised of two
+                        primary seeds: Materia by Andrea Salutri, C8H11NO2 by
+                        ROOM100, and three derivatives by Cecilia Manfrini,
+                        Marija Baranauskaité, Utka Gavuzzo, chosen via Cygnet
+                        Quadratic Voting. Lene Vollhardt's film Swirls of
+                        Fortune completes the collection, showcasing its web3
+                        art ecosystem.
+                      </Box>
+
+                      <Flex css={{ mt: '$4' }}>
+                        <Box css={{ mr: '$5' }}>
+                          <Text style="subtitle2" color="subtle">
+                            FLOOR
+                          </Text>
+                          <Box css={{ mt: 2 }}>
+                            {/* <FormatCryptoCurrency
+                                amount={
+                                  topCollection?.floorAsk?.price?.amount
+                                    ?.native ?? 0
+                                }
+                                textStyle={'h4'}
+                                logoHeight={20}
+                                address={
+                                  topCollection?.floorAsk?.price?.currency
+                                    ?.contract
+                                }
+                              /> */}
+                            floor value
+                          </Box>
+                        </Box>
+
+                        {/* <Box css={{ mr: '$4' }}>
+                            <Text style="subtitle2" color="subtle">
+                              24H SALES
+                            </Text>
+                            <Text style="h4" as="h4" css={{ mt: 2 }}>
+                              {topCollection?.count?.toLocaleString()}
+                            </Text>
+                          </Box> */}
+                      </Flex>
+                      {/* <Box
+                          css={{
+                            display: 'none',
+                            '@lg': {
+                              display: 'block',
+                            },
+                          }}
+                        >
+                          <Text
+                            style="subtitle2"
+                            color="subtle"
+                            as="p"
+                            css={{ mt: '$4' }}
+                          >
+                            RECENT SALES
+                          </Text>
+                          <Flex
+                            css={{
+                              mt: '$2',
+                              gap: '$3',
+                            }}
+                          >
+                            {topCollection?.recentSales
+                              ?.slice(0, 4)
+                              ?.map((sale, i) => (
+                                <Box
+                                  css={{
+                                    aspectRatio: '1/1',
+                                    maxWidth: 120,
+                                  }}
+                                  key={i}
+                                  onClick={(e) => {
+                                    e.stopPropagation()
+                                    e.preventDefault()
+                                    if (
+                                      sale?.collection?.id &&
+                                      sale?.token?.id
+                                    ) {
+                                      router.push(
+                                        `/${chain.routePrefix}/asset/${sale?.collection?.id}:${sale?.token?.id}`
+                                      )
+                                    }
+                                  }}
+                                >
+                                  <img
+                                    style={{ borderRadius: 4 }}
+                                    src={optimizeImage(
+                                      sale?.token?.image ||
+                                        topCollection?.image,
+                                      250
+                                    )}
+                                  />
+                                  <Box css={{ mt: '$1' }}>
+                                    <FormatCryptoCurrency
+                                      amount={sale?.price?.amount?.decimal ?? 0}
+                                      textStyle={'h6'}
+                                      logoHeight={16}
+                                      address={sale?.price?.currency?.contract}
+                                    />
+                                  </Box>
+                                </Box>
+                              ))}
+                            <Box css={{ flex: 1 }} />
+                            <Box css={{ flex: 1 }} />
+                          </Flex>
+                        </Box> */}
+                    </Box>
+                    <Flex css={{ gap: '$4', mt: '$4' }}>
+                      {theme == 'light' ? (
+                        <Button
+                          as="button"
+                          color="primary"
+                          size="large"
+                          className="w-full justify-center"
+                        >
+                          Explore
+                        </Button>
+                      ) : (
+                        <Button
+                          as="button"
+                          color="gray4"
+                          size="large"
+                          className="w-full justify-center"
+                        >
+                          Explore
+                        </Button>
+                      )}
+                    </Flex>
+                  </Flex>
+                </Box>
+              </Flex>
+            </Flex>
+          </Link>
+
+          {/* THE ANARCHIVING GAME  */}
+          <Link href="/zora/collection/0xfc599d7ad9255f7d60f84b4ab64ef8080453b767">
+            <Flex>
+              <Flex
+                css={{
+                  '&:hover button': {
+                    background: theme == 'light' ? '$primary11' : '$gray2',
+                  },
+                  minHeight: 540,
+
+                  flex: 1,
+                  overflow: 'hidden',
+                  position: 'relative',
+                  gap: '$3',
+                  p: '$4',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  '@md': {
+                    p: '$5',
+                    gap: '$4',
+                    flexDirection: 'column',
+                    display: 'flex',
+                  },
+                  '@lg': {
+                    flexDirection: 'row',
+                    p: '$5',
+                    gap: '$5',
+                    mt: '$4',
+                  },
+                  '@xl': {
+                    p: '$6',
+                    gap: '$6',
+                  },
+
+                  mb: '$6',
+                  maxWidth: 1820,
+                  mx: 'auto',
+                  // borderRadius: 16,
+                  // backgroundSize: 'cover',
+                  // border: `1px solid $gray5`,
+                  // backgroundImage: theme === 'light' ? `$gray2` : '$gray3',
+                  // backgroundColor: '$gray5',
+                }}
+              >
+                <Box
+                  css={{
+                    position: 'absolute',
+                    top: 0,
+                    display: theme === 'light' ? 'block' : 'none',
+                    zIndex: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    backdropFilter: 'blur(20px)',
+
+                    // background: 'rgba(255, 255, 255, 0.9)',
+                  }}
+                />
+
+                <Box
+                  css={{
+                    flex: 2,
+                    position: 'relative',
+                    zIndex: 5,
+
+                    '@xl': {
+                      flex: 3,
+                    },
+                  }}
+                >
+                  <StyledImage
+                    src={optimizeImage(
+                      // topCollection?.banner ??
+                      //   topCollection?.image ??
+                      //   topCollection?.recentSales?.[0]?.collection?.image ??
+                      //   topCollection?.recentSales?.[0]?.token?.image,
+                      '/assets/anarchiving_game.jpeg',
+                      1820
+                    )}
+                    css={{
+                      width: '100%',
+                      borderRadius: 8,
+                      height: 320,
+                      '@lg': {
+                        height: 540,
+                      },
+                      objectFit: 'cover',
+                    }}
+                  />
+                  <Box
+                    css={{
+                      position: 'absolute',
+                      left: '$4',
+                      display: 'none',
+                      aspectRatio: 'square',
+                      '@md': {
+                        display: 'block',
+                      },
+                      '@lg': {
+                        top: '$4',
+                      },
+                      bottom: '$4',
+                    }}
+                  >
+                    <Img
+                      alt="collection image"
+                      width={80}
+                      height={80}
+                      style={{
+                        display: 'block',
+                        borderRadius: 8,
+                        border: '2px solid rgba(255,255,255,0.6)',
+                        aspectRatio: 'square',
+                        minHeight: 80,
+                      }}
+                      src={
+                        optimizeImage(
+                          // topCollection?.image,
+                          '/assets/logo_animation.gif',
+                          200
+                        ) as string
+                      }
+                    />
+                  </Box>
+                </Box>
+                <Box css={{ flex: 2, zIndex: 4 }}>
+                  <Flex direction="column" css={{ height: '100%' }}>
+                    <Box css={{ flex: 1 }}>
+                      <Text style="h3" css={{ mt: '$3', mb: '$2' }} as="h3">
+                        THE ANARCHIVING GAME
+                      </Text>
+
+                      <Box
+                        css={{
+                          maxWidth: 720,
+                          lineHeight: 1.5,
+                          fontSize: 16,
+                          fontWeight: 400,
+                          display: '-webkit-box',
+                          color: '$gray12',
+                          fontFamily: '$body',
+                          WebkitLineClamp: 3,
+                          WebkitBoxOrient: 'vertical',
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                        }}
+                      >
+                        {/* <ReactMarkdown
+                            children={topCollection?.description || ''}
+                            components={{
+                              a: MarkdownLink,
+                              p: Text as any,
+                            }}
+                          /> */}
+                        The Sphere concludes its first funding cycle with KARMIC
+                        OBJECTS, a unique collection of six artworks (five in
+                        editions of 150, one in 250) blending circus, dance, and
+                        art with blockchain. KARMIC001 is comprised of two
+                        primary seeds: Materia by Andrea Salutri, C8H11NO2 by
+                        ROOM100, and three derivatives by Cecilia Manfrini,
+                        Marija Baranauskaité, Utka Gavuzzo, chosen via Cygnet
+                        Quadratic Voting. Lene Vollhardt's film Swirls of
+                        Fortune completes the collection, showcasing its web3
+                        art ecosystem.
+                      </Box>
+
+                      <Flex css={{ mt: '$4' }}>
+                        <Box css={{ mr: '$5' }}>
+                          <Text style="subtitle2" color="subtle">
+                            FLOOR
+                          </Text>
+                          <Box css={{ mt: 2 }}>
+                            {/* <FormatCryptoCurrency
+                                amount={
+                                  topCollection?.floorAsk?.price?.amount
+                                    ?.native ?? 0
+                                }
+                                textStyle={'h4'}
+                                logoHeight={20}
+                                address={
+                                  topCollection?.floorAsk?.price?.currency
+                                    ?.contract
+                                }
+                              /> */}
+                            floor value
+                          </Box>
+                        </Box>
+
+                        {/* <Box css={{ mr: '$4' }}>
+                            <Text style="subtitle2" color="subtle">
+                              24H SALES
+                            </Text>
+                            <Text style="h4" as="h4" css={{ mt: 2 }}>
+                              {topCollection?.count?.toLocaleString()}
+                            </Text>
+                          </Box> */}
+                      </Flex>
+                      {/* <Box
+                          css={{
+                            display: 'none',
+                            '@lg': {
+                              display: 'block',
+                            },
+                          }}
+                        >
+                          <Text
+                            style="subtitle2"
+                            color="subtle"
+                            as="p"
+                            css={{ mt: '$4' }}
+                          >
+                            RECENT SALES
+                          </Text>
+                          <Flex
+                            css={{
+                              mt: '$2',
+                              gap: '$3',
+                            }}
+                          >
+                            {topCollection?.recentSales
+                              ?.slice(0, 4)
+                              ?.map((sale, i) => (
+                                <Box
+                                  css={{
+                                    aspectRatio: '1/1',
+                                    maxWidth: 120,
+                                  }}
+                                  key={i}
+                                  onClick={(e) => {
+                                    e.stopPropagation()
+                                    e.preventDefault()
+                                    if (
+                                      sale?.collection?.id &&
+                                      sale?.token?.id
+                                    ) {
+                                      router.push(
+                                        `/${chain.routePrefix}/asset/${sale?.collection?.id}:${sale?.token?.id}`
+                                      )
+                                    }
+                                  }}
+                                >
+                                  <img
+                                    style={{ borderRadius: 4 }}
+                                    src={optimizeImage(
+                                      sale?.token?.image ||
+                                        topCollection?.image,
+                                      250
+                                    )}
+                                  />
+                                  <Box css={{ mt: '$1' }}>
+                                    <FormatCryptoCurrency
+                                      amount={sale?.price?.amount?.decimal ?? 0}
+                                      textStyle={'h6'}
+                                      logoHeight={16}
+                                      address={sale?.price?.currency?.contract}
+                                    />
+                                  </Box>
+                                </Box>
+                              ))}
+                            <Box css={{ flex: 1 }} />
+                            <Box css={{ flex: 1 }} />
+                          </Flex>
+                        </Box> */}
+                    </Box>
+                    <Flex css={{ gap: '$4', mt: '$4' }}>
+                      {theme == 'light' ? (
+                        <Button
+                          as="button"
+                          color="primary"
+                          size="large"
+                          className="w-full justify-center"
+                        >
+                          Explore
+                        </Button>
+                      ) : (
+                        <Button
+                          as="button"
+                          color="gray4"
+                          size="large"
+                          className="w-full justify-center"
+                        >
+                          Explore
+                        </Button>
+                      )}
+                    </Flex>
+                  </Flex>
+                </Box>
+              </Flex>
+            </Flex>
+          </Link>
+
+          {/* Spherical GeNFT */}
+          <Link href="/ethereum/collection/0x69b377c8dddc25ae26c422d39b45744bb67aab4b">
+            <Flex>
+              <Flex
+                css={{
+                  '&:hover button': {
+                    background: theme == 'light' ? '$primary11' : '$gray2',
+                  },
+                  minHeight: 540,
+
+                  flex: 1,
+                  overflow: 'hidden',
+                  position: 'relative',
+                  gap: '$3',
+                  p: '$4',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  '@md': {
+                    p: '$5',
+                    gap: '$4',
+                    flexDirection: 'column',
+                    display: 'flex',
+                  },
+                  '@lg': {
+                    flexDirection: 'row',
+                    p: '$5',
+                    gap: '$5',
+                    mt: '$4',
+                  },
+                  '@xl': {
+                    p: '$6',
+                    gap: '$6',
+                  },
+
+                  mb: '$6',
+                  maxWidth: 1820,
+                  mx: 'auto',
+                  // borderRadius: 16,
+                  // backgroundSize: 'cover',
+                  // border: `1px solid $gray5`,
+                  // backgroundImage: theme === 'light' ? `$gray2` : '$gray3',
+                  // backgroundColor: '$gray5',
+                }}
+              >
+                <Box
+                  css={{
+                    position: 'absolute',
+                    top: 0,
+                    display: theme === 'light' ? 'block' : 'none',
+                    zIndex: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    backdropFilter: 'blur(20px)',
+
+                    // background: 'rgba(255, 255, 255, 0.9)',
+                  }}
+                />
+
+                <Box
+                  css={{
+                    flex: 2,
+                    position: 'relative',
+                    zIndex: 5,
+
                     '@xl': {
                       flex: 3,
                     },
