@@ -979,9 +979,19 @@ const CollectionPage: NextPage<Props> = ({ id, ssr }) => {
                     key={owner?.address}
                     className="grid grid-cols-5 py-2 border-b-[1px] border-[#333333]"
                   >
-                    <div className="col-span-3">
+                    <div className="col-span-3 text-sm md:text-md">
                       <Link href={`/portfolio/${owner?.address}`}>
-                        {<EnsName address={owner.address} /> ?? owner?.address}
+                        {(!isSmallDevice && (
+                          <EnsName address={owner.address} />
+                        )) ??
+                          owner?.address}
+                        {(isSmallDevice && (
+                          <EnsName address={owner.address} />
+                        )) ??
+                          'oooo' +
+                            owner?.address.slice(0, 6) +
+                            '...' +
+                            (owner?.ensName ?? owner?.address).slice(-4)}
                       </Link>
                     </div>
                     <div className="col-span-2">
