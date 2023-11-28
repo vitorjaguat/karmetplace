@@ -6,7 +6,12 @@ import {
   faHand,
   faPlus,
   faRefresh,
+  faHeart,
+  faAngleDoubleRight,
+  faShareSquare,
 } from '@fortawesome/free-solid-svg-icons'
+import { SizeProp } from '@fortawesome/fontawesome-svg-core'
+import Modal from 'react-responsive-modal'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   EditListingModal,
@@ -42,6 +47,7 @@ import {
   useContext,
   useMemo,
   useState,
+  useEffect,
 } from 'react'
 import { MutatorCallback } from 'swr'
 import { useMediaQuery } from 'react-responsive'
@@ -51,8 +57,19 @@ import { DATE_REGEX, timeTill } from 'utils/till'
 import { Address } from 'wagmi'
 import Image from 'next/image'
 import optimizeImage from 'utils/optimizeImage'
+import { useTheme } from 'next-themes'
+import { useRouter } from 'next/router'
+import { createWalletClient, http, custom } from 'viem'
+import { mainnet, zora, goerli } from 'viem/chains'
+import {
+  getClient,
+  Execute,
+  SignatureStepItem,
+  TransactionStepItem,
+} from '@reservoir0x/reservoir-sdk'
 
 type PortfolioTokenCardProps = {
+  // setOpenHeart: Dispatch<SetStateAction<boolean>>
   token: ReturnType<typeof useUserTokens>['data'][0]
   address: Address
   isOwner: boolean
@@ -79,8 +96,21 @@ export default ({
   mutate,
   onMediaPlayed,
 }: PortfolioTokenCardProps) => {
+  const { theme } = useTheme()
   const { addToast } = useContext(ToastContext)
   const [isRefreshing, setIsRefreshing] = useState(false)
+  const [openHeart, setOpenHeart] = useState(false)
+  const [heartValue, setHeartValue] = useState(0)
+
+  //connecting orderFee to heartValue:
+  const [orderFee, setOrderFee] = useState('')
+  const [orderFees, setOrderFees] = useState<string[]>([])
+  useEffect(() => {
+    const newOrderFee =
+      '0x5C6DC3b2a55be4b02e26b75848e27c19df4Af9fE:' + heartValue * 100
+    setOrderFee(newOrderFee)
+    setOrderFees([newOrderFee])
+  }, [heartValue])
 
   let dynamicToken = token as ReturnType<typeof useDynamicTokens>['data'][0]
 
@@ -123,6 +153,72 @@ export default ({
         selectedItem?.token?.contract === token?.token?.contract
     )
   }, [selectedItems])
+
+  // transfer modal
+  const [transferModal, setTransferModal] = useState<any>(false)
+  const [transferModalToken, setTransferModalToken] =
+    useState<ReturnType<typeof useTokens>['data'][0]>()
+  const [transferTarget, setTransferTarget] = useState('')
+  const chain = useMarketplaceChain()
+  const router = useRouter()
+  // console.log(chain)
+  const [transferStep, setTransferStep] = useState<any>('')
+  const [transferProcessingModal, setTransferProcessingModal] =
+    useState<any>(false)
+  const [transferQuantity, setTransferQuantity] = useState(1)
+
+  const handleTransferConfirm = async (
+    token: ReturnType<typeof useTokens>['data'][0],
+    target: string,
+    quantity: number,
+    ownership: any
+  ) => {
+    // console.log(+ownership, +quantity)
+    if (+ownership < +quantity) {
+      alert('You do not own enough of this token to transfer this quantity.')
+      return
+    }
+    setTransferModal(false)
+    setTransferProcessingModal(true)
+    const address = router.query.address[0] as string
+
+    const wallet = createWalletClient({
+      account: address as `0x${string}`,
+      // transport: http(),
+      chain:
+        chain.id === 1
+          ? mainnet
+          : chain.id === 5
+          ? goerli
+          : chain.id === 7777777
+          ? zora
+          : undefined,
+      transport: custom(window.ethereum),
+    })
+    // console.log(wallet)
+    await wallet.switchChain(
+      chain.id === 1 ? mainnet : chain.id === 5 ? goerli : zora
+    )
+    getClient().actions.transferTokens({
+      to: target as `0x${string}`,
+      items: [
+        {
+          token: (token?.token?.contract +
+            ':' +
+            token?.token?.tokenId) as string,
+          quantity: quantity,
+        },
+      ],
+      wallet: wallet,
+      onProgress: (steps) => {
+        console.log(steps)
+        setTransferStep(steps as Array<object>)
+      },
+    })
+    // console.log(address)
+    // console.log(token)
+    // console.log(target)
+  }
 
   return (
     <Box
@@ -392,17 +488,19 @@ export default ({
       {isOwner ? (
         <Flex
           className="token-button-container"
+          justify="between"
           css={{
             width: '100%',
             transition: 'bottom 0.25s ease-in-out',
             position: 'absolute',
-            bottom: -44,
+            bottom: 0,
             left: 0,
             right: 0,
             gap: 1,
           }}
         >
-          <List
+          <div className="flex gap-1">
+            {/* <List
             token={token as ReturnType<typeof useTokens>['data'][0]}
             buttonCss={{
               justifyContent: 'center',
@@ -413,7 +511,287 @@ export default ({
             }}
             buttonChildren="List"
             mutate={mutate}
-          />
+          /> */}
+
+            {/* list button + Modal */}
+            <div
+              className={
+                'px-5 py-1 font-bold text-sm rounded-lg flex items-center cursor-pointer duration-300' +
+                (theme == 'dark'
+                  ? ' text-white hover:bg-neutral-700'
+                  : ' text-black hover:bg-neutral-300')
+              }
+              onClick={() => setOpenHeart(true)}
+            >
+              List
+            </div>
+
+            <Modal
+              open={openHeart}
+              onClose={() => {
+                setOpenHeart(false)
+                setHeartValue(0)
+              }}
+              center
+            >
+              <div className="flex flex-col items-center justify-center px-6 pt-16 pb-4 gap-4 bg-slate-600 text-sm md:text-md">
+                <div className="flex flex-col gap-3">
+                  <div className="">
+                    Would you like to set a percentage of your sale to be
+                    donated to{' '}
+                    <span className="font-bold">
+                      The Sphere Common Treasury
+                    </span>{' '}
+                    multisig, so we can continue funding live art?
+                  </div>
+                  <div className="">
+                    If YES, select the percentage using the slider, then click
+                    "Next". The donation will be deducted from the total price
+                    you set.
+                  </div>
+                  <div className="">
+                    If NOT, that's ok - you can click "Next" and proceed to your
+                    listing.
+                  </div>
+                </div>
+                <form className="mt-4 flex flex-col gap-6 w-full items-center">
+                  <div className="text-center gap-8 bg-white/20 rounded-lg p-6 pt-10 px-10 w-fit">
+                    <input
+                      type="range"
+                      name="percentage"
+                      id="percentage"
+                      placeholder="0"
+                      defaultValue="0"
+                      max={
+                        token?.token?.chainId == 1 || token?.token?.chainId == 5
+                          ? 90
+                          : 80
+                      }
+                      className="w-[200px] md:w-[300px] mb-6"
+                      onChange={(e) => setHeartValue(+e.target.value)}
+                    />
+                    <div className="text-center pb-5 text-neutral-300 flex justify-center">
+                      Your donation:{' '}
+                      <div className="ml-4 font-bold min-w-[3rem]">
+                        {heartValue}%
+                      </div>
+                    </div>
+                    <FontAwesomeIcon
+                      icon={faHeart}
+                      color="#00ff00"
+                      className="duration-300 ease-in-out"
+                      size={
+                        ((heartValue + 10 - (heartValue % 10)) / 10 +
+                          'x') as SizeProp
+                      }
+                    />
+                  </div>
+                  <div className="flex gap-4 w-full justify-between mt-4">
+                    <button
+                      className="py-2 px-5 rounded-lg bg-[#2c2c59] text-md font-bold"
+                      onClick={() => {
+                        setOpenHeart(false)
+                      }}
+                    >
+                      Cancel
+                    </button>
+
+                    {/* regular List button: */}
+                    <List
+                      orderFees={orderFees}
+                      // setOpenHeart={setOpenHeart}
+                      token={token as ReturnType<typeof useTokens>['data'][0]}
+                      buttonCss={{
+                        px: isSmallDevice ? '40px' : '100px',
+                        backgroundColor: '$gray3',
+                        color: '$gray12',
+                        border: '1px solid white',
+                        '&:hover': {
+                          backgroundColor: '$gray4',
+                        },
+                      }}
+                      // buttonChildren="List"
+                      buttonChildren={
+                        <span className="flexjustify-betweenw-full">
+                          <FontAwesomeIcon
+                            className="mr-3"
+                            icon={faAngleDoubleRight}
+                          />
+                          Next
+                        </span>
+                      }
+                      mutate={mutate}
+                    />
+                  </div>
+                </form>
+              </div>
+            </Modal>
+
+            {/* {!isSmallDevice && ( */}
+            <>
+              {/* transfer MEDIUM/desktop */}
+              <div
+                className={
+                  'px-5 py-1 text-sm font-bold rounded-lg flex items-center cursor-pointer duration-300' +
+                  (useTheme().theme == 'dark'
+                    ? ' text-white hover:bg-neutral-700'
+                    : ' text-black hover:bg-neutral-300')
+                }
+                onClick={() => {
+                  setTransferModal(token)
+                  // setTransferModalToken(token)
+                }}
+              >
+                Transfer
+              </div>
+
+              <Modal
+                open={transferModal}
+                onClose={() => setTransferModal(false)}
+                classNames={
+                  {
+                    // modal: 'customModal',
+                    // modalContainer: 'customModal',
+                  }
+                }
+                center // transfer modal
+              >
+                <div className="flex flex-col items-center justify-center px-6 pt-16 pb-4 gap-4 bg-slate-600">
+                  <div className="flex flex-col gap-3 text-sm">
+                    <div className="">
+                      Transfer your token to another wallet address.
+                    </div>
+                    <div className="">
+                      You can transfer to any address on the same chain as the
+                      token.
+                    </div>
+                  </div>
+                  <form className="mt-4 flex flex-col gap-6 w-full items-center">
+                    <div className="text-center gap-8 bg-white/20 rounded-lg pb-6 pt-6 md:pt-10 px-2 md:px-10 text-xs md:text-md w-full">
+                      <label
+                        className="text-neutral-300 text-sm md:text-md"
+                        htmlFor="newAddress"
+                      >
+                        Receiver address:
+                      </label>
+                      <input
+                        type="text"
+                        name="newAddress"
+                        id="newAddress"
+                        required
+                        placeholder="0x..."
+                        className="w-full mb-6 outline-none px-0 md:px-2 py-1 rounded-md text-xs md:text-md text-center"
+                        onChange={(e) => setTransferTarget(e.target.value)}
+                      />
+                      <div className="text-center pb-1 md:pb-2 text-neutral-300 flex flex-col justify-center">
+                        Confirm receiver:{' '}
+                        <div className="font-bold min-w-[3rem]">
+                          {transferTarget || '0x...'}
+                        </div>
+                      </div>
+                      <div className="mt-4 flex flex-col items-center">
+                        <label
+                          className=" text-neutral-300 text-sm md:text-md"
+                          htmlFor="transferQuantity"
+                        >
+                          Quantity:
+                        </label>
+                        <input
+                          type="number"
+                          name="transferQuantity"
+                          id="transferQuantity"
+                          placeholder="1"
+                          required
+                          step={1}
+                          className="w-12 outline-none px-0 py-1 rounded-md text-center"
+                          onChange={(e) => setTransferQuantity(+e.target.value)}
+                        />
+                      </div>
+                      {/* <div className="text-xs text-green-400 w-full flex flex-col items-center">
+                      {transferStep &&
+                        transferStep?.map(
+                          (step: any, i: number, steps: any) => (
+                            <div className="w-[80%] mb-2">
+                              Your transfer is being executed. You must
+                              approve the transaction in your wallet.
+                            </div>
+                          )
+                        )}
+                    </div> */}
+                    </div>
+                    <div className="flex gap-4 w-full justify-between mt-2">
+                      <div className="flex gap-4 w-full justify-between mt-4">
+                        <button
+                          type="submit"
+                          className="py-2 px-5 rounded-lg bg-[#2c2c59] text-sm md:text-md"
+                          onClick={(e) => {
+                            e.preventDefault()
+                            // console.log(token)
+                            setTransferModal(false)
+                          }}
+                        >
+                          Cancel
+                        </button>
+                        <div
+                          className="text-[#00ff00] py-2 px-5 rounded-lg bg-[#2c2c59] cursor-pointer text-sm md:text-md"
+                          onClick={() =>
+                            handleTransferConfirm(
+                              token as ReturnType<typeof useTokens>['data'][0],
+                              transferTarget,
+                              transferQuantity,
+                              token?.ownership?.tokenCount
+                            )
+                          }
+                        >
+                          <FontAwesomeIcon
+                            icon={faShareSquare}
+                            color="#00ff00"
+                            className="mr-2 duration-300 ease-in-out "
+                          />
+                          Confirm
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </Modal>
+
+              {/* transferProcessingModal: */}
+              <Modal
+                open={transferProcessingModal}
+                onClose={() => setTransferProcessingModal(false)}
+                classNames={
+                  {
+                    // modal: 'customModal',
+                    // modalContainer: 'customModal',
+                  }
+                }
+                center // transfer modal
+              >
+                <div className="flex flex-col items-center justify-center px-6 pt-16 pb-6 gap-8 bg-slate-600 ">
+                  <div className="flex flex-col gap-8 items-center">
+                    <div className="">
+                      Please follow the steps in your wallet to complete the
+                      transfer.
+                    </div>
+                    <div
+                      className="text-[#00ff00] py-2 px-5 rounded-lg bg-[#2c2c59] cursor-pointer w-fit"
+                      onClick={() => setTransferProcessingModal(false)}
+                    >
+                      <FontAwesomeIcon
+                        icon={faCheck}
+                        color="#00ff00"
+                        className="mr-2 duration-300 ease-in-out "
+                      />
+                      Done
+                    </div>
+                  </div>
+                </div>
+              </Modal>
+            </>
+            {/* )} */}
+          </div>
+
           <Dropdown
             modal={false}
             trigger={

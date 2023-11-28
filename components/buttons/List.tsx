@@ -4,8 +4,10 @@ import {
   cloneElement,
   ComponentProps,
   ComponentPropsWithoutRef,
+  Dispatch,
   FC,
   ReactNode,
+  SetStateAction,
   useContext,
 } from 'react'
 import { CSS } from '@stitches/react'
@@ -15,7 +17,7 @@ import { useConnectModal } from '@rainbow-me/rainbowkit'
 import { ToastContext } from 'context/ToastContextProvider'
 import { useMarketplaceChain } from 'hooks'
 
-const orderFee = process.env.NEXT_PUBLIC_MARKETPLACE_FEE
+// const orderFee = process.env.NEXT_PUBLIC_MARKETPLACE_FEE
 
 type ListingCurrencies = ComponentPropsWithoutRef<
   typeof ListModal
@@ -27,6 +29,7 @@ type Props = {
   buttonChildren?: ReactNode
   buttonProps?: ComponentProps<typeof Button>
   mutate?: SWRResponse['mutate']
+  orderFees?: string[]
 }
 
 const List: FC<Props> = ({
@@ -34,7 +37,9 @@ const List: FC<Props> = ({
   buttonCss,
   buttonChildren,
   buttonProps,
+  orderFees,
   mutate,
+  // setOpenHeart,
 }) => {
   const { isDisconnected } = useAccount()
   const { openConnectModal } = useConnectModal()
@@ -55,7 +60,7 @@ const List: FC<Props> = ({
     </Button>
   )
 
-  const orderFees = orderFee ? [orderFee] : []
+  // const orderFees = orderFee ? [orderFee] : []
 
   if (isDisconnected) {
     return cloneElement(trigger, {
@@ -77,6 +82,7 @@ const List: FC<Props> = ({
         chainId={marketplaceChain.id}
         onClose={(data, stepData, currentStep) => {
           if (mutate && currentStep == ListStep.Complete) mutate()
+          // setOpenHeart(false)
         }}
         onListingError={(err: any) => {
           if (err?.code === 4001) {

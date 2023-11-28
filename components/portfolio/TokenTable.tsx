@@ -149,6 +149,7 @@ export const TokenTable = forwardRef<TokenTableRef, Props>(
     const loadMoreObserver = useIntersectionObserver(loadMoreRef, {})
     const client = useReservoirClient()
     const [acceptBidModalOpen, setAcceptBidModalOpen] = useState(false)
+    // const [openHeart, setOpenHeart] = useState(false)
 
     const [playingElement, setPlayingElement] = useState<
       HTMLAudioElement | HTMLVideoElement | null
@@ -266,6 +267,8 @@ export const TokenTable = forwardRef<TokenTableRef, Props>(
                       onAcceptBidModalOpened={(open) => {
                         setAcceptBidModalOpen(open)
                       }}
+                      // setOpenHeart={setOpenHeart}
+                      // openHeart={openHeart}
                     />
                   )
                 })}
@@ -285,6 +288,7 @@ export const TokenTable = forwardRef<TokenTableRef, Props>(
               >
                 {tokens?.map((token, i) => (
                   <PortfolioTokenCard
+                    // setOpenHeart={setOpenHeart}
                     key={i}
                     token={token}
                     isOwner={isOwner}
@@ -336,6 +340,8 @@ type TokenTableRowProps = {
   setSelectedItems: Dispatch<SetStateAction<UserToken[]>>
   onAcceptBidModalOpened: (open: boolean) => void
   isOwner: boolean
+  // setOpenHeart: Dispatch<SetStateAction<boolean>>
+  // openHeart: boolean
 }
 
 const TokenTableRow: FC<TokenTableRowProps> = ({
@@ -345,6 +351,8 @@ const TokenTableRow: FC<TokenTableRowProps> = ({
   onAcceptBidModalOpened,
   mutate,
   setSelectedItems,
+  // setOpenHeart,
+  // openHeart,
 }) => {
   const { routePrefix, proxyApi } = useMarketplaceChain()
   const { addToast } = useContext(ToastContext)
@@ -426,12 +434,12 @@ const TokenTableRow: FC<TokenTableRowProps> = ({
     )
 
     //connecting orderFee to heartValue:
-    const [orderFee, setOrderFee] = useState('')
+    // const [orderFee, setOrderFee] = useState('')
     const [orderFees, setOrderFees] = useState<string[]>([])
     useEffect(() => {
       const newOrderFee =
         '0x5C6DC3b2a55be4b02e26b75848e27c19df4Af9fE:' + heartValue * 100
-      setOrderFee(newOrderFee)
+      // setOrderFee(newOrderFee)
       setOrderFees([newOrderFee])
     }, [heartValue])
 
@@ -718,7 +726,10 @@ const TokenTableRow: FC<TokenTableRowProps> = ({
               )} */}
               <Modal
                 open={openHeart}
-                onClose={() => setOpenHeart(false)}
+                onClose={() => {
+                  setOpenHeart(false)
+                  setHeartValue(0)
+                }}
                 classNames={{
                   modal: 'customModal',
                   // modalContainer: 'customModal',
@@ -844,7 +855,7 @@ const TokenTableRow: FC<TokenTableRowProps> = ({
                 center // transfer modal
               >
                 <div className="flex flex-col items-center justify-center px-6 pt-16 pb-4 gap-4 bg-slate-600 overflow-hidden max-w-full">
-                  <div className="flex flex-col gap-3">
+                  <div className="flex flex-col gap-3 text-sm">
                     <div className="">
                       Transfer your token to another wallet address.
                     </div>
@@ -904,10 +915,10 @@ const TokenTableRow: FC<TokenTableRowProps> = ({
                           )}
                       </div> */}
                     </div>
-                    <div className="flex gap-4 w-full justify-between mt-4">
+                    <div className="flex gap-4 w-full justify-between mt-2">
                       <div className="flex gap-4 w-full justify-between mt-4">
                         <button
-                          className="py-2 px-5 rounded-lg bg-[#2c2c59]"
+                          className="py-2 px-5 rounded-lg bg-[#2c2c59] text-sm md:text-md"
                           onClick={() => {
                             setTransferModal(false)
                           }}
@@ -915,7 +926,7 @@ const TokenTableRow: FC<TokenTableRowProps> = ({
                           Cancel
                         </button>
                         <div
-                          className="text-[#00ff00] py-2 px-5 rounded-lg bg-[#2c2c59] cursor-pointer"
+                          className="text-[#00ff00] py-2 px-5 rounded-lg bg-[#2c2c59] cursor-pointer text-sm md:text-md"
                           onClick={() =>
                             handleTransferConfirm(
                               token as ReturnType<typeof useTokens>['data'][0],
@@ -929,7 +940,6 @@ const TokenTableRow: FC<TokenTableRowProps> = ({
                             icon={faShareSquare}
                             color="#00ff00"
                             className="mr-2 duration-300 ease-in-out "
-                            size={20 as unknown as SizeProp}
                           />
                           Confirm
                         </div>
@@ -965,7 +975,6 @@ const TokenTableRow: FC<TokenTableRowProps> = ({
                         icon={faCheck}
                         color="#00ff00"
                         className="mr-2 duration-300 ease-in-out "
-                        size={20 as unknown as SizeProp}
                       />
                       Done
                     </div>
@@ -1514,7 +1523,6 @@ const TokenTableRow: FC<TokenTableRowProps> = ({
                             icon={faShareSquare}
                             color="#00ff00"
                             className="mr-2 duration-300 ease-in-out "
-                            size={20 as unknown as SizeProp}
                           />
                           Confirm
                         </div>
@@ -1550,7 +1558,6 @@ const TokenTableRow: FC<TokenTableRowProps> = ({
                         icon={faCheck}
                         color="#00ff00"
                         className="mr-2 duration-300 ease-in-out "
-                        size={20 as unknown as SizeProp}
                       />
                       Done
                     </div>
@@ -1576,7 +1583,10 @@ const TokenTableRow: FC<TokenTableRowProps> = ({
               )} */}
               <Modal
                 open={openHeart}
-                onClose={() => setOpenHeart(false)}
+                onClose={() => {
+                  setOpenHeart(false)
+                  setHeartValue(0)
+                }}
                 center
               >
                 <div className="flex flex-col items-center justify-center px-6 pt-16 pb-4 gap-4 bg-slate-600 ">
