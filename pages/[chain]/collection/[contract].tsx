@@ -15,7 +15,7 @@ import {
 } from '@reservoir0x/reservoir-kit-ui'
 import { paths } from '@reservoir0x/reservoir-sdk'
 import Layout from 'components/Layout'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { use, useEffect, useMemo, useRef, useState } from 'react'
 import { truncateAddress } from 'utils/truncate'
 import TokenCard from 'components/collections/TokenCard'
 import { AttributeFilters } from 'components/collections/filters/AttributeFilters'
@@ -38,7 +38,7 @@ import { ActivityFilters } from 'components/common/ActivityFilters'
 import { MobileAttributeFilters } from 'components/collections/filters/MobileAttributeFilters'
 import { MobileActivityFilters } from 'components/common/MobileActivityFilters'
 import LoadingCard from 'components/common/LoadingCard'
-import { useChainCurrency, useMounted } from 'hooks'
+import { useChainCurrency, useENSResolver, useMounted } from 'hooks'
 import { NORMALIZE_ROYALTIES } from 'pages/_app'
 import {
   faCog,
@@ -62,6 +62,8 @@ import { CollectionDetails } from 'components/collections/CollectionDetails'
 import useTokenUpdateStream from 'hooks/useTokenUpdateStream'
 import LiveState from 'components/common/LiveState'
 import { formatUnits } from 'viem'
+import { useTheme } from 'next-themes'
+import { useEnsName } from 'wagmi'
 
 type ActivityTypes = Exclude<
   NonNullable<
@@ -76,6 +78,7 @@ type Props = InferGetServerSidePropsType<typeof getServerSideProps>
 
 const CollectionPage: NextPage<Props> = ({ id, ssr }) => {
   const router = useRouter()
+  console.log(useENSResolver('0x95aa6CF80aa61c3433215c7b8330C065eD29CE97'))
   const { address } = useAccount()
   const [attributeFiltersOpen, setAttributeFiltersOpen] = useState(false)
   const [activityFiltersOpen, setActivityFiltersOpen] = useState(true)
@@ -87,6 +90,7 @@ const CollectionPage: NextPage<Props> = ({ id, ssr }) => {
     'sale',
     'mint',
   ])
+  const { theme } = useTheme()
   const [initialTokenFallbackData, setInitialTokenFallbackData] = useState(true)
   const isMounted = useMounted()
   const isSmallDevice = useMediaQuery({ maxWidth: 905 }) && isMounted
@@ -389,6 +393,23 @@ const CollectionPage: NextPage<Props> = ({ id, ssr }) => {
 
   console.log(owners)
 
+  //owners' ENS:
+  // const [ensNames, setEnsNames] = useState<string[]>([])
+  // useEffect(() => {
+  //   let ensNames: string[] = []
+  //   owners.map((owner) => {
+  //     const ensName: string = useEnsName({ address: owner.address })
+  //       .data as string
+  //     ensNames.push(ensName)
+  //   })
+  //   setEnsNames(ensNames)
+  // }, [owners])
+  // const { data, isError, isLoading } = useEnsName({
+  //   address: '0x95aa6CF80aa61c3433215c7b8330C065eD29CE97',
+  //   chainId: 1,
+  // })
+  // console.log(data, isError, isLoading)
+
   return (
     <Layout>
       <Head
@@ -651,7 +672,7 @@ const CollectionPage: NextPage<Props> = ({ id, ssr }) => {
               <TabsTrigger value="items">Items</TabsTrigger>
               <TabsTrigger value="details">Details</TabsTrigger>
               <TabsTrigger value="activity">Activity</TabsTrigger>
-              {/* <TabsTrigger value="owners">Owners</TabsTrigger> */}
+              <TabsTrigger value="owners">Owners</TabsTrigger>
             </TabsList>
 
             <TabsContent value="items">
@@ -942,6 +963,34 @@ const CollectionPage: NextPage<Props> = ({ id, ssr }) => {
                 </Box>
               </Flex>
             </TabsContent>
+            <TabsContent value="owners">
+              <div className="min-h-[400px]">
+                <div
+                  className={
+                    'grid grid-cols-5 text-sm py-2 ' +
+                    (theme === 'dark' ? 'bg-[#27282c]' : 'bg-[#ffffff]')
+                  }
+                >
+                  <div className=" col-span-3">Owner</div>
+                  <div className="col-span-2">Quantity</div>
+                </div>
+                {owners.map((owner) => (
+                  <div
+                    key={owner?.address}
+                    className="grid grid-cols-5 py-2 border-b-[1px] border-[#333333]"
+                  >
+                    <div className="col-span-3">
+                      <Link href={`/portfolio/${owner?.address}`}>
+                        {<EnsName address={owner.address} /> ?? owner?.address}
+                      </Link>
+                    </div>
+                    <div className="col-span-2">
+                      {owner?.ownership?.tokenCount}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </TabsContent>
           </Flex>
         ) : (
           <Box />
@@ -952,6 +1001,8 @@ const CollectionPage: NextPage<Props> = ({ id, ssr }) => {
 }
 
 import filterContractsTheSphere from 'utils/filterContractsTheSphere'
+import Link from 'next/link'
+import EnsName from 'components/primitives/EnsName'
 
 export const getServerSideProps: GetServerSideProps<{
   ssr: {
