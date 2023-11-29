@@ -55,68 +55,73 @@ const companySectionLinks = [
   //   href: 'https://jobs.ashbyhq.com/reservoir',
   // },
   {
-    name: 'Terms of Use',
+    name: 'Website',
     href: 'https://www.thesphere.as/',
   },
   {
-    name: 'Privacy Policy',
-    href: 'https://www.thesphere.as/',
+    name: 'Docs',
+    href: 'https://docs.thesphere.as/',
   },
 ]
 
 export const Footer = () => {
   return (
-    <Flex
-      justify="between"
-      css={{
-        borderTop: '1px solid $gray7',
-        borderStyle: 'solid',
-        position: 'relative',
-        zIndex: 1,
-        p: '$5',
-        '@lg': {
-          p: '$6',
-        },
-        flexDirection: 'column',
-        alignItems: 'flex-start',
-        gap: 36,
-        '@bp600': {
-          flexDirection: 'row',
-          gap: 0,
-        },
-      }}
-    >
-      <Flex css={{ gap: 80, '@bp600': { gap: 136 } }}>
-        <Flex direction="column">
-          <SectionTitle title="Developers" />
-          {developerSectionLinks.map((props) => (
-            <SectionLink key={props.name} {...props} />
-          ))}
-        </Flex>
-        <Flex direction="column">
-          <SectionTitle title="Company" />
-          {companySectionLinks.map((props) => (
-            <SectionLink key={props.name} {...props} />
-          ))}
-        </Flex>
-      </Flex>
-      <Flex
-        direction="column"
-        css={{ alignItems: 'flex-start', '@bp600': { alignItems: 'flex-end' } }}
-      >
-        <SectionTitle title="Join us at" />
-        <Flex css={{ gap: '$4', mt: 16 }}>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://twitter.com/TheSphere_as"
-          >
-            <Button size="xs" color="gray3">
-              <FontAwesomeIcon icon={faTwitter} width={14} height={14} />
-            </Button>
-          </a>
-        </Flex>
-      </Flex>
-    </Flex>
+    <>
+      <div className="border-t-[1px] border-[var(--colors-gray7)] relative z-[1] p-10">
+        <div
+          id="logoAnimation"
+          className="-m-6 -ml-[324px] -mt-[30px] scale-[0.5] flex justify-start"
+        >
+          <div className="logo-animation"></div>
+        </div>
+        <div className="md:grid md:grid-cols-3 w-full">
+          <div className="text-[14px] text-[var(--colors-gray11)] flex flex-col">
+            <div className="">Regenerative Commons for Live Arts</div>
+            <div className="">2023</div>
+            <div className="">Developed by Uint Studio</div>
+          </div>
+          <div className="md:text-center text-[14px] text-[var(--colors-gray11)] flex flex-col">
+            <div className="">.</div>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://thesphere.as"
+            >
+              <div className="">Website</div>
+            </a>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://docs.thesphere.as/"
+            >
+              <div className="">Docs</div>
+            </a>
+          </div>
+          <div className="text-[14px] text-[var(--colors-gray11)] flex flex-col md:text-right">
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://twitter.com/TheSphere_as"
+            >
+              <div className="">Twitter</div>
+            </a>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://t.me/+o3hn1fgGsQMzZjgx"
+            >
+              <div className="">Telegram</div>
+            </a>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://discord.gg/e8K8KPrJ49"
+            >
+              <div className="">Discord</div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </>
   )
 }
