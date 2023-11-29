@@ -21,10 +21,25 @@ import {
 import { createStitches } from '@stitches/react'
 import type * as Stitches from '@stitches/react'
 import { reset } from 'utils/css/reset'
-import { Inter } from '@next/font/google'
+// import { Inter } from '@next/font/google'
+import localFont from '@next/font/local'
 
-const inter = Inter({
-  subsets: ['latin'],
+// const inter = Inter({
+//   subsets: ['latin'],
+// })
+const inter = localFont({
+  src: [
+    {
+      path: 'public/assets/space_grotesk_medium.otf',
+      weight: '500',
+      style: 'normal',
+    },
+    {
+      path: 'public/assets/space_grotesk_semibold.otf',
+      weight: '700',
+      style: 'bold',
+    },
+  ],
 })
 
 // CONFIGURABLE: Here you can update all your theming (outside of ReservoirKit which can be configured in the app.tsx)

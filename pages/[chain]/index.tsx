@@ -265,7 +265,7 @@ const Home: NextPage<any> = ({ ssr }) => {
                   <Flex direction="column" css={{ height: '100%' }}>
                     <Box css={{ flex: 1 }}>
                       <Text style="h3" css={{ mt: '$3', mb: '$2' }} as="h3">
-                        THE SPHERE KARMIC OBJECTS — first cycle
+                        THE SPHERE KARMIC OBJECTS — FIRST CYCLE
                       </Text>
 
                       <Box
@@ -291,15 +291,7 @@ const Home: NextPage<any> = ({ ssr }) => {
                             }}
                           /> */}
                         The Sphere concludes its first funding cycle with KARMIC
-                        OBJECTS, a unique collection of six artworks (five in
-                        editions of 150, one in 250) blending circus, dance, and
-                        art with blockchain. KARMIC001 is comprised of two
-                        primary seeds: Materia by Andrea Salutri, C8H11NO2 by
-                        ROOM100, and three derivatives by Cecilia Manfrini,
-                        Marija Baranauskaité, Utka Gavuzzo, chosen via Cygnet
-                        Quadratic Voting. Lene Vollhardt's film Swirls of
-                        Fortune completes the collection, showcasing its web3
-                        art ecosystem.
+                        OBJECTS, a unique collection of six artworks.
                       </Box>
 
                       <Flex css={{ mt: '$4' }}>
@@ -581,16 +573,9 @@ const Home: NextPage<any> = ({ ssr }) => {
                               p: Text as any,
                             }}
                           /> */}
-                        The Sphere concludes its first funding cycle with KARMIC
-                        OBJECTS, a unique collection of six artworks (five in
-                        editions of 150, one in 250) blending circus, dance, and
-                        art with blockchain. KARMIC001 is comprised of two
-                        primary seeds: Materia by Andrea Salutri, C8H11NO2 by
-                        ROOM100, and three derivatives by Cecilia Manfrini,
-                        Marija Baranauskaité, Utka Gavuzzo, chosen via Cygnet
-                        Quadratic Voting. Lene Vollhardt's film Swirls of
-                        Fortune completes the collection, showcasing its web3
-                        art ecosystem.
+                        The Sphere's Anarchive is a dynamic, participatory open
+                        canvas where its community's memories and creativity are
+                        continuously re-imagined.
                       </Box>
 
                       <Flex css={{ mt: '$4' }}>

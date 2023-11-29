@@ -22,12 +22,14 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from 'components/primitives/Dropdown'
+import { useMediaQuery } from 'react-responsive'
 
 const ChainToggle: FC = () => {
   const router = useRouter()
   const { chain, switchCurrentChain } = useContext(ChainContext)
   const isMounted = useMounted()
   const { theme } = useTheme()
+  const isSmallDevice = useMediaQuery({ maxWidth: 900 })
 
   const switchChains = useCallback(
     (chainOption: (typeof supportedChains)[0]) => {
@@ -58,7 +60,7 @@ const ChainToggle: FC = () => {
           <Button
             color="gray3"
             css={{
-              px: '14px',
+              px: '2px',
               justifyContent: 'space-between',
               width: 'auto',
               minWidth: 'max-content',
@@ -70,9 +72,9 @@ const ChainToggle: FC = () => {
           >
             <img
               src={theme === 'dark' ? chain.darkIconUrl : chain.lightIconUrl}
-              style={{ height: 20 }}
+              style={{ height: isSmallDevice ? 16 : 20 }}
             />
-            <Text style="body1">{chain.name}</Text>
+            <Text style={isSmallDevice ? 'body1' : 'body1'}>{chain.name}</Text>
             <Box
               css={{
                 color: '$gray10',
@@ -80,7 +82,10 @@ const ChainToggle: FC = () => {
                 '[data-state=open] &': { transform: 'rotate(180deg)' },
               }}
             >
-              <FontAwesomeIcon icon={faChevronDown} width={16} />
+              <FontAwesomeIcon
+                icon={faChevronDown}
+                width={isSmallDevice ? 16 : 16}
+              />
             </Box>
           </Button>
         </DropdownMenu.Trigger>

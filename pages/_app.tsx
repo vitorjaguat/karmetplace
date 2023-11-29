@@ -7,7 +7,8 @@ import ErrorTrackingProvider from 'components/ErrorTrackingProvider'
 import '/styles/globals.css'
 import 'react-responsive-modal/styles.css'
 
-import { Inter } from '@next/font/google'
+// import { Inter } from '@next/font/google'
+import localFont from '@next/font/local'
 import type { AppContext, AppProps } from 'next/app'
 import { default as NextApp } from 'next/app'
 import { ThemeProvider, useTheme } from 'next-themes'
@@ -44,8 +45,25 @@ import ReferralContextProvider, {
 import { chainPaymentTokensMap } from 'utils/paymentTokens'
 
 //CONFIGURABLE: Use nextjs to load your own custom font: https://nextjs.org/docs/basic-features/font-optimization
-const inter = Inter({
-  subsets: ['latin'],
+// const inter = Inter({
+//   subsets: ['latin'],
+// })
+const inter = localFont({
+  src: [
+    {
+      path: '../public/assets/space_grotesk_medium.otf',
+      weight: '500',
+      style: 'normal',
+    },
+    {
+      path: '../public/assets/space_grotesk_semibold.otf',
+      weight: '700',
+      style: 'bold',
+    },
+  ],
+  variable: '--inter-font',
+  display: 'swap',
+  // src: '../public/assets/space_grotesk_medium.otf',
 })
 
 export const NORMALIZE_ROYALTIES = process.env.NEXT_PUBLIC_NORMALIZE_ROYALTIES
@@ -212,7 +230,9 @@ function MyApp({
                   modalSize="compact"
                 >
                   <ToastContextProvider>
-                    <FunctionalComponent {...pageProps} />
+                    <main className={`${inter.variable} font-inter`}>
+                      <FunctionalComponent {...pageProps} />
+                    </main>
                   </ToastContextProvider>
                 </RainbowKitProvider>
               </Tooltip.Provider>
