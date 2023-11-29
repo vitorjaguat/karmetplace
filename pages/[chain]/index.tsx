@@ -137,8 +137,8 @@ const Home: NextPage<any> = ({ ssr }) => {
       >
         <div className="w-full relative text-4xl text-right text-white z-[100] flex justify-end my-20">
           <div className="max-w-[600px] text-[#edeeef]">
-            <div className="mb-2">The Sphere Karmetplace:</div>
-            <div className="">
+            <div className="mb-2">The Sphere Karmetplace</div>
+            <div className="text-3xl">
               A Platform for Live Art and Choreographed Value Distribution
             </div>
           </div>
@@ -262,7 +262,7 @@ const Home: NextPage<any> = ({ ssr }) => {
                       src={
                         optimizeImage(
                           // topCollection?.image,
-                          '/assets/logo_animation.gif',
+                          '/assets/logo_animation_square.gif',
                           200
                         ) as string
                       }
@@ -298,8 +298,9 @@ const Home: NextPage<any> = ({ ssr }) => {
                               p: Text as any,
                             }}
                           /> */}
-                        The Sphere concludes its first funding cycle with KARMIC
-                        OBJECTS, a unique collection of six artworks.
+                        The Sphere concludes its first funding cycle with{' '}
+                        <span className="font-bold">KARMIC OBJECTS</span>, a
+                        unique collection of six artworks.
                       </Box>
 
                       <Flex css={{ mt: '$4' }}>
@@ -545,7 +546,7 @@ const Home: NextPage<any> = ({ ssr }) => {
                       src={
                         optimizeImage(
                           // topCollection?.image,
-                          '/assets/logo_animation.gif',
+                          '/assets/logo_animation_square.gif',
                           200
                         ) as string
                       }

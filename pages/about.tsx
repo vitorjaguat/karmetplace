@@ -4,8 +4,10 @@ import Layout from 'components/Layout'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFolderOpen } from '@fortawesome/free-solid-svg-icons'
 import { Head } from 'components/Head'
+import { useMediaQuery } from 'react-responsive'
 
 const AboutPage: NextPage = () => {
+  const isSmallDevice = useMediaQuery({ maxWidth: 900 })
   return (
     <Layout>
       <Head />
@@ -24,14 +26,22 @@ const AboutPage: NextPage = () => {
         }}
       >
         <div className="max-w-[1000px] flex flex-col items-center">
-          <div className="w-full flex justify-between items-center gap-20 ">
+          <div className="w-full flex flex-col md:flex-row md:justify-between items-center gap-4 md:gap-20 mt-3">
             <Box css={{ color: '$gray11', my: '60px' }}>
               {/* <FontAwesomeIcon icon={faFolderOpen} size="2xl" /> */}
-              <div id="logoAnimation" className="mr-7 scale-[1.3]">
+              {/* <div id="logoAnimation" className="mr-7 scale-[1.3]">
                 <div className="logo-animation"></div>
+              </div> */}
+              <div className="">
+                <img
+                  src="/assets/karmetplace_logo.png"
+                  width={isSmallDevice ? 400 : 500}
+                  // height={36}
+                  alt="The Sphere Karmetplace"
+                />
               </div>
             </Box>
-            <div className="text-right">
+            <div className="text-center md:text-right">
               <div className="text-2xl">
                 The Sphere Karmetplace: A Platform for Live Art and
                 Choreographed Value Distribution
@@ -51,9 +61,9 @@ const AboutPage: NextPage = () => {
               collaborative spirit of art creation.
             </div>
           </div>
-          <div className="py-6 mt-20 text-left flex flex-col gap-8">
+          <div className="py-6 mt-20 mb-10 text-left flex flex-col md:grid md:grid-cols-3 gap-8">
             <div className="">
-              <div className="font-bold">Onchain Royalties</div>
+              <div className="font-bold text-2xl mb-3">Onchain Royalties</div>
               <div className="">
                 The Karmetplace ensures that artists continue to receive
                 royalties from secondary sales, thanks to its onchain
@@ -63,7 +73,7 @@ const AboutPage: NextPage = () => {
               </div>
             </div>
             <div className="">
-              <div className="font-bold">Artistic Support</div>
+              <div className="font-bold text-2xl mb-3">Artistic Support</div>
               <div className="">
                 The Sphere Karmetplace encourages sellers to direct a part of
                 their sale proceeds to The Sphere Commons Treasury. This
@@ -75,7 +85,7 @@ const AboutPage: NextPage = () => {
               </div>
             </div>
             <div className="mb-20">
-              <div className="font-bold">
+              <div className="font-bold text-2xl mb-3">
                 Showcasing Diverse Art Collections
               </div>
               <div className="">

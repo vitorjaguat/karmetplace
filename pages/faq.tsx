@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFolderOpen } from '@fortawesome/free-solid-svg-icons'
 import { Head } from 'components/Head'
 import Faq from 'react-faq-component'
+import { useMediaQuery } from 'react-responsive'
 
 const styles = {
   bgColor: 'transparent',
@@ -25,6 +26,7 @@ const config = {
 }
 
 const AboutPage: NextPage = () => {
+  const isSmallDevice = useMediaQuery({ maxWidth: 900 })
   const data = {
     title: 'FAQ',
     rows: [
@@ -138,15 +140,23 @@ const AboutPage: NextPage = () => {
           // maxWidth: '1000px',
         }}
       >
-        <div className="w-full max-w-[1000px] flex flex-col items-center px-1 md:px-0">
+        <div className="w-full max-w-[1000px] flex flex-col items-center px-1 md:px-0 mt-6">
           <div className="w-full flex flex-col md:flex-row justify-between items-center gap-8 md:gap-20 ">
             <Box css={{ color: '$gray11', my: '60px' }}>
               {/* <FontAwesomeIcon icon={faFolderOpen} size="2xl" /> */}
-              <div
+              {/* <div
                 id="logoAnimation"
                 className="md:mr-7 scale-[1] md:scale-[1.3] flex justify-center md:block md:justify-normal"
               >
                 <div className="logo-animation"></div>
+              </div> */}
+              <div className="">
+                <img
+                  src="/assets/karmetplace_logo.png"
+                  width={isSmallDevice ? 400 : 500}
+                  // height={36}
+                  alt="The Sphere Karmetplace"
+                />
               </div>
             </Box>
             <div className="text-center md:text-right">
@@ -156,7 +166,7 @@ const AboutPage: NextPage = () => {
               </div>
             </div>
           </div>
-          <div className="text-lg mt-8 max-w-[800px]">
+          {/* <div className="text-lg mt-8 max-w-[800px]">
             <div className="">
               Launched in December 2023, The Sphere Karmetplace emerges as a
               unique platform, fostering the connection between live art, its
@@ -168,8 +178,8 @@ const AboutPage: NextPage = () => {
               circulation of live art seeds and derivatives within a
               collaborative spirit of art creation.
             </div>
-          </div>
-          <div className="py-6 mt-20 mb-20 text-left">
+          </div> */}
+          <div className="py-6 mt-10 mb-24 text-left">
             <Faq data={data} styles={styles} config={config} />
           </div>
         </div>
