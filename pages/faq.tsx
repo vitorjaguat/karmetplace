@@ -161,8 +161,7 @@ const AboutPage: NextPage = () => {
             </Box>
             <div className="text-center md:text-right">
               <div className="text-2xl">
-                The Sphere Karmetplace: A Platform for Live Art and
-                Choreographed Value Distribution
+                Experiment, Trade, and Collect Live Art
               </div>
             </div>
           </div>

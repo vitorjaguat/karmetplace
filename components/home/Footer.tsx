@@ -67,20 +67,36 @@ const companySectionLinks = [
 export const Footer = () => {
   return (
     <>
-      <div className="border-t-[1px] border-[var(--colors-gray7)] relative z-[1] p-6 md:p-10 flex flex-col w-full items-center md:block text-center md:text-left">
-        <div
+      <div className="border-t-[1px] border-[var(--colors-gray8)] relative z-[1] p-6 md:p-10 flex flex-col w-full items-center md:block text-center md:text-left">
+        {/* <div
           id="logoAnimation"
           className="-mt-[30px] scale-[0.5] w-full flex justify-center"
         >
           <div className="logo-animation"></div>
+        </div> */}
+        <div className="mb-4 md:-ml-[8px]">
+          <img
+            src="/assets/karmetplace_logo.png"
+            alt="The Sphere Karmetplace"
+            width={240}
+          />
         </div>
         <div className="flex flex-col md:grid md:grid-cols-3 w-full">
-          <div className="text-[14px] text-[var(--colors-gray11)] flex flex-col">
+          <div className="text-[14px] text-[var(--colors-gray12)] flex flex-col">
             <div className="">Regenerative Commons for Live Arts</div>
-            <div className="">2023</div>
-            <div className="">Developed by Uint Studio</div>
+            <div className="">v0.1 - 2023</div>
+            <div className="">
+              Developed by{' '}
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://uint.vercel.app"
+              >
+                Uint Studio
+              </a>
+            </div>
           </div>
-          <div className="md:text-center text-[14px] text-[var(--colors-gray11)] flex flex-col mt-6 md:mt-0">
+          <div className="md:text-center text-[14px] text-[var(--colors-gray12)] flex flex-col mt-6 md:mt-0">
             {/* <div className=" hidden md:block">.</div> */}
             <a
               target="_blank"
@@ -97,7 +113,7 @@ export const Footer = () => {
               <div className="">Docs</div>
             </a>
           </div>
-          <div className="text-[14px] text-[var(--colors-gray11)] flex flex-col md:text-right mt-6 md:mt-0">
+          <div className="text-[14px] text-[var(--colors-gray12)] flex flex-col md:text-right mt-6 md:mt-0">
             <a
               target="_blank"
               rel="noopener noreferrer"

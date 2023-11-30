@@ -254,7 +254,33 @@ const HamburgerMenu = () => {
                     width: '100%',
                   }}
                 >
-                  Explore
+                  Home
+                </Text>
+              </Link>
+              <Link href={`/about`} legacyBehavior>
+                <Text
+                  style="subtitle1"
+                  css={{
+                    borderBottom: '1px solid $gray4',
+                    cursor: 'pointer',
+                    pb: '$4',
+                    pt: '24px',
+                  }}
+                >
+                  About
+                </Text>
+              </Link>
+              <Link href={`/faq`} legacyBehavior>
+                <Text
+                  style="subtitle1"
+                  css={{
+                    borderBottom: '1px solid $gray4',
+                    cursor: 'pointer',
+                    pb: '$4',
+                    pt: '24px',
+                  }}
+                >
+                  FAQ
                 </Text>
               </Link>
               <Link href={`/portfolio/${address || ''}`} legacyBehavior>
@@ -271,7 +297,7 @@ const HamburgerMenu = () => {
                   Portfolio
                 </Text>
               </Link>
-              <Anchor
+              {/* <Anchor
                 href="https://docs.reservoir.tools/docs"
                 target="_blank"
                 css={{
@@ -283,7 +309,7 @@ const HamburgerMenu = () => {
                 }}
               >
                 <Text style="subtitle1">Docs</Text>
-              </Anchor>
+              </Anchor> */}
             </Flex>
             <Box>
               <ConnectWalletButton />
@@ -300,7 +326,7 @@ const HamburgerMenu = () => {
             borderTop: '1px solid $gray4',
           }}
         >
-          <a href="https://twitter.com/reservoir0x" target="_blank">
+          {/* <a href="https://twitter.com/reservoir0x" target="_blank">
             <Button
               css={{ justifyContent: 'center', width: '44px', height: '44px' }}
               type="button"
@@ -309,7 +335,7 @@ const HamburgerMenu = () => {
             >
               <FontAwesomeIcon icon={faTwitter} width={20} height={20} />
             </Button>
-          </a>
+          </a> */}
           <ThemeSwitcher />
         </Flex>
       </Flex>
