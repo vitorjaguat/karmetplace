@@ -203,6 +203,14 @@ const Navbar = () => {
         />
       </Box> */}
 
+      <div className="">
+        <img
+          src="/assets/karmetplace_logo.png"
+          alt="The Sphere Karmetplace"
+          width={240}
+        />
+      </div>
+
       <Flex
         css={{
           gap: '$3',

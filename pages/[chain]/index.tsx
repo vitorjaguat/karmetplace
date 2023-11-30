@@ -17,16 +17,17 @@ import { Head } from 'components/Head'
 import { ChainContext } from 'context/ChainContextProvider'
 
 import Img from 'components/primitives/Img'
-import useTopSellingCollections from 'hooks/useTopSellingCollections'
-import ReactMarkdown from 'react-markdown'
+// import useTopSellingCollections from 'hooks/useTopSellingCollections'
+import { useCollections } from '@reservoir0x/reservoir-kit-ui'
+// import ReactMarkdown from 'react-markdown'
 import { basicFetcher as fetcher } from 'utils/fetcher'
 import { styled } from 'stitches.config'
 import { useTheme } from 'next-themes'
-import ChainToggle from 'components/common/ChainToggle'
+// import ChainToggle from 'components/common/ChainToggle'
 import optimizeImage from 'utils/optimizeImage'
-import { MarkdownLink } from 'components/primitives/MarkdownLink'
+// import { MarkdownLink } from 'components/primitives/MarkdownLink'
 import { useRouter } from 'next/router'
-import Header from 'components/home/Header'
+// import Header from 'components/home/Header'
 
 const StyledImage = styled('img', {})
 
@@ -34,6 +35,68 @@ const Home: NextPage<any> = ({ ssr }) => {
   const router = useRouter()
   const marketplaceChain = useMarketplaceChain()
   const isMounted = useMounted()
+
+  //get floor prices:
+  const collectionsArr = [
+    '0x95520e629368c3a08ec6b4d070a130ee72f6e471',
+    '0xfc599d7ad9255f7d60f84b4ab64ef8080453b767',
+    '0x69b377c8dddc25ae26c422d39b45744bb67aab4b',
+    '0xe27f011e8eb90b4d42fa7658fbe44e240d9c5f03',
+  ]
+
+  //floor price for collection 0:
+  const [floorPrice0, setFloorPrice0] = useState<number | null>(null)
+  const { data: collection0 } = useCollections({ id: collectionsArr[0] }, {}, 1)
+  useEffect(() => {
+    if (collection0[0]?.floorAsk?.price?.amount?.native) {
+      setFloorPrice0(collection0[0]?.floorAsk?.price?.amount?.native)
+    }
+  }, [collection0[0]?.floorAsk?.price?.amount?.native])
+  const [coll0, setColl0] = useState<any>(null)
+  useEffect(() => {
+    if (collection0[0]) {
+      setColl0(collection0[0])
+    }
+  }, [collection0[0]])
+
+  //floor price for collection 1:
+  const [floorPrice1, setFloorPrice1] = useState<number | null>(null)
+  const { data: collection1 } = useCollections(
+    { id: collectionsArr[1] },
+    {},
+    7777777
+  )
+  useEffect(() => {
+    if (collection1[0]?.floorAsk?.price?.amount?.native) {
+      setFloorPrice1(collection1[0]?.floorAsk?.price?.amount?.native)
+    }
+  }, [collection1[0]?.floorAsk?.price?.amount?.native])
+
+  //floor price for collection 2:
+  const [floorPrice2, setFloorPrice2] = useState<number | null>(null)
+  const { data: collection2 } = useCollections({ id: collectionsArr[0] }, {}, 1)
+  useEffect(() => {
+    if (collection2[0]?.floorAsk?.price?.amount?.native) {
+      setFloorPrice2(collection2[0]?.floorAsk?.price?.amount?.native)
+    }
+  }, [collection2[0]?.floorAsk?.price?.amount?.native])
+
+  //floor price for collection 3:
+  const [floorPrice3, setFloorPrice3] = useState<number | null>(null)
+  const { data: collection3 } = useCollections(
+    { id: collectionsArr[3] },
+    {},
+    7777777
+  )
+  useEffect(() => {
+    if (collection3[0]?.floorAsk?.price?.amount?.native) {
+      setFloorPrice3(collection3[0]?.floorAsk?.price?.amount?.native)
+    }
+  }, [collection3[0]?.floorAsk?.price?.amount?.native])
+  // setTimeout(() => {
+  //   console.log(collection3)
+  // }, 3000)
+  // console.log(floorPrice0, floorPrice1, floorPrice2, floorPrice3)
 
   // not sure if there is a better way to fix this
   const { theme: nextTheme } = useTheme()
@@ -135,12 +198,12 @@ const Home: NextPage<any> = ({ ssr }) => {
           },
         }}
       >
-        <div className="w-full relative text-4xl text-right text-white z-[100] flex justify-end my-20">
-          <div className="max-w-[600px] text-[#edeeef]">
-            <div className="mb-2">The Sphere Karmetplace</div>
-            <div className="text-3xl">
+        <div className="w-full relative text-4xl text-right text-white z-[100] flex justify-end my-4">
+          <div className="max-w-[700px] text-[#edeeef]">
+            <div className="">Experiment, Trade, and Collect Live Art</div>
+            {/* <div className="text-3xl">
               A Platform for Live Art and Choreographed Value Distribution
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="md:grid md:grid-cols-2">
@@ -272,7 +335,11 @@ const Home: NextPage<any> = ({ ssr }) => {
                 <Box css={{ flex: 2, zIndex: 4 }}>
                   <Flex direction="column" css={{ height: '100%' }}>
                     <Box css={{ flex: 1 }}>
-                      <Text style="h3" css={{ mt: '$3', mb: '$2' }} as="h3">
+                      <Text
+                        style="h3"
+                        css={{ mt: '$3', mb: '$2', fontSize: '25px' }}
+                        as="h3"
+                      >
                         THE SPHERE KARMIC OBJECTS — FIRST CYCLE
                       </Text>
 
@@ -285,7 +352,7 @@ const Home: NextPage<any> = ({ ssr }) => {
                           display: '-webkit-box',
                           color: '$gray12',
                           fontFamily: '$body',
-                          WebkitLineClamp: 3,
+                          WebkitLineClamp: 4,
                           WebkitBoxOrient: 'vertical',
                           overflow: 'hidden',
                           textOverflow: 'ellipsis',
@@ -306,22 +373,17 @@ const Home: NextPage<any> = ({ ssr }) => {
                       <Flex css={{ mt: '$4' }}>
                         <Box css={{ mr: '$5' }}>
                           <Text style="subtitle2" color="subtle">
-                            FLOOR
+                            FLOOR PRICE
                           </Text>
                           <Box css={{ mt: 2 }}>
-                            {/* <FormatCryptoCurrency
-                                amount={
-                                  topCollection?.floorAsk?.price?.amount
-                                    ?.native ?? 0
-                                }
-                                textStyle={'h4'}
-                                logoHeight={20}
-                                address={
-                                  topCollection?.floorAsk?.price?.currency
-                                    ?.contract
-                                }
-                              /> */}
-                            floor value
+                            <FormatCryptoCurrency
+                              amount={floorPrice0 ?? 0}
+                              textStyle={'h4'}
+                              logoHeight={20}
+                              // address={
+                              //   coll0.floorAsk?.price?.currency?.contract
+                              // }
+                            />
                           </Box>
                         </Box>
 
@@ -556,7 +618,11 @@ const Home: NextPage<any> = ({ ssr }) => {
                 <Box css={{ flex: 2, zIndex: 4 }}>
                   <Flex direction="column" css={{ height: '100%' }}>
                     <Box css={{ flex: 1 }}>
-                      <Text style="h3" css={{ mt: '$3', mb: '$2' }} as="h3">
+                      <Text
+                        style="h3"
+                        css={{ mt: '$3', mb: '$2', fontSize: '25px' }}
+                        as="h3"
+                      >
                         THE ANARCHIVING GAME
                       </Text>
 
@@ -569,7 +635,7 @@ const Home: NextPage<any> = ({ ssr }) => {
                           display: '-webkit-box',
                           color: '$gray12',
                           fontFamily: '$body',
-                          WebkitLineClamp: 3,
+                          WebkitLineClamp: 4,
                           WebkitBoxOrient: 'vertical',
                           overflow: 'hidden',
                           textOverflow: 'ellipsis',
@@ -590,22 +656,18 @@ const Home: NextPage<any> = ({ ssr }) => {
                       <Flex css={{ mt: '$4' }}>
                         <Box css={{ mr: '$5' }}>
                           <Text style="subtitle2" color="subtle">
-                            FLOOR
+                            FLOOR PRICE
                           </Text>
                           <Box css={{ mt: 2 }}>
-                            {/* <FormatCryptoCurrency
-                                amount={
-                                  topCollection?.floorAsk?.price?.amount
-                                    ?.native ?? 0
-                                }
-                                textStyle={'h4'}
-                                logoHeight={20}
-                                address={
-                                  topCollection?.floorAsk?.price?.currency
-                                    ?.contract
-                                }
-                              /> */}
-                            floor value
+                            <FormatCryptoCurrency
+                              amount={floorPrice1 ?? 0}
+                              textStyle={'h4'}
+                              logoHeight={20}
+                              // address={
+                              //   topCollection?.floorAsk?.price?.currency
+                              //     ?.contract
+                              // }
+                            />
                           </Box>
                         </Box>
 
@@ -853,7 +915,7 @@ const Home: NextPage<any> = ({ ssr }) => {
                           display: '-webkit-box',
                           color: '$gray12',
                           fontFamily: '$body',
-                          WebkitLineClamp: 3,
+                          WebkitLineClamp: 4,
                           WebkitBoxOrient: 'vertical',
                           overflow: 'hidden',
                           textOverflow: 'ellipsis',
@@ -875,22 +937,18 @@ const Home: NextPage<any> = ({ ssr }) => {
                       <Flex css={{ mt: '$4' }}>
                         <Box css={{ mr: '$5' }}>
                           <Text style="subtitle2" color="subtle">
-                            FLOOR
+                            FLOOR PRICE
                           </Text>
                           <Box css={{ mt: 2 }}>
-                            {/* <FormatCryptoCurrency
-                                amount={
-                                  topCollection?.floorAsk?.price?.amount
-                                    ?.native ?? 0
-                                }
-                                textStyle={'h4'}
-                                logoHeight={20}
-                                address={
-                                  topCollection?.floorAsk?.price?.currency
-                                    ?.contract
-                                }
-                              /> */}
-                            floor value
+                            <FormatCryptoCurrency
+                              amount={floorPrice2 ?? 0}
+                              textStyle={'h4'}
+                              logoHeight={20}
+                              // address={
+                              //   topCollection?.floorAsk?.price?.currency
+                              //     ?.contract
+                              // }
+                            />
                           </Box>
                         </Box>
 
@@ -1134,7 +1192,7 @@ const Home: NextPage<any> = ({ ssr }) => {
                           display: '-webkit-box',
                           color: '$gray12',
                           fontFamily: '$body',
-                          WebkitLineClamp: 3,
+                          WebkitLineClamp: 4,
                           WebkitBoxOrient: 'vertical',
                           overflow: 'hidden',
                           textOverflow: 'ellipsis',
@@ -1157,22 +1215,18 @@ const Home: NextPage<any> = ({ ssr }) => {
                       <Flex css={{ mt: '$4' }}>
                         <Box css={{ mr: '$5' }}>
                           <Text style="subtitle2" color="subtle">
-                            FLOOR
+                            FLOOR PRICE
                           </Text>
                           <Box css={{ mt: 2 }}>
-                            {/* <FormatCryptoCurrency
-                                amount={
-                                  topCollection?.floorAsk?.price?.amount
-                                    ?.native ?? 0
-                                }
-                                textStyle={'h4'}
-                                logoHeight={20}
-                                address={
-                                  topCollection?.floorAsk?.price?.currency
-                                    ?.contract
-                                }
-                              /> */}
-                            floor value
+                            <FormatCryptoCurrency
+                              amount={floorPrice3 ?? 0}
+                              textStyle={'h4'}
+                              logoHeight={20}
+                              // address={
+                              //   topCollection?.floorAsk?.price?.currency
+                              //     ?.contract
+                              // }
+                            />
                           </Box>
                         </Box>
 

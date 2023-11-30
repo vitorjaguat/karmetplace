@@ -67,21 +67,21 @@ const companySectionLinks = [
 export const Footer = () => {
   return (
     <>
-      <div className="border-t-[1px] border-[var(--colors-gray7)] relative z-[1] p-10">
+      <div className="border-t-[1px] border-[var(--colors-gray7)] relative z-[1] p-6 md:p-10 flex flex-col w-full items-center md:block text-center md:text-left">
         <div
           id="logoAnimation"
-          className="-m-6 -ml-[324px] -mt-[30px] scale-[0.5] flex justify-start"
+          className="-mt-[30px] scale-[0.5] w-full flex justify-center"
         >
           <div className="logo-animation"></div>
         </div>
-        <div className="md:grid md:grid-cols-3 w-full">
+        <div className="flex flex-col md:grid md:grid-cols-3 w-full">
           <div className="text-[14px] text-[var(--colors-gray11)] flex flex-col">
             <div className="">Regenerative Commons for Live Arts</div>
             <div className="">2023</div>
             <div className="">Developed by Uint Studio</div>
           </div>
-          <div className="md:text-center text-[14px] text-[var(--colors-gray11)] flex flex-col">
-            <div className="">.</div>
+          <div className="md:text-center text-[14px] text-[var(--colors-gray11)] flex flex-col mt-6 md:mt-0">
+            {/* <div className=" hidden md:block">.</div> */}
             <a
               target="_blank"
               rel="noopener noreferrer"
@@ -97,7 +97,7 @@ export const Footer = () => {
               <div className="">Docs</div>
             </a>
           </div>
-          <div className="text-[14px] text-[var(--colors-gray11)] flex flex-col md:text-right">
+          <div className="text-[14px] text-[var(--colors-gray11)] flex flex-col md:text-right mt-6 md:mt-0">
             <a
               target="_blank"
               rel="noopener noreferrer"
