@@ -26,12 +26,8 @@ const AboutPage: NextPage = () => {
         }}
       >
         <div className="max-w-[1000px] flex flex-col items-center">
-          <div className="w-full flex flex-col md:flex-row md:justify-between items-center gap-4 md:gap-20 mt-3">
+          {/* <div className="w-full flex flex-col md:flex-row md:justify-between items-center gap-4 md:gap-20 mt-3">
             <Box css={{ color: '$gray11', my: '60px' }}>
-              {/* <FontAwesomeIcon icon={faFolderOpen} size="2xl" /> */}
-              {/* <div id="logoAnimation" className="mr-7 scale-[1.3]">
-                <div className="logo-animation"></div>
-              </div> */}
               <div className="">
                 <img
                   src="/assets/karmetplace_logo.png"
@@ -47,7 +43,7 @@ const AboutPage: NextPage = () => {
                 Choreographed Value Distribution
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="text-lg mt-8 max-w-[800px]">
             <div className="">
               Launched in December 2023, The Sphere Karmetplace emerges as a

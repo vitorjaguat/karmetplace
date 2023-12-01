@@ -140,31 +140,8 @@ const AboutPage: NextPage = () => {
           // maxWidth: '1000px',
         }}
       >
-        <div className="w-full max-w-[1000px] flex flex-col items-center px-1 md:px-0 mt-6">
-          <div className="w-full flex flex-col md:flex-row justify-between items-center gap-8 md:gap-20 ">
-            <Box css={{ color: '$gray11', my: '60px' }}>
-              {/* <FontAwesomeIcon icon={faFolderOpen} size="2xl" /> */}
-              {/* <div
-                id="logoAnimation"
-                className="md:mr-7 scale-[1] md:scale-[1.3] flex justify-center md:block md:justify-normal"
-              >
-                <div className="logo-animation"></div>
-              </div> */}
-              <div className="">
-                <img
-                  src="/assets/karmetplace_logo.png"
-                  width={isSmallDevice ? 400 : 500}
-                  // height={36}
-                  alt="The Sphere Karmetplace"
-                />
-              </div>
-            </Box>
-            <div className="text-center md:text-right">
-              <div className="text-2xl">
-                Experiment, Trade, and Collect Live Art
-              </div>
-            </div>
-          </div>
+        <div className="w-full max-w-[1000px] flex flex-col items-center px-1 md:px-0">
+          <div className="w-full flex flex-col md:flex-row justify-between items-center gap-8 md:gap-20 "></div>
           {/* <div className="text-lg mt-8 max-w-[800px]">
             <div className="">
               Launched in December 2023, The Sphere Karmetplace emerges as a

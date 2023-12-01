@@ -140,13 +140,29 @@ const Navbar = () => {
               // href={`/${routePrefix}/about`}
               href="/about"
             >
-              <NavItem>About</NavItem>
+              <NavItem
+                className={
+                  router.pathname.includes('about')
+                    ? 'text-[var(--colors-gray10)]'
+                    : ''
+                }
+              >
+                About
+              </NavItem>
             </Link>
             <Link
               // href={`/${routePrefix}/faq`}
               href="/faq"
             >
-              <NavItem>FAQ</NavItem>
+              <NavItem
+                className={
+                  router.pathname.includes('/faq')
+                    ? 'text-[var(--colors-gray10)]'
+                    : ''
+                }
+              >
+                FAQ
+              </NavItem>
             </Link>
 
             {/* <HoverCard.Root openDelay={200}>
@@ -203,7 +219,7 @@ const Navbar = () => {
         />
       </Box> */}
 
-      <div className="">
+      <div className="hidden xl:block">
         <img
           src="/assets/karmetplace_logo.png"
           alt="The Sphere Karmetplace"

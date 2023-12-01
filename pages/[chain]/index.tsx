@@ -198,14 +198,11 @@ const Home: NextPage<any> = ({ ssr }) => {
           },
         }}
       >
-        <div className="w-full relative text-4xl text-right text-white z-[100] flex justify-end my-4">
+        {/* <div className="w-full relative text-4xl text-right text-white z-[100] flex justify-end my-4">
           <div className="max-w-[700px] text-[#edeeef]">
             <div className="">Experiment, Trade, and Collect Live Art</div>
-            {/* <div className="text-3xl">
-              A Platform for Live Art and Choreographed Value Distribution
-            </div> */}
           </div>
-        </div>
+        </div> */}
         <div className="md:grid md:grid-cols-2">
           {/* THE SPHERE KARMIC OBJECTS — FIRST CYCLE */}
           <Link href="/ethereum/collection/0x95520e629368c3a08ec6b4d070a130ee72f6e471">

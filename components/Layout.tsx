@@ -3,6 +3,7 @@ import { FC, ReactNode } from 'react'
 import Navbar from './navbar'
 import { Footer } from './home/Footer'
 import { useRouter } from 'next/router'
+import Header from './home/Header'
 
 type Props = {
   children: ReactNode
@@ -22,6 +23,8 @@ const Layout: FC<Props> = ({ children }) => {
       >
         <Box css={{ maxWidth: 4500, mx: 'auto' }}>
           <Navbar />
+          {!router.pathname.includes('/portfolio') &&
+            !router.pathname.includes('/collection') && <Header />}
           <main>{children}</main>
           {!router.pathname.includes('/portfolio') && <Footer />}
         </Box>
