@@ -110,77 +110,77 @@ const Home: NextPage<any> = ({ ssr }) => {
   const { chain, switchCurrentChain } = useContext(ChainContext)
 
   //handles for collections/chains
-  const handleGoerli = () => {
-    const newChain = supportedChains?.find((ch) => ch?.routePrefix == 'goerli')
-    if (newChain) {
-      //   const newUrl = router.asPath.replace(
-      //     chain.routePrefix,
-      //     newChain?.routePrefix
-      //   )
-      //   console.log(newUrl)
-      switchCurrentChain(newChain?.id)
-      router.push(
-        `/goerli/collection/0x01a8c25b7f28443875d982c8236c59699ce70dd9`,
-        undefined,
-        { scroll: false }
-      )
-    }
-  }
+  // const handleGoerli = () => {
+  //   const newChain = supportedChains?.find((ch) => ch?.routePrefix == 'goerli')
+  //   if (newChain) {
+  //     //   const newUrl = router.asPath.replace(
+  //     //     chain.routePrefix,
+  //     //     newChain?.routePrefix
+  //     //   )
+  //     //   console.log(newUrl)
+  //     switchCurrentChain(newChain?.id)
+  //     router.push(
+  //       `/goerli/collection/0x01a8c25b7f28443875d982c8236c59699ce70dd9`,
+  //       undefined,
+  //       { scroll: false }
+  //     )
+  //   }
+  // }
 
-  const handleEthereum = () => {
-    const newChain = supportedChains?.find(
-      (ch) => ch?.routePrefix == 'ethereum'
-    )
-    if (newChain) {
-      //   const newUrl = router.asPath.replace(
-      //     chain.routePrefix,
-      //     newChain?.routePrefix
-      //   )
-      //   console.log(newUrl)
-      switchCurrentChain(newChain?.id)
-      router.push(
-        `/ethereum/collection/0x69b377c8dddc25ae26c422d39b45744bb67aab4b`,
-        undefined,
-        { scroll: false }
-      )
-    }
-  }
+  // const handleEthereum = () => {
+  //   const newChain = supportedChains?.find(
+  //     (ch) => ch?.routePrefix == 'ethereum'
+  //   )
+  //   if (newChain) {
+  //     //   const newUrl = router.asPath.replace(
+  //     //     chain.routePrefix,
+  //     //     newChain?.routePrefix
+  //     //   )
+  //     //   console.log(newUrl)
+  //     switchCurrentChain(newChain?.id)
+  //     router.push(
+  //       `/ethereum/collection/0x69b377c8dddc25ae26c422d39b45744bb67aab4b`,
+  //       undefined,
+  //       { scroll: false }
+  //     )
+  //   }
+  // }
 
-  const handleZora = () => {
-    const newChain = supportedChains?.find((ch) => ch?.routePrefix == 'zora')
-    if (newChain) {
-      //   const newUrl = router.asPath.replace(
-      //     chain.routePrefix,
-      //     newChain?.routePrefix
-      //   )
-      //   console.log(newUrl)
-      switchCurrentChain(newChain?.id)
-      router.push(
-        `/zora/collection/0xe27f011e8eb90b4d42fa7658fbe44e240d9c5f03`,
-        undefined,
-        { scroll: false }
-      )
-    }
-  }
+  // const handleZora = () => {
+  //   const newChain = supportedChains?.find((ch) => ch?.routePrefix == 'zora')
+  //   if (newChain) {
+  //     //   const newUrl = router.asPath.replace(
+  //     //     chain.routePrefix,
+  //     //     newChain?.routePrefix
+  //     //   )
+  //     //   console.log(newUrl)
+  //     switchCurrentChain(newChain?.id)
+  //     router.push(
+  //       `/zora/collection/0xe27f011e8eb90b4d42fa7658fbe44e240d9c5f03`,
+  //       undefined,
+  //       { scroll: false }
+  //     )
+  //   }
+  // }
 
-  const handleSapo = () => {
-    const newChain = supportedChains?.find(
-      (ch) => ch?.routePrefix == 'ethereum'
-    )
-    if (newChain) {
-      //   const newUrl = router.asPath.replace(
-      //     chain.routePrefix,
-      //     newChain?.routePrefix
-      //   )
-      //   console.log(newUrl)
-      switchCurrentChain(newChain?.id)
-      router.push(
-        `/ethereum/collection/0x9523e213d3929be2c6f48e5dafe2b8a3d4fd3e39`,
-        undefined,
-        { scroll: false }
-      )
-    }
-  }
+  // const handleSapo = () => {
+  //   const newChain = supportedChains?.find(
+  //     (ch) => ch?.routePrefix == 'ethereum'
+  //   )
+  //   if (newChain) {
+  //     //   const newUrl = router.asPath.replace(
+  //     //     chain.routePrefix,
+  //     //     newChain?.routePrefix
+  //     //   )
+  //     //   console.log(newUrl)
+  //     switchCurrentChain(newChain?.id)
+  //     router.push(
+  //       `/ethereum/collection/0x9523e213d3929be2c6f48e5dafe2b8a3d4fd3e39`,
+  //       undefined,
+  //       { scroll: false }
+  //     )
+  //   }
+  // }
 
   return (
     <Layout>
@@ -772,7 +772,7 @@ const Home: NextPage<any> = ({ ssr }) => {
           </Link>
 
           {/* Spherical GeNFT */}
-          <Link href="/ethereum/collection/0x69b377c8dddc25ae26c422d39b45744bb67aab4b">
+          {/* <Link href="/ethereum/collection/0x69b377c8dddc25ae26c422d39b45744bb67aab4b">
             <Flex>
               <Flex
                 css={{
@@ -918,13 +918,7 @@ const Home: NextPage<any> = ({ ssr }) => {
                           textOverflow: 'ellipsis',
                         }}
                       >
-                        {/* <ReactMarkdown
-                            children={topCollection?.description || ''}
-                            components={{
-                              a: MarkdownLink,
-                              p: Text as any,
-                            }}
-                          /> */}
+                        
                         The Spherical GeNFTs are dynamic on-chain generative
                         artworks that evolve over time as an expression of
                         membership in The Sphere. The particularities of the
@@ -949,81 +943,9 @@ const Home: NextPage<any> = ({ ssr }) => {
                           </Box>
                         </Box>
 
-                        {/* <Box css={{ mr: '$4' }}>
-                            <Text style="subtitle2" color="subtle">
-                              24H SALES
-                            </Text>
-                            <Text style="h4" as="h4" css={{ mt: 2 }}>
-                              {topCollection?.count?.toLocaleString()}
-                            </Text>
-                          </Box> */}
+                        
                       </Flex>
-                      {/* <Box
-                          css={{
-                            display: 'none',
-                            '@lg': {
-                              display: 'block',
-                            },
-                          }}
-                        >
-                          <Text
-                            style="subtitle2"
-                            color="subtle"
-                            as="p"
-                            css={{ mt: '$4' }}
-                          >
-                            RECENT SALES
-                          </Text>
-                          <Flex
-                            css={{
-                              mt: '$2',
-                              gap: '$3',
-                            }}
-                          >
-                            {topCollection?.recentSales
-                              ?.slice(0, 4)
-                              ?.map((sale, i) => (
-                                <Box
-                                  css={{
-                                    aspectRatio: '1/1',
-                                    maxWidth: 120,
-                                  }}
-                                  key={i}
-                                  onClick={(e) => {
-                                    e.stopPropagation()
-                                    e.preventDefault()
-                                    if (
-                                      sale?.collection?.id &&
-                                      sale?.token?.id
-                                    ) {
-                                      router.push(
-                                        `/${chain.routePrefix}/asset/${sale?.collection?.id}:${sale?.token?.id}`
-                                      )
-                                    }
-                                  }}
-                                >
-                                  <img
-                                    style={{ borderRadius: 4 }}
-                                    src={optimizeImage(
-                                      sale?.token?.image ||
-                                        topCollection?.image,
-                                      250
-                                    )}
-                                  />
-                                  <Box css={{ mt: '$1' }}>
-                                    <FormatCryptoCurrency
-                                      amount={sale?.price?.amount?.decimal ?? 0}
-                                      textStyle={'h6'}
-                                      logoHeight={16}
-                                      address={sale?.price?.currency?.contract}
-                                    />
-                                  </Box>
-                                </Box>
-                              ))}
-                            <Box css={{ flex: 1 }} />
-                            <Box css={{ flex: 1 }} />
-                          </Flex>
-                        </Box> */}
+                      
                     </Box>
                     <Flex css={{ gap: '$4', mt: '$4' }}>
                       {theme == 'light' ? (
@@ -1050,9 +972,10 @@ const Home: NextPage<any> = ({ ssr }) => {
                 </Box>
               </Flex>
             </Flex>
-          </Link>
+          </Link> */}
 
-          <Link href="/zora/collection/0xe27f011e8eb90b4d42fa7658fbe44e240d9c5f03">
+          {/* GRAFS */}
+          {/* <Link href="/zora/collection/0xe27f011e8eb90b4d42fa7658fbe44e240d9c5f03">
             <Flex>
               <Flex
                 css={{
@@ -1195,13 +1118,7 @@ const Home: NextPage<any> = ({ ssr }) => {
                           textOverflow: 'ellipsis',
                         }}
                       >
-                        {/* <ReactMarkdown
-                            children={topCollection?.description || ''}
-                            components={{
-                              a: MarkdownLink,
-                              p: Text as any,
-                            }}
-                          /> */}
+                       
                         Lorem ipsum dolor sit amet consectetur adipisicing elit.
                         Expedita voluptatem vitae, animi placeat, necessitatibus
                         eaque molestiae explicabo aut architecto sequi inventore
@@ -1227,81 +1144,9 @@ const Home: NextPage<any> = ({ ssr }) => {
                           </Box>
                         </Box>
 
-                        {/* <Box css={{ mr: '$4' }}>
-                            <Text style="subtitle2" color="subtle">
-                              24H SALES
-                            </Text>
-                            <Text style="h4" as="h4" css={{ mt: 2 }}>
-                              {topCollection?.count?.toLocaleString()}
-                            </Text>
-                          </Box> */}
+                        
                       </Flex>
-                      {/* <Box
-                          css={{
-                            display: 'none',
-                            '@lg': {
-                              display: 'block',
-                            },
-                          }}
-                        >
-                          <Text
-                            style="subtitle2"
-                            color="subtle"
-                            as="p"
-                            css={{ mt: '$4' }}
-                          >
-                            RECENT SALES
-                          </Text>
-                          <Flex
-                            css={{
-                              mt: '$2',
-                              gap: '$3',
-                            }}
-                          >
-                            {topCollection?.recentSales
-                              ?.slice(0, 4)
-                              ?.map((sale, i) => (
-                                <Box
-                                  css={{
-                                    aspectRatio: '1/1',
-                                    maxWidth: 120,
-                                  }}
-                                  key={i}
-                                  onClick={(e) => {
-                                    e.stopPropagation()
-                                    e.preventDefault()
-                                    if (
-                                      sale?.collection?.id &&
-                                      sale?.token?.id
-                                    ) {
-                                      router.push(
-                                        `/${chain.routePrefix}/asset/${sale?.collection?.id}:${sale?.token?.id}`
-                                      )
-                                    }
-                                  }}
-                                >
-                                  <img
-                                    style={{ borderRadius: 4 }}
-                                    src={optimizeImage(
-                                      sale?.token?.image ||
-                                        topCollection?.image,
-                                      250
-                                    )}
-                                  />
-                                  <Box css={{ mt: '$1' }}>
-                                    <FormatCryptoCurrency
-                                      amount={sale?.price?.amount?.decimal ?? 0}
-                                      textStyle={'h6'}
-                                      logoHeight={16}
-                                      address={sale?.price?.currency?.contract}
-                                    />
-                                  </Box>
-                                </Box>
-                              ))}
-                            <Box css={{ flex: 1 }} />
-                            <Box css={{ flex: 1 }} />
-                          </Flex>
-                        </Box> */}
+                     
                     </Box>
                     <Flex css={{ gap: '$4', mt: '$4' }}>
                       {theme == 'light' ? (
@@ -1328,35 +1173,10 @@ const Home: NextPage<any> = ({ ssr }) => {
                 </Box>
               </Flex>
             </Flex>
-          </Link>
+          </Link> */}
         </div>
 
-        <div className="relative flex flex-col gap-2 mb-32 text-center z-[5]">
-          <div
-            className="cursor-pointer py-5 bg-white rounded-md text-black border-[1px] border-black"
-            onClick={handleGoerli}
-          >
-            Goerli
-          </div>
-          <div
-            className="cursor-pointer py-5 bg-[#01ff00] rounded-md text-black"
-            onClick={handleEthereum}
-          >
-            Ethereum
-          </div>
-          <div
-            className="cursor-pointer py-5 bg-[#a0a0ff] rounded-md text-black"
-            onClick={handleZora}
-          >
-            Zora
-          </div>
-          <div
-            className="cursor-pointer py-5 bg-[#1d6e24] rounded-md text-black"
-            onClick={handleSapo}
-          >
-            View to nothingness (2008-2012)
-          </div>
-        </div>
+        {/* s */}
       </Box>
 
       {/* <Footer /> */}

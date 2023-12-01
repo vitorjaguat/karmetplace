@@ -66,78 +66,79 @@ const companySectionLinks = [
 
 export const Footer = () => {
   return (
-    <>
-      <div className="border-t-[1px] border-[var(--colors-gray8)] relative z-[1] p-6 md:p-10 flex flex-col w-full items-center md:block text-center md:text-left">
-        {/* <div
+    <div
+      className=" 
+    relative z-[1] p-6 md:p-10 flex flex-col w-full items-center md:block text-center md:text-left bg-gray-200/10"
+    >
+      {/* <div
           id="logoAnimation"
           className="-mt-[30px] scale-[0.5] w-full flex justify-center"
         >
           <div className="logo-animation"></div>
         </div> */}
-        <div className="mb-4 md:-ml-[8px]">
-          <img
-            src="/assets/karmetplace_logo.png"
-            alt="The Sphere Karmetplace"
-            width={240}
-          />
+      <div className="mb-4 md:-ml-[8px]">
+        <img
+          src="/assets/karmetplace_logo.png"
+          alt="The Sphere Karmetplace"
+          width={240}
+        />
+      </div>
+      <div className="flex flex-col md:grid md:grid-cols-3 w-full">
+        <div className="text-[14px] text-[var(--colors-gray12)] flex flex-col">
+          <div className="">Regenerative Commons for Live Arts</div>
+          <div className="">v0.1 - 2023</div>
+          <div className="">
+            Developed by{' '}
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://uint.vercel.app"
+            >
+              Uint Studio
+            </a>
+          </div>
         </div>
-        <div className="flex flex-col md:grid md:grid-cols-3 w-full">
-          <div className="text-[14px] text-[var(--colors-gray12)] flex flex-col">
-            <div className="">Regenerative Commons for Live Arts</div>
-            <div className="">v0.1 - 2023</div>
-            <div className="">
-              Developed by{' '}
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="https://uint.vercel.app"
-              >
-                Uint Studio
-              </a>
-            </div>
-          </div>
-          <div className="md:text-center text-[14px] text-[var(--colors-gray12)] flex flex-col mt-6 md:mt-0">
-            {/* <div className=" hidden md:block">.</div> */}
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://thesphere.as"
-            >
-              <div className="">Website</div>
-            </a>
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://docs.thesphere.as/"
-            >
-              <div className="">Docs</div>
-            </a>
-          </div>
-          <div className="text-[14px] text-[var(--colors-gray12)] flex flex-col md:text-right mt-6 md:mt-0">
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://twitter.com/TheSphere_as"
-            >
-              <div className="">Twitter</div>
-            </a>
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://t.me/+o3hn1fgGsQMzZjgx"
-            >
-              <div className="">Telegram</div>
-            </a>
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://discord.gg/e8K8KPrJ49"
-            >
-              <div className="">Discord</div>
-            </a>
-          </div>
+        <div className="md:text-center text-[14px] text-[var(--colors-gray12)] flex flex-col mt-6 md:mt-0">
+          {/* <div className=" hidden md:block">.</div> */}
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://thesphere.as"
+          >
+            <div className="">Website</div>
+          </a>
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://docs.thesphere.as/"
+          >
+            <div className="">Docs</div>
+          </a>
+        </div>
+        <div className="text-[14px] text-[var(--colors-gray12)] flex flex-col md:text-right mt-6 md:mt-0">
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://twitter.com/TheSphere_as"
+          >
+            <div className="">Twitter</div>
+          </a>
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://t.me/+o3hn1fgGsQMzZjgx"
+          >
+            <div className="">Telegram</div>
+          </a>
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://discord.gg/e8K8KPrJ49"
+          >
+            <div className="">Discord</div>
+          </a>
         </div>
       </div>
-    </>
+    </div>
   )
 }

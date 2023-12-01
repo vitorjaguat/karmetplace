@@ -43,7 +43,7 @@ const AboutPage: NextPage = () => {
       {
         title: 'How can I collect the works minted as non-fungible tokens?',
         content:
-          "To collect the works, you will need a non-custodial wallet that has a balance corresponding to the price of the works in Ether, the native cryptocurrency of the Ethereum blockchain. If you don't have Ether, you can buy it on an centralized exchange like <a class='underline text-neutral-300' href='https://coinbase.com' target='_blank' rel='noopener noreferrer'>https://coinbase.com</a>, <a class='underline text-neutral-300' href='https://bitstamp.com' target='_blank' rel='noopener noreferrer'>https://bitstamp.com</a> or in a decentralized exchange like <a class='underline text-neutral-300' href='https://app.uniswap.org' target='_blank' rel='noopener noreferrer'>https://app.uniswap.org</a>.",
+          "To collect the works, you will need a non-custodial wallet that has a balance corresponding to the price of the works in Ether, the native cryptocurrency of the Ethereum blockchain, USDC, or USDT. If you don't have Ether, you can buy it on an centralized exchange like <a class='underline text-neutral-300' href='https://coinbase.com' target='_blank' rel='noopener noreferrer'>https://coinbase.com</a>, <a class='underline text-neutral-300' href='https://bitstamp.com' target='_blank' rel='noopener noreferrer'>https://bitstamp.com</a> or in a decentralized exchange like <a class='underline text-neutral-300' href='https://app.uniswap.org' target='_blank' rel='noopener noreferrer'>https://app.uniswap.org</a>.",
       },
       {
         title:
@@ -54,7 +54,7 @@ const AboutPage: NextPage = () => {
       {
         title: 'What is a non-custodial wallet? Is it safe?',
         content:
-          "A non-custodial wallet is a digital cryptocurrency wallet that is installed in your internet browser as an extension (add-on), in which the custody of the assets is not centralized by any third party entity (like a bank, for instance), but by the person who owns the wallet itself. It is recommended to use Metamask, the most widely used wallet. When installing Metamask in your browser, you will be asked to securely note down a secret recovery phrase (seed phrase) of 12 words that gives you access to the wallet. <span class='font-bold'>It is very important to have a backup of this phrase, preferably physically and never share it with anyone, because with this phrase you (or anyone in possession of it) can access the wallet on any device.</span> As a browser extension, Metamask has proven to be quite secure, requiring a minimum amount of personal information sharing. For more details on its operation, visit <a class='underline text-neutral-300' href='https://metamask.io/faqs/' target='_blank' rel='noopener noreferrer'>https://metamask.io/faqs/</a>.",
+          "A non-custodial wallet is a digital cryptocurrency wallet that is installed in your internet browser as an extension (add-on), in which the custody of the assets is not centralized by any third party entity (like a bank, for instance), but by the person who owns the wallet itself. It is recommended to use Metamask, the most widely used wallet. When installing Metamask in your browser, you will be asked to securely note down a secret recovery phrase (seed phrase) of 12 words that gives you access to the wallet. <span class='font-bold underline'>It is very important to have a backup of this phrase, preferably physically and never share it with anyone, because with this phrase you (or anyone in possession of it) can access the wallet on any device.</span> As a browser extension, Metamask has proven to be quite secure, requiring a minimum amount of personal information sharing. For more details on its operation, visit <a class='underline text-neutral-300' href='https://metamask.io/faqs/' target='_blank' rel='noopener noreferrer'>https://metamask.io/faqs/</a>.",
       },
       {
         title:
@@ -71,11 +71,11 @@ const AboutPage: NextPage = () => {
         title:
           'Which blockchain and standard are used for the collections in the Karmetplace?',
         content:
-          'The Sphere Karmic Objects collection is featured on the Ethereum blockchain using the ERC-1155 standard, and The Anarchiving Game is hosted on Zora, also utilizing the ERC-1155 standard. These choices ensure a seamless and flexible experience for artists and collectors, and in the case of The Anarching Game, it enables us to leverage the value proposition of Zora, with their model of revenue share of protocol fees.',
+          '<span class="font-bold">THE SPHERE KARMIC OBJECTS</span> collection is featured on the Ethereum blockchain using the ERC-1155 standard, and <span class="font-bold">THE ANARCHIVING GAME</span> is hosted on Zora, also utilizing the ERC-1155 standard. These choices ensure a seamless and flexible experience for artists and collectors, and in the case of The Anarching Game, it enables us to leverage the value proposition of Zora, with their model of revenue share of protocol fees.',
       },
       {
         title:
-          'Can I collect NFTs from The Anarchiving Game contract for free?',
+          'Can I collect NFTs from THE ANARCHIVING GAME contract for free?',
         content:
           "Yes. Please go to the corresponding section on <a class='underline text-neutral-300' href='https://thesphere.as' target='_blank' rel='noopener noreferrer'>https://thesphere.as</a> to find which tokens are available to be collected for free, plus a small gas fee on Zora mainnet.",
       },
@@ -87,7 +87,7 @@ const AboutPage: NextPage = () => {
       {
         title: 'What are gas fees, and how are they determined?',
         content:
-          "Gas fees are payments made by users to compensate for the computing energy required to process and validate transactions on the Ethereum blockchain. They vary based on network demand and transaction complexity. On Zora mainnet, these fees are considerably smaller. On Ethereum mainnet the fees can be a bit higher, but the contract we deployed have optimal gas optimization settings. You can check status of gas fees prices on <a class='underline text-neutral-300' href='https://etherscan.io/gastracker' target='_blank' rel='noopener noreferrer'>https://etherscan.io/gastracker</a>.",
+          "Gas fees are payments made by users to compensate for the computing power required to process and validate transactions on the Ethereum blockchain. They vary based on network demand and transaction complexity. On Zora mainnet, these fees are considerably smaller. On Ethereum mainnet the fees can be a bit higher, but the contract we deployed have optimal gas optimization settings. You can check the status of gas fees prices on <a class='underline text-neutral-300' href='https://etherscan.io/gastracker' target='_blank' rel='noopener noreferrer'>https://etherscan.io/gastracker</a>.",
       },
       {
         title: 'How does onchain royalty enforcement work?',
@@ -113,7 +113,7 @@ const AboutPage: NextPage = () => {
         title:
           'I have other questions that were not addressed in this manual. What should I do?',
         content:
-          "You reach out on our <a class='underline text-neutral-300' href='https://t.me/+o3hn1fgGsQMzZjgx' target='_blank' rel='noopener noreferrer'>Telegram</a> channel and ask for support there.",
+          "You can reach out on our <a class='underline text-neutral-300' href='https://t.me/+o3hn1fgGsQMzZjgx' target='_blank' rel='noopener noreferrer'>Telegram</a> channel and ask for support there.",
       },
       // {
       //   title: t('faq.q13'),

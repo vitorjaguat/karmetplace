@@ -14,9 +14,9 @@ type Props = {
  * @param description - The description of the page.
  */
 export const Head: FC<Props> = ({
-  ogImage = 'https://karmetplace.vercel.app/logo_thesphere.png',
+  ogImage = 'https://karmetplace.vercel.app/lit_thesphere.png',
   title = 'The Sphere Karmetplace',
-  description = 'The Sphere Karmetplace is a platform for live art and choreographed value distribution',
+  description = 'The Sphere Karmetplace is a platform to experiment, trade, and collect live art.',
 }) => {
   return (
     <NextHead>
