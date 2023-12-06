@@ -11,7 +11,7 @@ const sentryWebpackPluginOptions = {
  */
 const nextConfig = {
   sentry: {
-    hideSourceMaps: false,
+    hideSourceMaps: true,
   },
   async rewrites() {
     return [

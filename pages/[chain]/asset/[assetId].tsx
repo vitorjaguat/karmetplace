@@ -105,6 +105,7 @@ const IndexPage: NextPage<Props> = ({ assetId, ssr }) => {
       fallbackData: [ssr.tokens ? ssr.tokens : {}],
     }
   )
+  console.log(tokens)
 
   const token = tokens && tokens[0] ? tokens[0] : undefined
   const is1155 = token?.token?.kind === 'erc1155'
@@ -638,6 +639,7 @@ type SSRProps = {
 }
 
 import filterContractsTheSphere from 'utils/filterContractsTheSphere'
+import { chain } from 'lodash'
 
 export const getServerSideProps: GetServerSideProps<{
   assetId?: string
