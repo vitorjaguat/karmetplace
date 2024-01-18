@@ -232,6 +232,7 @@ const Home: NextPage<any> = ({ ssr }) => {
                     p: '$5',
                     gap: '$5',
                     mt: '$4',
+                    maxHeight: 540,
                   },
                   '@xl': {
                     p: '$6',
@@ -258,7 +259,9 @@ const Home: NextPage<any> = ({ ssr }) => {
                     right: 0,
                     bottom: 0,
                     backdropFilter: 'blur(20px)',
-
+                    '@lg': {
+                      height: '100%',
+                    },
                     // background: 'rgba(255, 255, 255, 0.9)',
                   }}
                 />
@@ -268,7 +271,9 @@ const Home: NextPage<any> = ({ ssr }) => {
                     flex: 2,
                     position: 'relative',
                     zIndex: 5,
-
+                    '@lg': {
+                      height: '100%',
+                    },
                     '@xl': {
                       flex: 3,
                     },
@@ -288,7 +293,7 @@ const Home: NextPage<any> = ({ ssr }) => {
                       borderRadius: 8,
                       height: 320,
                       '@lg': {
-                        height: 540,
+                        height: '100%',
                       },
                       objectFit: 'cover',
                     }}
@@ -329,8 +334,18 @@ const Home: NextPage<any> = ({ ssr }) => {
                     />
                   </Box>
                 </Box>
-                <Box css={{ flex: 2, zIndex: 4 }}>
-                  <Flex direction="column" css={{ height: '100%' }}>
+                <Box
+                  css={{
+                    flex: 2,
+                    zIndex: 4,
+                  }}
+                >
+                  <Flex
+                    direction="column"
+                    css={{
+                      height: '100%',
+                    }}
+                  >
                     <Box css={{ flex: 1 }}>
                       <Text
                         style="h3"
@@ -515,6 +530,7 @@ const Home: NextPage<any> = ({ ssr }) => {
                     p: '$5',
                     gap: '$5',
                     mt: '$4',
+                    maxHeight: 540,
                   },
                   '@xl': {
                     p: '$6',
@@ -541,7 +557,9 @@ const Home: NextPage<any> = ({ ssr }) => {
                     right: 0,
                     bottom: 0,
                     backdropFilter: 'blur(20px)',
-
+                    '@lg': {
+                      height: '100%',
+                    },
                     // background: 'rgba(255, 255, 255, 0.9)',
                   }}
                 />
@@ -551,7 +569,9 @@ const Home: NextPage<any> = ({ ssr }) => {
                     flex: 2,
                     position: 'relative',
                     zIndex: 5,
-
+                    '@lg': {
+                      height: '100%',
+                    },
                     '@xl': {
                       flex: 3,
                     },
@@ -571,7 +591,7 @@ const Home: NextPage<any> = ({ ssr }) => {
                       borderRadius: 8,
                       height: 320,
                       '@lg': {
-                        height: 540,
+                        height: '100%',
                       },
                       objectFit: 'cover',
                     }}
