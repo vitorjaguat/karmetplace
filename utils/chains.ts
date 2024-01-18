@@ -94,17 +94,17 @@ export const DefaultChain: ReservoirChain = {
 
 export default [
   DefaultChain,
-  {
-    ...goerli,
-    lightIconUrl: '/icons/goerli-icon-dark.svg',
-    darkIconUrl: '/icons/goerli-icon-light.svg',
-    reservoirBaseUrl: reservoirChains.goerli.baseApiUrl,
-    proxyApi: '/api/reservoir/goerli',
-    routePrefix: 'goerli',
-    coingeckoId: 'ethereum',
-    checkPollingInterval: reservoirChains.goerli.checkPollingInterval,
-    wssUrl: 'wss://ws-goerli.reservoir.tools',
-  },
+  // {
+  //   ...goerli,
+  //   lightIconUrl: '/icons/goerli-icon-dark.svg',
+  //   darkIconUrl: '/icons/goerli-icon-light.svg',
+  //   reservoirBaseUrl: reservoirChains.goerli.baseApiUrl,
+  //   proxyApi: '/api/reservoir/goerli',
+  //   routePrefix: 'goerli',
+  //   coingeckoId: 'ethereum',
+  //   checkPollingInterval: reservoirChains.goerli.checkPollingInterval,
+  //   wssUrl: 'wss://ws-goerli.reservoir.tools',
+  // },
   {
     ...zora,
     name: 'Zora',
