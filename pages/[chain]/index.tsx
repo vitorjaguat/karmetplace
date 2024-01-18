@@ -205,7 +205,7 @@ const Home: NextPage<any> = ({ ssr }) => {
         </div> */}
         <div className="md:grid md:grid-cols-2">
           {/* THE SPHERE KARMIC OBJECTS — FIRST CYCLE */}
-          <Link href="/ethereum/collection/0x95520e629368c3a08ec6b4d070a130ee72f6e471">
+          <Link href="/ethereum/collection/0x39f7e5bdfb46bf321b8df7803070d27d79361400">
             <Flex>
               <Flex
                 css={{
@@ -503,7 +503,7 @@ const Home: NextPage<any> = ({ ssr }) => {
           </Link>
 
           {/* THE ANARCHIVING GAME  */}
-          <Link href="/zora/collection/0xfc599d7ad9255f7d60f84b4ab64ef8080453b767">
+          <Link href="/zora/collection/0xe5a192aaf911c35fb47de1342e768ef01c84fa09">
             <Flex>
               <Flex
                 css={{
