@@ -574,6 +574,18 @@ const IndexPage: NextPage<Props> = ({ assetId, ssr }) => {
                   )}
                 </TabsContent>
                 <TabsContent value="info">
+                  <div className="mb-8">
+                    <ReactMarkdown
+                      children={token?.token?.description || ''}
+                      components={
+                        {
+                          // a: MarkdownLink,
+                          // p: Text as any,
+                        }
+                      }
+                      className="whitespace-pre-line"
+                    ></ReactMarkdown>
+                  </div>
                   {collection && (
                     <TokenInfo token={token} collection={collection} />
                   )}
@@ -640,6 +652,7 @@ type SSRProps = {
 
 import filterContractsTheSphere from 'utils/filterContractsTheSphere'
 import { chain } from 'lodash'
+import ReactMarkdown from 'react-markdown'
 
 export const getServerSideProps: GetServerSideProps<{
   assetId?: string
