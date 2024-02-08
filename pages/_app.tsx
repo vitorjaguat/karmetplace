@@ -79,7 +79,7 @@ const { chains, publicClient } = configureChains(supportedChains, [
 ])
 
 const { connectors } = getDefaultWallets({
-  appName: 'Reservoir NFT Explorer',
+  appName: 'The Sphere Common Pool',
   projectId: WALLET_CONNECT_PROJECT_ID,
   chains,
 })
