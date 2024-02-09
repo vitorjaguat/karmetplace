@@ -67,8 +67,8 @@ const inter = localFont({
 })
 
 export const NORMALIZE_ROYALTIES = process.env.NEXT_PUBLIC_NORMALIZE_ROYALTIES
-  ? process.env.NEXT_PUBLIC_NORMALIZE_ROYALTIES === 'true'
-  : false
+  ? process.env.NEXT_PUBLIC_NORMALIZE_ROYALTIES === 'false'
+  : true
 
 const WALLET_CONNECT_PROJECT_ID =
   process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID || ''
@@ -78,7 +78,9 @@ const { chains, publicClient } = configureChains(supportedChains, [
   publicProvider(),
 ])
 
+//Jaguat customized:
 const { connectors } = getDefaultWallets({
+  // appName: 'Reservoir NFT Explorer',
   appName: 'The Sphere Common Pool',
   projectId: WALLET_CONNECT_PROJECT_ID,
   chains,
