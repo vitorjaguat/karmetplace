@@ -26,6 +26,7 @@ import { ToastContext } from 'context/ToastContextProvider'
 import { useMarketplaceChain } from 'hooks'
 import { createPortal } from 'react-dom'
 import { useTheme } from 'next-themes'
+import { emojisplosion } from 'emojisplosion'
 
 import { Modal } from 'react-responsive-modal'
 

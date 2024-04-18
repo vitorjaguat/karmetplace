@@ -54,6 +54,8 @@ const usdcCurrencyBase = {
   coinGeckoId: 'usd-coin',
 }
 
+console.log(zora)
+
 export const DefaultChain: ReservoirChain = {
   ...mainnet,
   // Any url to display the logo of the chain in light mode

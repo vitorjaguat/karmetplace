@@ -105,7 +105,7 @@ const IndexPage: NextPage<Props> = ({ assetId, ssr }) => {
       fallbackData: [ssr.tokens ? ssr.tokens : {}],
     }
   )
-  console.log(tokens)
+  // console.log(tokens)
 
   const token = tokens && tokens[0] ? tokens[0] : undefined
   const is1155 = token?.token?.kind === 'erc1155'
