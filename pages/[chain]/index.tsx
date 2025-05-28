@@ -203,7 +203,7 @@ const Home: NextPage<any> = ({ ssr }) => {
             <div className="">Experiment, Trade, and Collect Live Art</div>
           </div>
         </div> */}
-        <div className="md:grid md:grid-cols-2">
+        <div className="">
           {/* THE SPHERE KARMIC OBJECTS — FIRST CYCLE */}
           <Link href="/ethereum/collection/0x39f7e5bdfb46bf321b8df7803070d27d79361400">
             <Flex>
@@ -213,7 +213,6 @@ const Home: NextPage<any> = ({ ssr }) => {
                     background: theme == 'light' ? '$primary11' : '$gray2',
                   },
                   minHeight: 540,
-
                   flex: 1,
                   overflow: 'hidden',
                   position: 'relative',
@@ -503,7 +502,7 @@ const Home: NextPage<any> = ({ ssr }) => {
           </Link>
 
           {/* THE ANARCHIVING GAME  */}
-          <Link href="/zora/collection/0xe5a192aaf911c35fb47de1342e768ef01c84fa09">
+          {/* <Link href="/zora/collection/0xe5a192aaf911c35fb47de1342e768ef01c84fa09">
             <Flex>
               <Flex
                 css={{
@@ -658,13 +657,6 @@ const Home: NextPage<any> = ({ ssr }) => {
                           textOverflow: 'ellipsis',
                         }}
                       >
-                        {/* <ReactMarkdown
-                            children={topCollection?.description || ''}
-                            components={{
-                              a: MarkdownLink,
-                              p: Text as any,
-                            }}
-                          /> */}
                         The Sphere's Anarchive is a dynamic, participatory open
                         canvas where its community's memories and creativity are
                         continuously re-imagined.
@@ -688,81 +680,9 @@ const Home: NextPage<any> = ({ ssr }) => {
                           </Box>
                         </Box>
 
-                        {/* <Box css={{ mr: '$4' }}>
-                            <Text style="subtitle2" color="subtle">
-                              24H SALES
-                            </Text>
-                            <Text style="h4" as="h4" css={{ mt: 2 }}>
-                              {topCollection?.count?.toLocaleString()}
-                            </Text>
-                          </Box> */}
+                      
                       </Flex>
-                      {/* <Box
-                          css={{
-                            display: 'none',
-                            '@lg': {
-                              display: 'block',
-                            },
-                          }}
-                        >
-                          <Text
-                            style="subtitle2"
-                            color="subtle"
-                            as="p"
-                            css={{ mt: '$4' }}
-                          >
-                            RECENT SALES
-                          </Text>
-                          <Flex
-                            css={{
-                              mt: '$2',
-                              gap: '$3',
-                            }}
-                          >
-                            {topCollection?.recentSales
-                              ?.slice(0, 4)
-                              ?.map((sale, i) => (
-                                <Box
-                                  css={{
-                                    aspectRatio: '1/1',
-                                    maxWidth: 120,
-                                  }}
-                                  key={i}
-                                  onClick={(e) => {
-                                    e.stopPropagation()
-                                    e.preventDefault()
-                                    if (
-                                      sale?.collection?.id &&
-                                      sale?.token?.id
-                                    ) {
-                                      router.push(
-                                        `/${chain.routePrefix}/asset/${sale?.collection?.id}:${sale?.token?.id}`
-                                      )
-                                    }
-                                  }}
-                                >
-                                  <img
-                                    style={{ borderRadius: 4 }}
-                                    src={optimizeImage(
-                                      sale?.token?.image ||
-                                        topCollection?.image,
-                                      250
-                                    )}
-                                  />
-                                  <Box css={{ mt: '$1' }}>
-                                    <FormatCryptoCurrency
-                                      amount={sale?.price?.amount?.decimal ?? 0}
-                                      textStyle={'h6'}
-                                      logoHeight={16}
-                                      address={sale?.price?.currency?.contract}
-                                    />
-                                  </Box>
-                                </Box>
-                              ))}
-                            <Box css={{ flex: 1 }} />
-                            <Box css={{ flex: 1 }} />
-                          </Flex>
-                        </Box> */}
+                    
                     </Box>
                     <Flex css={{ gap: '$4', mt: '$4' }}>
                       {theme == 'light' ? (
@@ -789,7 +709,7 @@ const Home: NextPage<any> = ({ ssr }) => {
                 </Box>
               </Flex>
             </Flex>
-          </Link>
+          </Link> */}
 
           {/* Spherical GeNFT */}
           {/* <Link href="/ethereum/collection/0x69b377c8dddc25ae26c422d39b45744bb67aab4b">

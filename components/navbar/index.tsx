@@ -290,7 +290,7 @@ const Navbar = () => {
           )}
         </Flex> */}
 
-        <ChainToggle />
+        {/* <ChainToggle /> */}
 
         {isConnected ? (
           <AccountSidebar />
