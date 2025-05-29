@@ -178,46 +178,52 @@ export default ({
       alert('You do not own enough of this token to transfer this quantity.')
       return
     }
+
     setTransferModal(false)
     setTransferProcessingModal(true)
     const address = router.query.address[0] as string
 
-    const wallet = createWalletClient({
-      account: address as `0x${string}`,
-      // transport: http(),
-      chain:
-        chain.id === 1
-          ? mainnet
-          : chain.id === 5
-          ? goerli
-          : chain.id === 7777777
-          ? zora
-          : undefined,
-      transport: custom(window.ethereum),
-    })
-    // console.log(wallet)
-    await wallet.switchChain(
-      chain.id === 1 ? mainnet : chain.id === 5 ? goerli : zora
-    )
-    getClient().actions.transferTokens({
-      to: target as `0x${string}`,
-      items: [
-        {
-          token: (token?.token?.contract +
-            ':' +
-            token?.token?.tokenId) as string,
-          quantity: quantity,
+    try {
+      const wallet = createWalletClient({
+        account: address as `0x${string}`,
+        chain:
+          chain.id === 1
+            ? mainnet
+            : chain.id === 5
+            ? goerli
+            : chain.id === 7777777
+            ? zora
+            : undefined,
+        transport: window.ethereum ? custom(window.ethereum) : http(),
+      })
+
+      await wallet.switchChain(
+        chain.id === 1 ? mainnet : chain.id === 5 ? goerli : zora
+      )
+      getClient().actions.transferTokens({
+        to: target as `0x${string}`,
+        items: [
+          {
+            token: (token?.token?.contract +
+              ':' +
+              token?.token?.tokenId) as string,
+            quantity: quantity,
+          },
+        ],
+        wallet: wallet,
+        onProgress: (steps) => {
+          console.log(steps)
+          setTransferStep(steps as Array<object>)
         },
-      ],
-      wallet: wallet,
-      onProgress: (steps) => {
-        console.log(steps)
-        setTransferStep(steps as Array<object>)
-      },
-    })
-    // console.log(address)
-    // console.log(token)
-    // console.log(target)
+      })
+      // console.log(address)
+      // console.log(token)
+      // console.log(target)
+    } catch (error) {
+      console.error('Failed to create wallet client:', error)
+      alert('Failed to connect to wallet. Please try again.')
+      setTransferProcessingModal(false)
+    }
   }
 
   return (
