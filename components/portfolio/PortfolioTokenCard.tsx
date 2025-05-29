@@ -184,6 +184,13 @@ export default ({
     const address = router.query.address[0] as string
 
     try {
+      // Check if window.ethereum exists before proceeding
+      if (!window.ethereum) {
+        alert('No wallet detected. Please install a wallet like MetaMask.')
+        return
+      }
+
+      // Now TypeScript knows window.ethereum exists
       const wallet = createWalletClient({
         account: address as `0x${string}`,
         chain:
@@ -194,7 +201,7 @@ export default ({
             : chain.id === 7777777
             ? zora
             : undefined,
-        transport: window.ethereum ? custom(window.ethereum) : http(),
+        transport: custom(window.ethereum),
       })
 
       await wallet.switchChain(

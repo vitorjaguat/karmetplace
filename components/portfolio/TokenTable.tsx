@@ -549,13 +549,20 @@ const TokenTableRow: FC<TokenTableRowProps> = ({
       alert('You do not own enough of this token to transfer this quantity.')
       return
     }
+
     setTransferModal(false)
     setTransferProcessingModal(true)
     const address = router.query.address[0] as string
 
+    // Add this check before creating the wallet client
+    if (!window.ethereum) {
+      alert('No wallet detected. Please install a wallet like MetaMask.')
+      setTransferProcessingModal(false)
+      return
+    }
+
     const wallet = createWalletClient({
       account: address as `0x${string}`,
-      // transport: http(),
       chain:
         chain.id === 1
           ? mainnet
@@ -564,7 +571,7 @@ const TokenTableRow: FC<TokenTableRowProps> = ({
           : chain.id === 7777777
           ? zora
           : undefined,
-      transport: custom(window.ethereum),
+      transport: custom(window.ethereum), // Now TypeScript knows it's not undefined
     })
     // console.log(wallet)
     await wallet.switchChain(
