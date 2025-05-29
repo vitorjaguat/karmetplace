@@ -35,7 +35,7 @@ class MyDocument extends Document {
         {/* <link rel="shortcut icon" type="image" href="/assets/favicon.png" /> */}
 
         {/* Reservoir meta tags */}
-        <meta property="reservoir:title" content="The Sphere's Karmetplace" />
+        <meta property="reservoir:title" content="Karmetplace" />
         <meta property="reservoir:icon" content="/reservoir-source-icon.png" />
         <meta
           property="reservoir:token-url-mainnet"

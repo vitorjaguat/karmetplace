@@ -228,7 +228,8 @@ const OfferTableRow: FC<OfferTableRowProps> = ({
                   },
                 }}
               >
-                {fromDisplayName}
+                {/* {fromDisplayName} */}
+                Karmetplace
               </Text>
             </Link>
           ) : (

@@ -78,7 +78,7 @@ export const PriceData: FC<Props> = ({ token }) => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Flex
+            {/* <Flex
               align="center"
               css={{
                 borderRadius: 4,
@@ -90,7 +90,7 @@ export const PriceData: FC<Props> = ({ token }) => {
               <Text style="body3" css={{ color: '$gray11' }}>
                 {listSourceName}
               </Text>
-            </Flex>
+            </Flex> */}
           </a>
         )}
       </Flex>

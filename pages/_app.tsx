@@ -17,6 +17,7 @@ import '@rainbow-me/rainbowkit/styles.css'
 import {
   RainbowKitProvider,
   getDefaultWallets,
+  connectorsForWallets,
   darkTheme as rainbowDarkTheme,
   lightTheme as rainbowLightTheme,
 } from '@rainbow-me/rainbowkit'
@@ -32,6 +33,15 @@ import {
   ReservoirKitTheme,
   CartProvider,
 } from '@reservoir0x/reservoir-kit-ui'
+import {
+  metaMaskWallet,
+  coinbaseWallet,
+  rainbowWallet,
+  walletConnectWallet,
+  rabbyWallet,
+  ledgerWallet,
+  phantomWallet,
+} from '@rainbow-me/rainbowkit/wallets'
 import { FC, useContext, useEffect, useState } from 'react'
 import { HotkeysProvider } from 'react-hotkeys-hook'
 import ToastContextProvider from 'context/ToastContextProvider'
@@ -79,12 +89,42 @@ const { chains, publicClient } = configureChains(supportedChains, [
 ])
 
 //Jaguat customized:
-const { connectors } = getDefaultWallets({
-  // appName: 'Reservoir NFT Explorer',
-  appName: 'The Sphere Common Pool',
-  projectId: WALLET_CONNECT_PROJECT_ID,
-  chains,
-})
+// const { connectors } = getDefaultWallets({
+//   // appName: 'Reservoir NFT Explorer',
+//   appName: 'The Sphere Common Pool',
+//   projectId: WALLET_CONNECT_PROJECT_ID,
+//   chains,
+// })
+///////adding more supported wallets:
+const connectors = connectorsForWallets([
+  {
+    groupName: 'Recommended',
+    wallets: [
+      metaMaskWallet({
+        chains,
+        projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID || '',
+      }),
+      coinbaseWallet({
+        chains,
+        appName: 'The Sphere Common Pool',
+      }),
+      rainbowWallet({
+        chains,
+        projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID || '',
+      }),
+      walletConnectWallet({
+        chains,
+        projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID || '',
+      }),
+      rabbyWallet({ chains }),
+      ledgerWallet({
+        chains,
+        projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID || '',
+      }),
+      phantomWallet({ chains }),
+    ],
+  },
+])
 
 const wagmiClient = createConfig({
   autoConnect: true,
