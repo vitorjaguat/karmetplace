@@ -17,8 +17,10 @@ type Options =
   | 'Price high to low'
   | 'Rare to common'
   | 'Common to rare'
+  | 'Token ID'
 
 const options: { [x: string]: { sortBy: string; sortDirection: string } } = {
+  'Token ID': { sortBy: 'tokenId', sortDirection: 'asc' },
   'Price low to high': { sortBy: 'floorAskPrice', sortDirection: 'asc' },
   'Price high to low': { sortBy: 'floorAskPrice', sortDirection: 'desc' },
   'Rare to common': { sortBy: 'rarity', sortDirection: 'asc' },
@@ -31,8 +33,7 @@ type Props = {
 
 export const SortTokens: FC<Props> = ({ css }) => {
   const router = useRouter()
-  const [sortSelection, setSortSelection] =
-    useState<Options>('Price low to high')
+  const [sortSelection, setSortSelection] = useState<Options>('Token ID')
 
   const isMounted = useMounted()
   const isSmallDevice = useMediaQuery({ maxWidth: 905 }) && isMounted
@@ -53,7 +54,15 @@ export const SortTokens: FC<Props> = ({ css }) => {
       setSortSelection('Price high to low')
       return
     }
-    setSortSelection('Price low to high')
+    if (sortBy === 'floorAskPrice' && sortDirection === 'asc') {
+      setSortSelection('Price low to high')
+      return
+    }
+    if (sortBy === 'tokenId' && sortDirection === 'asc') {
+      setSortSelection('Token ID')
+      return
+    }
+    // setSortSelection('Token ID')
   }, [router.query])
 
   return (

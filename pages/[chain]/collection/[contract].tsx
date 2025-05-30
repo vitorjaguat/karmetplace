@@ -164,7 +164,7 @@ const CollectionPage: NextPage<Props> = ({ id, ssr }) => {
   let tokenQuery: Parameters<typeof useDynamicTokens>['0'] = {
     limit: 20,
     collection: id,
-    sortBy: 'floorAskPrice',
+    sortBy: 'tokenId',
     sortDirection: 'asc',
     includeQuantity: true,
     includeLastSale: true,
@@ -176,7 +176,8 @@ const CollectionPage: NextPage<Props> = ({ id, ssr }) => {
   const sortDirection = router.query['sortDirection']?.toString()
   const sortBy = router.query['sortBy']?.toString()
 
-  if (sortBy === 'tokenId' || sortBy === 'rarity') tokenQuery.sortBy = sortBy
+  if (sortBy === 'floorAskPrice' || sortBy === 'rarity')
+    tokenQuery.sortBy = sortBy
   if (sortDirection === 'desc') tokenQuery.sortDirection = 'desc'
 
   // Extract all queries of attribute type
