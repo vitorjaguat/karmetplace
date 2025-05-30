@@ -82,27 +82,27 @@ const IndexPage: NextPage = () => {
     shortAddress,
   } = useENSResolver(address)
 
-  let collectionQuery: Parameters<typeof useUserCollections>['1'] = {
-    limit: 100,
-    excludeSpam: hideSpam,
-    // collectionsSetId:
-    //   '5213bc89ad6f83413e7d0d0f568a389c2afdf6437fda900ad57543e38b91e569',
-  }
+  // let collectionQuery: Parameters<typeof useUserCollections>['1'] = {
+  //   limit: 100,
+  //   excludeSpam: hideSpam,
+  //   // collectionsSetId:
+  //   //   '5213bc89ad6f83413e7d0d0f568a389c2afdf6437fda900ad57543e38b91e569',
+  // }
 
   const { chain } = useContext(ChainContext)
 
-  if (chain.collectionSetId) {
-    collectionQuery.collectionsSetId = chain.collectionSetId
-  } else if (chain.community) {
-    collectionQuery.community = chain.community
-  }
+  // if (chain.collectionSetId) {
+  //   collectionQuery.collectionsSetId = chain.collectionSetId
+  // } else if (chain.community) {
+  //   collectionQuery.community = chain.community
+  // }
 
-  const {
-    data: collections,
-    isLoading: collectionsLoading,
-    fetchNextPage,
-  } = useUserCollections(isMounted ? (address as string) : '', collectionQuery)
-  console.log(collections)
+  // const {
+  //   data: collections,
+  //   isLoading: collectionsLoading,
+  //   fetchNextPage,
+  // } = useUserCollections(isMounted ? (address as string) : '', collectionQuery)
+  // console.log(collections)
 
   // Batch listing logic
   const [showListingPage, setShowListingPage] = useState(false)
@@ -280,7 +280,7 @@ const IndexPage: NextPage = () => {
                           pb: 37,
                         }}
                       >
-                        {isSmallDevice ? (
+                        {/* {isSmallDevice ? (
                           <MobileTokenFilters
                             hideSpam={hideSpam}
                             setHideSpam={setHideSpam}
@@ -302,7 +302,7 @@ const IndexPage: NextPage = () => {
                             setFilterCollection={setFilterCollection}
                             loadMoreCollections={fetchNextPage}
                           />
-                        )}
+                        )} */}
                         <Box
                           css={{
                             flex: 1,
@@ -324,15 +324,15 @@ const IndexPage: NextPage = () => {
                             </Flex>
                           )}
                           <Flex justify="between" css={{ marginBottom: '$4' }}>
-                            {!isSmallDevice &&
+                            {/* {!isSmallDevice &&
                               !collectionsLoading &&
                               collections.length > 0 && (
                                 <FilterButton
                                   open={tokenFiltersOpen}
                                   setOpen={setTokenFiltersOpen}
                                 />
-                              )}
-                            {!isSmallDevice && !collectionsLoading && (
+                              )} */}
+                            {!isSmallDevice && (
                               <Flex
                                 align="center"
                                 justify="between"
@@ -354,7 +354,7 @@ const IndexPage: NextPage = () => {
                           <TokenTable
                             hideSpam={hideSpam}
                             ref={tokenTableRef}
-                            isLoading={collectionsLoading}
+                            // isLoading={collectionsLoading}
                             address={address}
                             filterCollection={filterCollection}
                             sortBy={sortByType}
