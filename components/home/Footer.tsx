@@ -83,7 +83,7 @@ export const Footer = () => {
           width={240}
         />
       </div>
-      <div className="flex flex-col md:grid md:grid-cols-3 w-full">
+      <div className="flex flex-col md:grid md:grid-cols-2 w-full">
         <div className="text-[14px] text-[var(--colors-gray12)] flex flex-col">
           <div className="">Regenerative Commons for Live Arts</div>
           <div className="">v0.1 - 2023</div>
@@ -97,46 +97,54 @@ export const Footer = () => {
               Uint Studio
             </a>
           </div>
+          <div className="">
+            Powered by{' '}
+            <a href="https://reservoir.tools/" className="">
+              Reservoir
+            </a>
+          </div>
         </div>
-        <div className="md:text-center text-[14px] text-[var(--colors-gray12)] flex flex-col mt-6 md:mt-0">
-          {/* <div className=" hidden md:block">.</div> */}
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://thesphere.as"
-          >
-            <div className="">Website</div>
-          </a>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://docs.thesphere.as/"
-          >
-            <div className="">Docs</div>
-          </a>
-        </div>
-        <div className="text-[14px] text-[var(--colors-gray12)] flex flex-col md:text-right mt-6 md:mt-0">
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://twitter.com/TheSphere_as"
-          >
-            <div className="">Twitter</div>
-          </a>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://t.me/+o3hn1fgGsQMzZjgx"
-          >
-            <div className="">Telegram</div>
-          </a>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://discord.gg/e8K8KPrJ49"
-          >
-            <div className="">Discord</div>
-          </a>
+        <div className="flex items-end justify-end gap-6">
+          <div className="md:text-left text-[14px] text-[var(--colors-gray12)] flex flex-col justify-end mt-6 md:mt-0">
+            {/* <div className=" hidden md:block">.</div> */}
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://thesphere.as"
+            >
+              <div className="">Website</div>
+            </a>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://docs.thesphere.as/"
+            >
+              <div className="">Docs</div>
+            </a>
+          </div>
+          <div className="text-[14px] text-[var(--colors-gray12)] flex flex-col justify-end md:text-right mt-6 md:mt-0">
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://twitter.com/TheSphere_as"
+            >
+              <div className="">Twitter</div>
+            </a>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://t.me/+o3hn1fgGsQMzZjgx"
+            >
+              <div className="">Telegram</div>
+            </a>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://discord.gg/e8K8KPrJ49"
+            >
+              <div className="">Discord</div>
+            </a>
+          </div>
         </div>
       </div>
     </div>
