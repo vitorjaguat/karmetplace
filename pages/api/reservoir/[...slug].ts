@@ -5,6 +5,39 @@ import { arbitrum, goerli, mainnet, optimism, zora } from 'wagmi/chains'
 import wrappedContracts from 'utils/wrappedContracts'
 import { zeroAddress } from 'viem'
 
+// Add CORS headers function
+function setCorsHeaders(res: NextApiResponse, origin?: string) {
+  // Allow specific origins
+  const allowedOrigins = [
+    'https://karmetplace.thesphere.as',
+    'https://karmetplace.vercel.app',
+    'http://localhost:3000', // for development
+    'http://localhost:3001', // if you use different ports
+    'http://localhost:3002',
+  ]
+
+  if (origin && allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin)
+  } else if (!origin) {
+    // Fallback for requests without origin header
+    res.setHeader(
+      'Access-Control-Allow-Origin',
+      'https://karmetplace.thesphere.as'
+    )
+  }
+
+  res.setHeader(
+    'Access-Control-Allow-Methods',
+    'GET, POST, PUT, DELETE, OPTIONS'
+  )
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'Content-Type, Authorization, x-api-key, x-rkc-version, x-rkui-version'
+  )
+  res.setHeader('Access-Control-Allow-Credentials', 'true')
+  res.setHeader('Access-Control-Max-Age', '86400') // 24 hours
+}
+
 // Request queue implementation
 class RequestQueue {
   private queue: Array<{
@@ -128,6 +161,15 @@ const allowedDomains = process.env.ALLOWED_API_DOMAINS
 // https://nextjs.org/docs/api-routes/dynamic-api-routes#catch-all-api-routes
 const proxy = async (req: NextApiRequest, res: NextApiResponse) => {
   const { query, body, method, headers: reqHeaders } = req
+
+  // Set CORS headers for all requests
+  setCorsHeaders(res, req.headers.origin)
+
+  // Handle preflight requests
+  if (method === 'OPTIONS') {
+    res.status(200).end()
+    return
+  }
 
   if (allowedDomains && allowedDomains.length > 0) {
     let origin = req.headers.origin || req.headers.referer || ''
