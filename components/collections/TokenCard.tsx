@@ -338,6 +338,15 @@ export default ({
             buttonCss={{
               justifyContent: 'center',
               flex: 1,
+              backgroundColor: '$primary9 !important', // Purple background
+              '@md': {
+                padding: '0px',
+              },
+              // Button direct hover
+              '&:hover': {
+                backgroundColor: '#00ff00 !important', // Green color
+                color: '#111111 !important', // White text
+              },
             }}
             buttonProps={{
               corners: 'square',
