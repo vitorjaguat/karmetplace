@@ -18,7 +18,7 @@ import CartButton from './CartButton'
 import { AccountSidebar } from 'components/navbar/AccountSidebar'
 
 import * as HoverCard from '@radix-ui/react-hover-card'
-import ChainToggle from 'components/common/ChainToggle'
+// import ChainToggle from 'components/common/ChainToggle'
 
 export const NAVBAR_HEIGHT = 81
 export const NAVBAR_HEIGHT_MOBILE = 77
@@ -80,7 +80,7 @@ const Navbar = () => {
       </Box>
       <Flex align="center" css={{ gap: '$3' }}>
         {/* <MobileSearch key={`${router.asPath}-search`} /> */}
-        <ChainToggle />
+        {/* <ChainToggle /> */}
         <CartButton />
         <HamburgerMenu key={`${router.asPath}-hamburger`} />
       </Flex>
