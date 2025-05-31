@@ -63,8 +63,8 @@ const AccountSidebar: FC = () => {
     checkAvatar()
   }, [ensAvatar])
 
-  console.log('ENS Avatar:', ensAvatar)
-  console.log('Valid Avatar:', validAvatar)
+  // console.log('ENS Avatar:', ensAvatar)
+  // console.log('Valid Avatar:', validAvatar)
 
   useEffect(() => {
     setOpen(false)
