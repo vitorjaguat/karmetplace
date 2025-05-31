@@ -392,7 +392,7 @@ const CollectionPage: NextPage<Props> = ({ id, ssr }) => {
       .catch((err) => console.error(err))
   }, [id])
 
-  console.log(owners)
+  // console.log(owners)
 
   //owners' ENS:
   // const [ensNames, setEnsNames] = useState<string[]>([])
@@ -845,7 +845,7 @@ const CollectionPage: NextPage<Props> = ({ id, ssr }) => {
                         'repeat(auto-fill, minmax(200px, 1fr))',
                       '@md': {
                         gridTemplateColumns:
-                          'repeat(auto-fill, minmax(240px, 1fr))',
+                          'repeat(auto-fill, minmax(15%, 1fr))',
                       },
                     }}
                   >
