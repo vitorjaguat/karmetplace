@@ -15,9 +15,13 @@ type Props = {
 
 export const PriceData: FC<Props> = ({ token }) => {
   const { reservoirBaseUrl } = useMarketplaceChain()
-  const listSourceName = token?.market?.floorAsk?.source?.name as
+  let listSourceName = token?.market?.floorAsk?.source?.name as
     | string
     | undefined
+  if (listSourceName?.includes('Reservoir')) {
+    listSourceName = 'Karmetplace'
+  }
+
   const listSourceDomain = token?.market?.floorAsk?.source?.domain as
     | string
     | undefined
