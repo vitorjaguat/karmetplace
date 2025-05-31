@@ -279,7 +279,7 @@ export default ({
           </Text>
         </Flex>
       )}
-      {isOwner && !isSmallDevice ? (
+      {/* {isOwner && !isSmallDevice ? (
         <Button
           css={{
             borderRadius: '99999px',
@@ -314,7 +314,7 @@ export default ({
             height={20}
           />
         </Button>
-      ) : null}
+      ) : null} */}
       <Link
         passHref
         href={`/${routePrefix}/asset/${token?.token?.contract}:${token?.token?.tokenId}`}
