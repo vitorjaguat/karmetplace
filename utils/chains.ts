@@ -81,7 +81,7 @@ export const DefaultChain: ReservoirChain = {
   // '5213bc89ad6f83413e7d0d0f568a389c2afdf6437fda900ad57543e38b91e569', //Sphe GeNTF + Grafs
   // collectionSetId:
   //   '4ec91c8de958925ef99b639420a0cab81c5a33f089b5e156c4fe4da6c46b98c6', // Hamburguer + Grafs
-  community: process.env.NEXT_PUBLIC_ETH_COMMUNITY,
+  // community: process.env.NEXT_PUBLIC_ETH_COMMUNITY,
   wssUrl: 'wss://ws.reservoir.tools',
   listingCurrencies: [
     nativeCurrencyBase,
@@ -107,23 +107,23 @@ export default [
   //   checkPollingInterval: reservoirChains.goerli.checkPollingInterval,
   //   wssUrl: 'wss://ws-goerli.reservoir.tools',
   // },
-  {
-    ...zora,
-    name: 'Zora',
-    lightIconUrl: '/icons/zora-icon-dark.svg',
-    darkIconUrl: '/icons/zora-icon-light.svg',
-    reservoirBaseUrl: reservoirChains.zora.baseApiUrl,
-    proxyApi: '/api/reservoir/zora',
-    routePrefix: 'zora',
-    coingeckoId: 'ethereum',
-    checkPollingInterval: reservoirChains.zora.checkPollingInterval,
-    // wssUrl: 'wss://ws-zora.reservoir.tools',
-    // collectionSetId: '0xe27f011e8eb90b4d42fa7658fbe44e240d9c5f03'
-    // collectionSetId:
-    //   'fca7e824931f8de80afa6645a8a872acd4376af6005646a3f9d1f46e9360b781',
-    // collectionSetId:
-    //   '4ec91c8de958925ef99b639420a0cab81c5a33f089b5e156c4fe4da6c46b98c6',
-  },
+  // {
+  //   ...zora,
+  //   name: 'Zora',
+  //   lightIconUrl: '/icons/zora-icon-dark.svg',
+  //   darkIconUrl: '/icons/zora-icon-light.svg',
+  //   reservoirBaseUrl: reservoirChains.zora.baseApiUrl,
+  //   proxyApi: '/api/reservoir/zora',
+  //   routePrefix: 'zora',
+  //   coingeckoId: 'ethereum',
+  //   checkPollingInterval: reservoirChains.zora.checkPollingInterval,
+  //   // wssUrl: 'wss://ws-zora.reservoir.tools',
+  //   // collectionSetId: '0xe27f011e8eb90b4d42fa7658fbe44e240d9c5f03'
+  //   // collectionSetId:
+  //   //   'fca7e824931f8de80afa6645a8a872acd4376af6005646a3f9d1f46e9360b781',
+  //   // collectionSetId:
+  //   //   '4ec91c8de958925ef99b639420a0cab81c5a33f089b5e156c4fe4da6c46b98c6',
+  // },
   // {
   //   ...polygon,
   //   lightIconUrl: '/icons/polygon-icon-dark.svg',

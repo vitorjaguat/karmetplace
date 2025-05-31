@@ -164,18 +164,19 @@ export const TokenTable = forwardRef<TokenTableRef, Props>(
       includeRawData: true,
       includeAttributes: true,
       excludeSpam: hideSpam,
+      contract: filterContractsTheSphere[0],
     }
 
     const { chain } = useContext(ChainContext)
 
-    if (chain.collectionSetId) {
-      tokenQuery.collectionsSetId = chain.collectionSetId
-    } else if (chain.community) {
-      tokenQuery.community = chain.community
-    }
+    // if (chain.collectionSetId) {
+    //   tokenQuery.collectionsSetId = chain.collectionSetId
+    // } else if (chain.community) {
+    //   tokenQuery.community = chain.community
+    // }
 
     const {
-      data: tokensUnfiltered,
+      data: tokens,
       fetchNextPage,
       mutate,
       setSize,
@@ -186,10 +187,12 @@ export const TokenTable = forwardRef<TokenTableRef, Props>(
       fallbackData: [],
     })
 
-    //Filter only greenlisted contracts:
-    const tokens = tokensUnfiltered.filter((token) =>
-      filterContractsTheSphere.includes(token?.token?.contract ?? '')
-    )
+    // Filter only greenlisted contracts:
+    // const tokens = tokensUnfiltered.filter((token) => {
+    //   const contract = token?.token?.collection?.id
+    //   if (!contract) return false
+    //   if (filterContractsTheSphere.includes(contract)) return true
+    // })
 
     useEffect(() => {
       mutate()

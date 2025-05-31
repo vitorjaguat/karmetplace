@@ -82,27 +82,39 @@ const IndexPage: NextPage = () => {
     shortAddress,
   } = useENSResolver(address)
 
-  // let collectionQuery: Parameters<typeof useUserCollections>['1'] = {
-  //   limit: 100,
-  //   excludeSpam: hideSpam,
-  //   // collectionsSetId:
-  //   //   '5213bc89ad6f83413e7d0d0f568a389c2afdf6437fda900ad57543e38b91e569',
-  // }
+  // Add avatar validation state
+  const [validAvatar, setValidAvatar] = useState<string | null>(null)
+
+  // Function to validate avatar URL
+  const validateAvatarUrl = async (url: string): Promise<boolean> => {
+    try {
+      const response = await fetch(url, { method: 'HEAD' })
+      const contentType = response.headers.get('content-type')
+      return (
+        response.ok &&
+        contentType !== null &&
+        contentType.startsWith('image/')
+      )
+    } catch {
+      return false
+    }
+  }
+
+  // Effect to validate avatar when ensAvatar changes
+  useEffect(() => {
+    const checkAvatar = async () => {
+      if (ensAvatar && !ensAvatar?.message && typeof ensAvatar === 'string') {
+        const isValid = await validateAvatarUrl(ensAvatar)
+        setValidAvatar(isValid ? ensAvatar : null)
+      } else {
+        setValidAvatar(null)
+      }
+    }
+
+    checkAvatar()
+  }, [ensAvatar])
 
   const { chain } = useContext(ChainContext)
-
-  // if (chain.collectionSetId) {
-  //   collectionQuery.collectionsSetId = chain.collectionSetId
-  // } else if (chain.community) {
-  //   collectionQuery.community = chain.community
-  // }
-
-  // const {
-  //   data: collections,
-  //   isLoading: collectionsLoading,
-  //   fetchNextPage,
-  // } = useUserCollections(isMounted ? (address as string) : '', collectionQuery)
-  // console.log(collections)
 
   // Batch listing logic
   const [showListingPage, setShowListingPage] = useState(false)
@@ -215,8 +227,8 @@ const IndexPage: NextPage = () => {
                     }}
                   >
                     <Flex align="center">
-                      {ensAvatar ? (
-                        <Avatar size="xxl" src={ensAvatar} />
+                      {validAvatar ? (
+                        <Avatar size="xxl" src={validAvatar} />
                       ) : (
                         <Jazzicon
                           diameter={64}
