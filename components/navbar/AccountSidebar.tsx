@@ -299,4 +299,4 @@ const AccountSidebar: FC = () => {
   )
 }
 
-export default AccountSidebar
+export { AccountSidebar as default, AccountSidebar }
