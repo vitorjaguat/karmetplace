@@ -24,7 +24,7 @@ import Link from 'next/link'
 import Wallet from './Wallet'
 import { useRouter } from 'next/router'
 
-export const AccountSidebar: FC = () => {
+const AccountSidebar: FC = () => {
   const { address } = useAccount()
   const { disconnect } = useDisconnect()
   const router = useRouter()
@@ -34,7 +34,37 @@ export const AccountSidebar: FC = () => {
     shortName: shortEnsName,
   } = useENSResolver(address)
   const [open, setOpen] = useState(false)
+  const [validAvatar, setValidAvatar] = useState<string | null>(null)
+
+  // Function to validate avatar URL
+  const validateAvatarUrl = async (url: string): Promise<boolean> => {
+    try {
+      const response = await fetch(url, { method: 'HEAD' })
+      return !!(
+        response.ok &&
+        response.headers.get('content-type')?.startsWith('image/')
+      )
+    } catch {
+      return false
+    }
+  }
+
+  // Effect to validate avatar when ensAvatar changes
+  useEffect(() => {
+    const checkAvatar = async () => {
+      if (ensAvatar && !ensAvatar?.message && typeof ensAvatar === 'string') {
+        const isValid = await validateAvatarUrl(ensAvatar)
+        setValidAvatar(isValid ? ensAvatar : null)
+      } else {
+        setValidAvatar(null)
+      }
+    }
+
+    checkAvatar()
+  }, [ensAvatar])
+
   console.log('ENS Avatar:', ensAvatar)
+  console.log('Valid Avatar:', validAvatar)
 
   useEffect(() => {
     setOpen(false)
@@ -49,8 +79,8 @@ export const AccountSidebar: FC = () => {
       type="button"
       color="gray3"
     >
-      {ensAvatar ? (
-        <Avatar size="medium" src={ensAvatar} />
+      {validAvatar ? (
+        <Avatar size="medium" src={validAvatar} />
       ) : (
         <Jazzicon diameter={44} seed={jsNumberForAddress(address as string)} />
       )}
@@ -115,8 +145,8 @@ export const AccountSidebar: FC = () => {
                     <FontAwesomeIcon icon={faClose} height={18} width={18} />
                   </Button>
                   <Flex align="center" css={{ gap: '$3', ml: '$3' }}>
-                    {ensAvatar ? (
-                      <Avatar size="large" src={ensAvatar} />
+                    {validAvatar ? (
+                      <Avatar size="large" src={validAvatar} />
                     ) : (
                       <Jazzicon
                         diameter={52}
@@ -268,3 +298,5 @@ export const AccountSidebar: FC = () => {
     </DialogPrimitive.Root>
   )
 }
+
+export default AccountSidebar
