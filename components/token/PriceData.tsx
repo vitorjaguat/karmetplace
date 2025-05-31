@@ -26,9 +26,12 @@ export const PriceData: FC<Props> = ({ token }) => {
     | string
     | undefined
 
-  const offerSourceName = token?.market?.topBid?.source?.name as
+  let offerSourceName = token?.market?.topBid?.source?.name as
     | string
     | undefined
+  if (offerSourceName?.includes('Reservoir')) {
+    offerSourceName = 'Karmetplace'
+  }
   const offerSourceDomain = token?.market?.topBid?.source?.domain as
     | string
     | undefined
