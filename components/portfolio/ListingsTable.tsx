@@ -356,8 +356,9 @@ const ListingTableRow: FC<ListingTableRowProps> = ({
             weight="normal"
             css={{ fontSize: '13px', textDecoration: 'none' }}
           >
-            {/* {listing?.source?.name as string} */}
-            Karmetplace
+            {(listing?.source?.name as string).includes('Reservoir')
+              ? 'Karmetplace'
+              : (listing?.source?.name as string)}
           </Anchor>
         </Flex>
       </TableCell>
