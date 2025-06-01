@@ -271,8 +271,6 @@ export const TokenTable = forwardRef<TokenTableRef, Props>(
                       onAcceptBidModalOpened={(open) => {
                         setAcceptBidModalOpen(open)
                       }}
-                      // setOpenHeart={setOpenHeart}
-                      // openHeart={openHeart}
                     />
                   )
                 })}
@@ -292,7 +290,6 @@ export const TokenTable = forwardRef<TokenTableRef, Props>(
               >
                 {tokens?.map((token, i) => (
                   <PortfolioTokenCard
-                    // setOpenHeart={setOpenHeart}
                     key={i}
                     token={token}
                     isOwner={isOwner}
@@ -344,8 +341,6 @@ type TokenTableRowProps = {
   setSelectedItems: Dispatch<SetStateAction<UserToken[]>>
   onAcceptBidModalOpened: (open: boolean) => void
   isOwner: boolean
-  // setOpenHeart: Dispatch<SetStateAction<boolean>>
-  // openHeart: boolean
 }
 
 const TokenTableRow: FC<TokenTableRowProps> = ({
@@ -355,8 +350,6 @@ const TokenTableRow: FC<TokenTableRowProps> = ({
   onAcceptBidModalOpened,
   mutate,
   setSelectedItems,
-  // setOpenHeart,
-  // openHeart,
 }) => {
   const { routePrefix, proxyApi } = useMarketplaceChain()
   const { addToast } = useContext(ToastContext)
@@ -442,8 +435,8 @@ const TokenTableRow: FC<TokenTableRowProps> = ({
     const [orderFees, setOrderFees] = useState<string[]>([])
     useEffect(() => {
       const newOrderFee =
-        '0x2ac85F79d0FBE628594F7BC1d2311cDF700EF57A:' + heartValue * 100
-      // setOrderFee(newOrderFee)
+        '0x2ac85F79d0FBE628594F7BC1d2311cDF700EF57A:' +
+        Math.floor(heartValue * 79.99)
       setOrderFees([newOrderFee])
     }, [heartValue])
 
@@ -792,7 +785,7 @@ const TokenTableRow: FC<TokenTableRowProps> = ({
                         max={
                           token?.token?.chainId == 1 ||
                           token?.token?.chainId == 5
-                            ? 90
+                            ? 100
                             : 80
                         }
                         className="w-[260px]"
@@ -1631,7 +1624,7 @@ const TokenTableRow: FC<TokenTableRowProps> = ({
                         max={
                           token?.token?.chainId == 1 ||
                           token?.token?.chainId == 5
-                            ? 90
+                            ? 100
                             : 80
                         }
                         className="w-[300px] mb-6"
@@ -1648,8 +1641,11 @@ const TokenTableRow: FC<TokenTableRowProps> = ({
                         color="#00ff00"
                         className="duration-300 ease-in-out"
                         size={
-                          ((heartValue + 10 - (heartValue % 10)) / 10 +
-                            'x') as SizeProp
+                          (((heartValue !== 100 ? heartValue : 99) +
+                            10 -
+                            ((heartValue !== 100 ? heartValue : 99) % 10)) /
+                            10 +
+                            'x') as SizeProp ////////////////
                         }
                       />
                     </div>

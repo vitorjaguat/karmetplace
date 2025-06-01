@@ -103,12 +103,11 @@ export default ({
   const [heartValue, setHeartValue] = useState(0)
 
   //connecting orderFee to heartValue:
-  const [orderFee, setOrderFee] = useState('')
   const [orderFees, setOrderFees] = useState<string[]>([])
   useEffect(() => {
     const newOrderFee =
-      '0x2ac85F79d0FBE628594F7BC1d2311cDF700EF57A:' + heartValue * 100
-    setOrderFee(newOrderFee)
+      '0x2ac85F79d0FBE628594F7BC1d2311cDF700EF57A:' +
+      Math.floor(heartValue * 79.99) ///////////////////
     setOrderFees([newOrderFee])
   }, [heartValue])
 
@@ -577,11 +576,14 @@ export default ({
                       defaultValue="0"
                       max={
                         token?.token?.chainId == 1 || token?.token?.chainId == 5
-                          ? 90
+                          ? 100 ////////////////////
                           : 80
                       }
                       className="w-[200px] md:w-[300px] mb-6"
-                      onChange={(e) => setHeartValue(+e.target.value)}
+                      onChange={(e) => {
+                        // console.log(+e.target.value)
+                        setHeartValue(+e.target.value)
+                      }}
                     />
                     <div className="text-center pb-5 text-neutral-300 flex justify-center">
                       Your donation:{' '}
@@ -594,8 +596,11 @@ export default ({
                       color="#00ff00"
                       className="duration-300 ease-in-out"
                       size={
-                        ((heartValue + 10 - (heartValue % 10)) / 10 +
-                          'x') as SizeProp
+                        (((heartValue !== 100 ? heartValue : 99) +
+                          10 -
+                          ((heartValue !== 100 ? heartValue : 99) % 10)) /
+                          10 +
+                          'x') as SizeProp ////////////////
                       }
                     />
                   </div>

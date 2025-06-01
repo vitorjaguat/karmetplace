@@ -344,8 +344,8 @@ const ListingTableRow: FC<ListingTableRowProps> = ({
       <TableCell>
         <Flex align="center" css={{ gap: '$2' }}>
           <img
-            width="20px"
-            height="20px"
+            width="16px"
+            height="16px"
             src={(listing?.source?.icon as string) || ''}
             alt={`${listing?.source?.name}`}
           />
@@ -354,8 +354,10 @@ const ListingTableRow: FC<ListingTableRowProps> = ({
             target="_blank"
             color="primary"
             weight="normal"
+            css={{ fontSize: '13px', textDecoration: 'none' }}
           >
-            {listing?.source?.name as string}
+            {/* {listing?.source?.name as string} */}
+            Karmetplace
           </Anchor>
         </Flex>
       </TableCell>
