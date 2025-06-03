@@ -6,11 +6,14 @@ import { faFolderOpen } from '@fortawesome/free-solid-svg-icons'
 import { Head } from 'components/Head'
 import Faq from 'react-faq-component'
 import { useMediaQuery } from 'react-responsive'
+import { title } from 'process'
 
 const styles = {
   bgColor: 'transparent',
   titleTextColor: '#b1b1b1',
   rowTitleColor: 'white',
+  titleTextSize: '2rem',
+  rowTitleTextSize: '1.5rem',
   rowContentColor: '#b1b1b1',
   arrowColor: '#b1b1b1',
   // rowContentPaddingLeft: '30px',
@@ -33,7 +36,7 @@ const AboutPage: NextPage = () => {
       {
         title: 'What is The Sphere Karmetplace?',
         content:
-          'The Sphere Karmetplace is a unique 0%-fee digital platform for buying, selling, and appreciating live art seeds and derivatives minted as non-fungible tokens, leveraging blockchain technology to support artists and engage communities into a novel funding mechanism.',
+          'The Sphere Karmetplace is a 0%-fee digital platform for buying, selling, and appreciating live art seeds and derivatives minted as non-fungible tokens, leveraging blockchain technology to support artists and engage communities into a novel funding mechanism.',
       },
       {
         title: 'What is a non-fungible token (NFT)?',
@@ -43,7 +46,7 @@ const AboutPage: NextPage = () => {
       {
         title: 'How can I collect the works minted as non-fungible tokens?',
         content:
-          "To collect the works, you will need a non-custodial wallet that has a balance corresponding to the price of the works in Ether, the native cryptocurrency of the Ethereum blockchain, USDC, or USDT. If you don't have Ether, you can buy it on an centralized exchange like <a class='underline text-neutral-300' href='https://coinbase.com' target='_blank' rel='noopener noreferrer'>https://coinbase.com</a>, <a class='underline text-neutral-300' href='https://bitstamp.com' target='_blank' rel='noopener noreferrer'>https://bitstamp.com</a> or in a decentralized exchange like <a class='underline text-neutral-300' href='https://app.uniswap.org' target='_blank' rel='noopener noreferrer'>https://app.uniswap.org</a>.",
+          "To collect the works, you will need a non-custodial wallet that has a balance corresponding to the price of the works in Ether, the native cryptocurrency of the Ethereum blockchain. If you don't have Ether, you can buy it on an centralized exchange like <a class='underline text-neutral-300' href='https://coinbase.com' target='_blank' rel='noopener noreferrer'>https://coinbase.com</a>, <a class='underline text-neutral-300' href='https://bitstamp.com' target='_blank' rel='noopener noreferrer'>https://bitstamp.com</a> or in a decentralized exchange like <a class='underline text-neutral-300' href='https://app.uniswap.org' target='_blank' rel='noopener noreferrer'>https://app.uniswap.org</a>.",
       },
       {
         title:
@@ -60,54 +63,38 @@ const AboutPage: NextPage = () => {
         title:
           'Is it necessary to use the MetaMask wallet? Can I use other wallets?',
         content:
-          "You can use other wallets that operate on the Ethereum blockchain to connect to the Karmetplace. We offer support to Rainbow, Coinbase Wallet, and Wallet Connect, besides MetaMask, but we recommend you to use MetaMask. It is compatible with many decentralized applications, and also with most internet browsers. It is considered safe because it is frequently updated in rigorous audit processes. If you are interested in discovering other wallets that are compatible with the EVM (Ethereum Virtual Machine), visit <a class='underline text-neutral-300' href='https://ethereum.org/en/wallets/find-wallet/' target='_blank' rel='noopener noreferrer'>https://ethereum.org/en/wallets/find-wallet/</a>.",
+          'You can use other wallets that operate on the Ethereum blockchain to connect to the Karmetplace. We offer support Coinbase Wallet, Rainbow, WalletConnect, Rabby, Ledger, and Phantom, besides MetaMask.',
       },
       {
         title: 'Which collections are available on the Karmetplace?',
         content:
-          'Initially, the Karmetplace features two collections: The Sphere Karmic Objects ($KARMIC001) and The Anarchiving Game ($ANARCHIVE), showcasing a mix of seed-derivative iterations and collective collaboration.',
+          'Initially, the Karmetplace features only one collection: The Sphere Karmic Objects ($KARMIC001).',
       },
       {
         title:
           'Which blockchain and standard are used for the collections in the Karmetplace?',
         content:
-          '<span class="font-bold">THE SPHERE KARMIC OBJECTS</span> collection is featured on the Ethereum blockchain using the ERC-1155 standard, and <span class="font-bold">THE ANARCHIVING GAME</span> is hosted on Zora, also utilizing the ERC-1155 standard. These choices ensure a seamless and flexible experience for artists and collectors, and in the case of The Anarching Game, it enables us to leverage the value proposition of Zora, with their model of revenue share of protocol fees.',
-      },
-      {
-        title:
-          'Can I collect NFTs from THE ANARCHIVING GAME contract for free?',
-        content:
-          "Yes. Please go to the corresponding section on <a class='underline text-neutral-300' href='https://thesphere.as' target='_blank' rel='noopener noreferrer'>https://thesphere.as</a> to find which tokens are available to be collected for free, plus a small gas fee on Zora mainnet.",
-      },
-      {
-        title: 'How can I change the network I’m connected to?',
-        content:
-          "The user interface might prompt you to a network change if you need to interact with a network that your wallet is not connected to. If you want to manually add other networks, you can go to <a class='underline text-neutral-300' href='https://chainlist.org/' target='_blank' rel='noopener noreferrer'>https://chainlist.org/</a> and add them to your wallet’s network selector area.",
+          '<span class="font-bold">THE SPHERE KARMIC OBJECTS</span> collection is minted on the Ethereum Mainnet using the ERC-1155 standard.',
       },
       {
         title: 'What are gas fees, and how are they determined?',
         content:
-          "Gas fees are payments made by users to compensate for the computing power required to process and validate transactions on the Ethereum blockchain. They vary based on network demand and transaction complexity. On Zora mainnet, these fees are considerably smaller. On Ethereum mainnet the fees can be a bit higher, but the contract we deployed have optimal gas optimization settings. You can check the status of gas fees prices on <a class='underline text-neutral-300' href='https://etherscan.io/gastracker' target='_blank' rel='noopener noreferrer'>https://etherscan.io/gastracker</a>.",
+          "Gas fees are payments made by users to compensate for the computing energy required to process and validate transactions on the Ethereum blockchain. They vary based on network demand and transaction complexity. Live estimations can be found at <a class='underline text-neutral-300' href='https://etherscan.io/gastracker' target='_blank' rel='noopener noreferrer'>https://etherscan.io/gastracker</a>.",
       },
       {
         title: 'How does onchain royalty enforcement work?',
         content:
-          'Onchain royalty enforcement automatically ensures artists receive a percentage from secondary sales of their artwork, providing ongoing financial support. Secondary royalties are distributed to the original creator of the artworks from time to time, to optimize transaction costs.',
+          "<div class='flex flex-col gap-2'><div>Onchain royalties are enforced via smart contract to ensure seed and derivative artists receive a percentage from secondary sales of their artwork, providing ongoing financial support. There’s also a cut that goes to <span class='font-bold'>The Sphere Common Pool</span>.</div><div>Within The Sphere Karmic Objects collection, there’s a 20% fee on every sale.</div><div>If a token is a <span class='font-bold'>Seed</span>, the breakdown of the distribution of secondary royalties is:</div><ul class='list-disc pl-6'><li>Seed Artist: 14%</li><li>The Sphere Common Pool: 6%</li></ul><div>If a token is a <span class='font-bold'>Derivative</span>, the distribution of secondary royalties is:</div><ul class='list-disc pl-6'><li>Seed Artist: 7%</li><li>Derivative Artist: 7%</li><li>The Sphere Common Pool: 6%</li></ul></div>",
       },
       {
         title: 'Can I contribute to The Sphere Commons Treasury? How?',
         content:
-          'Yes. Even though we operate on a 0% fee structure, sellers on the Karmetplace can allocate up to 90% of their sales proceeds to The Sphere Commons Treasury, supporting the arts community and future projects.',
+          'Yes. Even though we operate on a 0% fee structure, sellers on the Karmetplace can allocate up to 100% of their sales proceeds to The Sphere Common Pool, supporting the arts community and future projects.',
       },
       {
-        title: 'What triggers a new open call for artistic submissions?',
+        title: 'Does The Sphere host special events or exhibitions?',
         content:
-          'When The Sphere Commons Treasury accumulates the equivalent of 10,000 euros in cryptocurrencies or stablecoins, a new open call for artistic seed submissions is launched, fostering continuous creative engagement. After a first governance ritual with quadratic voting, a new seed is chosen; then a new open call for artists to create derivative works from this seed is summoned, starting a new Karmic Funding Campaign.',
-      },
-      {
-        title: 'Does the Karmetplace host special events or exhibitions?',
-        content:
-          "Yes, we host various community events, immersive virtual exhibitions, live presentations, lectures, and encounters. You can connect with us through <a class='underline text-neutral-300' href='https://twitter.com/TheSphere_as' target='_blank' rel='noopener noreferrer'>Twitter</a>, <a class='underline text-neutral-300' href='https://t.me/+o3hn1fgGsQMzZjgx' target='_blank' rel='noopener noreferrer'>Telegram</a>, <a class='underline text-neutral-300' href='https://discord.com/invite/e8K8KPrJ49' target='_blank' rel='noopener noreferrer'>Discord</a>, and <a class='underline text-neutral-300' href='https://thesphere.substack.com/' target='_blank' rel='noopener noreferrer'>Substack</a> to know about our past and upcoming events.",
+          "Yes, we participate in conferences, and host various community events, immersive virtual exhibitions, live presentations, lectures, and encounters. You can connect with us through <a class='underline text-neutral-300' href='https://twitter.com/TheSphere_as' target='_blank' rel='noopener noreferrer'>Twitter</a>, <a class='underline text-neutral-300' href='https://t.me/+o3hn1fgGsQMzZjgx' target='_blank' rel='noopener noreferrer'>Telegram</a>, <a class='underline text-neutral-300' href='https://discord.com/invite/e8K8KPrJ49' target='_blank' rel='noopener noreferrer'>Discord</a>, and <a class='underline text-neutral-300' href='https://thesphere.substack.com/' target='_blank' rel='noopener noreferrer'>Substack</a> to know about our past and upcoming events.",
       },
       {
         title:
@@ -115,10 +102,6 @@ const AboutPage: NextPage = () => {
         content:
           "You can reach out on our <a class='underline text-neutral-300' href='https://t.me/+o3hn1fgGsQMzZjgx' target='_blank' rel='noopener noreferrer'>Telegram</a> channel and ask for support there.",
       },
-      // {
-      //   title: t('faq.q13'),
-      //   content: t('faq.a13'),
-      // },
     ],
   }
 

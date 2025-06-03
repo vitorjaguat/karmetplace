@@ -86,26 +86,27 @@ export const Footer = () => {
       <div className="flex flex-col md:grid md:grid-cols-2 w-full">
         <div className="text-[14px] text-[var(--colors-gray12)] flex flex-col">
           <div className="">Regenerative Commons for Live Arts</div>
-          <div className="">v0.1 - 2023</div>
+          <div className="">v0.2 / 2023-2025</div>
           <div className="">
             Developed by{' '}
             <a
               target="_blank"
               rel="noopener noreferrer"
               href="https://uint.vercel.app"
+              className="hover:tracking-wide duration-700"
             >
               Uint Studio
             </a>
           </div>
-          <div className="">
+          {/* <div className="">
             Powered by{' '}
             <a href="https://reservoir.tools/" className="">
               Reservoir
             </a>
-          </div>
+          </div> */}
         </div>
-        <div className="flex items-end justify-end gap-6">
-          <div className="md:text-left text-[14px] text-[var(--colors-gray12)] flex flex-col justify-end mt-6 md:mt-0">
+        <div className="flex items-end justify-between md:justify-end gap-6">
+          <div className="text-left text-[14px] text-[var(--colors-gray12)] flex flex-col justify-end mt-6 md:mt-0">
             {/* <div className=" hidden md:block">.</div> */}
             <a
               target="_blank"
@@ -122,7 +123,7 @@ export const Footer = () => {
               <div className="">Docs</div>
             </a>
           </div>
-          <div className="text-[14px] text-[var(--colors-gray12)] flex flex-col justify-end md:text-right mt-6 md:mt-0">
+          <div className="text-[14px] text-[var(--colors-gray12)] flex flex-col justify-end text-right mt-6 md:mt-0">
             <a
               target="_blank"
               rel="noopener noreferrer"
