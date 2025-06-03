@@ -545,29 +545,37 @@ export default ({
                 setHeartValue(0)
               }}
               center
+              closeOnEsc
+              showCloseIcon={false}
+              classNames={{
+                modal: 'rounded-md',
+              }}
             >
-              <div className="flex flex-col items-center justify-center px-6 pt-16 pb-4 gap-4 bg-slate-600 text-sm md:text-md">
-                <div className="flex flex-col gap-3">
-                  <div className="">
+              <div className="flex flex-col items-center justify-center px-6 pt-6 pb-4 gap-4 bg-zinc-900 border-[1px] border-neutral-700 text-neutral-100 text-sm md:text-md text-center ">
+                <div className="flex flex-col gap-3 ">
+                  <div className=" text-lg font-bold">
                     Would you like to set a percentage of your sale to be
                     donated to{' '}
-                    <span className="font-bold">
-                      The Sphere Common Treasury
-                    </span>{' '}
+                    <span className="font-bold">The Sphere Common Pool</span>{' '}
                     multisig, so we can continue funding live art?
                   </div>
-                  <div className="">
-                    If YES, select the percentage using the slider, then click
-                    "Next". The donation will be deducted from the total price
-                    you set.
+                  <div className="mt-3 text-sm">
+                    If <span className="font-bold">YES</span>, select the
+                    percentage using the slider, then click{' '}
+                    <span className="font-bold">"Next"</span>.{' '}
+                    <p>
+                      The donation will be deducted from the total price you
+                      set.
+                    </p>
                   </div>
-                  <div className="">
-                    If NOT, that's ok - you can click "Next" and proceed to your
-                    listing.
+                  <div className="text-sm">
+                    If <span className="font-bold">NOT</span>, that's ok - you
+                    can click <span className="font-bold">"Next"</span> and
+                    proceed to your listing.
                   </div>
                 </div>
                 <form className="mt-4 flex flex-col gap-6 w-full items-center">
-                  <div className="text-center gap-8 bg-white/20 rounded-lg p-6 pt-10 px-10 w-fit">
+                  <div className="text-center gap-8 bg-neutral-800 rounded-lg p-6 pt-10 px-10 w-fit shadow-xl shadow-black/100">
                     <input
                       type="range"
                       name="percentage"
@@ -645,7 +653,6 @@ export default ({
               </div>
             </Modal>
 
-            {/* {!isSmallDevice && ( */}
             <>
               {/* transfer MEDIUM/desktop */}
               <div
@@ -672,20 +679,21 @@ export default ({
                     // modalContainer: 'customModal',
                   }
                 }
-                center // transfer modal
+                center
+                showCloseIcon={false}
               >
-                <div className="flex flex-col items-center justify-center px-6 pt-16 pb-4 gap-4 bg-slate-600">
+                <div className="flex flex-col items-center justify-center px-6 pt-6 pb-4 gap-4 bg-zinc-900 border-[1px] border-neutral-700 text-neutral-100 text-sm md:text-md text-center">
                   <div className="flex flex-col gap-3 text-sm">
-                    <div className="">
+                    <div className="font-semibold text-base md:text-lg">
                       Transfer your token to another wallet address.
                     </div>
-                    <div className="">
+                    <div className="mt-3">
                       You can transfer to any address on the same chain as the
                       token.
                     </div>
                   </div>
                   <form className="mt-4 flex flex-col gap-6 w-full items-center">
-                    <div className="text-center gap-8 bg-white/20 rounded-lg pb-6 pt-6 md:pt-10 px-2 md:px-10 text-xs md:text-md w-full">
+                    <div className="text-center gap-8 bg-neutral-800 rounded-lg pb-6 pt-6 md:pt-10 px-2 md:px-10 text-xs md:text-md w-full shadow-xl shadow-black">
                       <label
                         className="text-neutral-300 text-sm md:text-md"
                         htmlFor="newAddress"
