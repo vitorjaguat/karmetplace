@@ -106,7 +106,7 @@ export default ({
   const [orderFees, setOrderFees] = useState<string[]>([])
   useEffect(() => {
     const newOrderFee =
-      '0x2ac85F79d0FBE628594F7BC1d2311cDF700EF57A:' +
+      '0xBFd118f0ff5d6f4D3Eb999eAF197Dbfcc421C5Ea:' +
       Math.floor(heartValue * 79.99) ///////////////////
     setOrderFees([newOrderFee])
   }, [heartValue])
