@@ -271,6 +271,15 @@ const AccountSidebar: FC = () => {
                   </Grid>
                   <Wallet />
 
+                  <Button
+                    size="large"
+                    css={{ my: '$4', justifyContent: 'center' }}
+                    color="gray3"
+                    onClick={() => disconnect()}
+                  >
+                    Disconnect Wallet
+                  </Button>
+
                   <Flex
                     css={{ m: '$4', mt: '$5' }}
                     justify="between"
@@ -281,14 +290,6 @@ const AccountSidebar: FC = () => {
                     </Text>
                     <ThemeSwitcher />
                   </Flex>
-                  <Button
-                    size="large"
-                    css={{ my: '$4', justifyContent: 'center' }}
-                    color="gray3"
-                    onClick={() => disconnect()}
-                  >
-                    Disconnect Wallet
-                  </Button>
                 </Flex>
               </motion.div>
             </Content>
