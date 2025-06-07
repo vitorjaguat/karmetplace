@@ -741,13 +741,21 @@ const TokenTableRow: FC<TokenTableRowProps> = ({
               >
                 <div className="flex flex-col items-center justify-center px-6 pt-6 pb-8 gap-4 bg-zinc-900 border-[1px] border-neutral-700 text-neutral-100 text-sm text-center ">
                   <div className="flex flex-col gap-3">
-                    <div className="text-base font-semibold">
-                      Would you like to set a percentage of your sale to be
-                      donated to{' '}
-                      <span className="font-bold">The Sphere Common Pool</span>{' '}
-                      multisig, so we can continue funding live art?
+                    <div className="mt-2 text-sm">
+                      Every listing in the Karmetplace comes with a 20% fixed
+                      fee, distributed between Seed and Derivative artists; and
+                      the Sphere Common Pool as well.
                     </div>
-                    <div className="mt-3">
+                    <div className="text-base font-semibold text-sph-green leading-snug">
+                      From the 80% of potential earnings, you can choose if you
+                      would like to set a percentage of this sale to be donated
+                      back to{' '}
+                      <span className="text-sph-purple-light font-normal">
+                        The Sphere Common Pool
+                      </span>
+                      , so we can continue funding live art.
+                    </div>
+                    <div className="mt-0">
                       If <span className="font-bold">YES</span>, select the
                       percentage using the slider, then click{' '}
                       <span className="font-bold">"Next"</span>. The donation
@@ -759,8 +767,8 @@ const TokenTableRow: FC<TokenTableRowProps> = ({
                       proceed to your listing.
                     </div>
                   </div>
-                  <form className="mt-4 flex flex-col gap-4">
-                    <div className="text-center bg-neutral-800 rounded-lg p-6 pt-10 px-10 pb-10 flex flex-col gap-6 items-center">
+                  <form className="mt-2 flex flex-col gap-4">
+                    <div className="text-center bg-neutral-800 rounded-lg p-6  flex flex-col gap-6 items-center">
                       <div className="text-center text-neutral-300 flex">
                         Your donation:{' '}
                         <div className=" font-bold w-[3rem]">{heartValue}%</div>
@@ -791,7 +799,7 @@ const TokenTableRow: FC<TokenTableRowProps> = ({
                         onChange={(e) => setHeartValue(+e.target.value)}
                       />
                     </div>
-                    <div className="mt-6 flex gap-4 justify-around">
+                    <div className="mt-4 flex gap-4 justify-around">
                       <button
                         className="py-2 px-3 rounded-lg bg-[#2c2c59]"
                         onClick={() => {
@@ -1580,15 +1588,23 @@ const TokenTableRow: FC<TokenTableRowProps> = ({
                 closeOnEsc
                 showCloseIcon={false}
               >
-                <div className="flex flex-col items-center justify-center px-6 pt-6 pb-4 gap-4 bg-zinc-900 border-[1px] border-neutral-700 text-neutral-100">
-                  <div className="flex flex-col gap-3 text-center">
-                    <div className="text-lg font-semibold">
-                      Would you like to set a percentage of your sale to be
-                      donated to{' '}
-                      <span className="font-bold">The Sphere Common Pool</span>{' '}
-                      multisig, so we can continue funding live art?
+                <div className="flex flex-col items-center justify-center px-6 pt-6 pb-4 gap-4 bg-zinc-900 border-[1px] border-neutral-700 text-neutral-100 font-inter">
+                  <div className="flex flex-col gap-3 text-center max-w-[600px]">
+                    <div className="mt-2 text-sm">
+                      Every listing in the Karmetplace comes with a 20% fixed
+                      fee, distributed between Seed and Derivative artists; and
+                      the Sphere Common Pool as well.
                     </div>
-                    <div className="mt-3 text-sm">
+                    <div className="text-lg font-semibold text-sph-green leading-snug">
+                      From the 80% of potential earnings, you can choose if you
+                      would like to set a percentage of this sale to be donated
+                      back to{' '}
+                      <span className="text-sph-purple-light font-normal">
+                        The Sphere Common Pool
+                      </span>
+                      , so we can continue funding live art.
+                    </div>
+                    <div className="mt-0 text-sm">
                       If <span className="font-bold">YES</span>, select the
                       percentage using the slider, then click{' '}
                       <span className="font-bold">"Next"</span>.{' '}

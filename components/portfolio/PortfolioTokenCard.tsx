@@ -553,13 +553,21 @@ export default ({
             >
               <div className="flex flex-col items-center justify-center px-6 pt-6 pb-4 gap-4 bg-zinc-900 border-[1px] border-neutral-700 text-neutral-100 text-sm md:text-md text-center ">
                 <div className="flex flex-col gap-3 ">
-                  <div className=" text-lg font-bold">
-                    Would you like to set a percentage of your sale to be
-                    donated to{' '}
-                    <span className="font-bold">The Sphere Common Pool</span>{' '}
-                    multisig, so we can continue funding live art?
+                  <div className="mt-2 text-sm">
+                    Every listing in the Karmetplace comes with a 20% fixed fee,
+                    distributed between Seed and Derivative artists; and the
+                    Sphere Common Pool as well.
                   </div>
-                  <div className="mt-3 text-sm">
+                  <div className="text-base font-semibold text-sph-green leading-snug">
+                    From the 80% of potential earnings, you can choose if you
+                    would like to set a percentage of this sale to be donated
+                    back to{' '}
+                    <span className="text-sph-purple-light font-normal">
+                      The Sphere Common Pool
+                    </span>
+                    , so we can continue funding live art.
+                  </div>
+                  <div className="mt-1 text-sm">
                     If <span className="font-bold">YES</span>, select the
                     percentage using the slider, then click{' '}
                     <span className="font-bold">"Next"</span>.{' '}

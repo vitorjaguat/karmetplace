@@ -155,7 +155,9 @@ function AppWrapper(props: AppProps & { baseUrl: string }) {
           <AnalyticsProvider>
             <ErrorTrackingProvider>
               <ReferralContextProvider>
-                <MyApp {...props} />
+                <div className={`${inter.variable} font-inter`}>
+                  <MyApp {...props} />
+                </div>
               </ReferralContextProvider>
             </ErrorTrackingProvider>
           </AnalyticsProvider>
