@@ -87,7 +87,7 @@ const AboutPage: NextPage = () => {
           "<div class='flex flex-col gap-2'><div>Onchain royalties are enforced via smart contract to ensure seed and derivative artists receive a percentage from secondary sales of their artwork, providing ongoing financial support. There’s also a cut that goes to <span class='font-bold'>The Sphere Common Pool</span>.</div><div>Within The Sphere Karmic Objects collection, there’s a 20% fee on every sale.</div><div>If a token is a <span class='font-bold'>Seed</span>, the breakdown of the distribution of secondary royalties is:</div><ul class='list-disc pl-6'><li>Seed Artist: 14%</li><li>The Sphere Common Pool: 6%</li></ul><div>If a token is a <span class='font-bold'>Derivative</span>, the distribution of secondary royalties is:</div><ul class='list-disc pl-6'><li>Seed Artist: 7%</li><li>Derivative Artist: 7%</li><li>The Sphere Common Pool: 6%</li></ul></div>",
       },
       {
-        title: 'Can I contribute to The Sphere Commons Treasury? How?',
+        title: 'Can I contribute to The Sphere Common Pool? How?',
         content:
           'Yes. Even though we operate on a 0% fee structure, sellers on the Karmetplace can allocate up to 100% of their sales proceeds to The Sphere Common Pool, supporting the arts community and future projects.',
       },
