@@ -92,7 +92,7 @@ export const Footer = () => {
             <a
               target="_blank"
               rel="noopener noreferrer"
-              href="https://uint.vercel.app"
+              href="https://uint.studio/"
               className="hover:tracking-wide duration-700"
             >
               Uint Studio
