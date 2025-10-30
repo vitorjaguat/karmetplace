@@ -51,7 +51,10 @@ import { OffersTable } from 'components/token/OffersTable'
 import { ListingsTable } from 'components/token/ListingsTable'
 import { useTheme } from 'next-themes'
 
-type Props = InferGetServerSidePropsType<typeof getServerSideProps>
+type Props = {
+  assetId?: string
+  ssr?: any
+}
 
 type ActivityTypes = Exclude<
   NonNullable<
@@ -74,6 +77,8 @@ const IndexPage: NextPage<Props> = ({ assetId, ssr }) => {
     </Layout>
   )
 
+  // Commented out for maintenance
+  /*
   const assetIdPieces = assetId ? assetId.toString().split(':') : []
   let collectionId = assetIdPieces[0]
   const id = assetIdPieces[1]
@@ -631,6 +636,7 @@ const IndexPage: NextPage<Props> = ({ assetId, ssr }) => {
       </Flex>
     </Layout>
   )
+  */
 }
 
 type SSRProps = {
