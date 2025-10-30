@@ -46,6 +46,7 @@ const Navbar = () => {
 
   return isMobile ? (
     <Flex
+      id="navbar"
       css={{
         height: NAVBAR_HEIGHT_MOBILE,
         px: '$4',

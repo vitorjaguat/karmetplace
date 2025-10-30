@@ -20,8 +20,12 @@ const Layout: FC<Props> = ({ children }) => {
           minHeight: '100vh',
           pt: 80,
         }}
+        className=""
       >
-        <Box css={{ maxWidth: 4500, mx: 'auto' }}>
+        <Box
+          css={{ maxWidth: 4500, mx: 'auto', minHeight: 'calc(100vh - 77px)' }}
+          className="flex flex-col justify-between"
+        >
           <Navbar />
           {!router.pathname.includes('/portfolio') &&
             !router.pathname.includes('/collection') && <Header />}

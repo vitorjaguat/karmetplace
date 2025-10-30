@@ -413,6 +413,17 @@ const CollectionPage: NextPage<Props> = ({ id, ssr }) => {
 
   return (
     <Layout>
+      <div className="relative  z-[1000000000000000]" id="maintainance">
+        <div className="mt-20 h-full w-full flex flex-col justify-center items-center text-white">
+          <p>System maintenance in progress.</p>
+          <p>The Sphere Karmetplace is recalibrating — stay tuned.</p>
+        </div>
+      </div>
+    </Layout>
+  )
+
+  return (
+    <Layout>
       <Head
         ogImage={ssr?.collection?.collections?.[0]?.banner}
         title={ssr?.collection?.collections?.[0]?.name}

@@ -1,81 +1,10 @@
-import { FC } from 'react'
-import { Text, Box, Flex, Anchor, Button } from '../primitives'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTwitter } from '@fortawesome/free-brands-svg-icons'
-
-type SectionTitleProps = {
-  title: string
-}
-
-const SectionTitle: FC<SectionTitleProps> = ({ title }) => (
-  <Text style="subtitle1" css={{ color: '$gray12', mb: 8 }}>
-    {title}
-  </Text>
-)
-
-type SectionLinkProps = {
-  name: string
-  href: string
-}
-
-const SectionLink: FC<SectionLinkProps> = ({ name, href }) => (
-  <Anchor
-    target="_blank"
-    rel="noopener noreferrer"
-    href={href}
-    weight="medium"
-    css={{ fontSize: 14, mt: 16 }}
-  >
-    {name}
-  </Anchor>
-)
-
-const developerSectionLinks = [
-  {
-    name: 'Docs',
-    href: 'https://www.thesphere.as/',
-  },
-  // {
-  //   name: 'API Reference',
-  //   href: 'https://docs.reservoir.tools/reference/overview',
-  // },
-  {
-    name: 'Github',
-    href: 'https://github.com/thesphere',
-  },
-  // {
-  //   name: 'Testnets',
-  //   href: 'https://testnets.reservoir.tools',
-  // },
-]
-
-const companySectionLinks = [
-  // {
-  //   name: 'Jobs',
-  //   href: 'https://jobs.ashbyhq.com/reservoir',
-  // },
-  {
-    name: 'Website',
-    href: 'https://www.thesphere.as/',
-  },
-  {
-    name: 'Docs',
-    href: 'https://docs.thesphere.as/',
-  },
-]
-
 export const Footer = () => {
   return (
     <div
+      id="footer"
       className=" 
     relative z-[1] p-6 md:p-10 flex flex-col w-full items-center md:block text-center md:text-left bg-gray-200/10"
     >
-      {/* <div
-          id="logoAnimation"
-          className="-mt-[30px] scale-[0.5] w-full flex justify-center"
-        >
-          <div className="logo-animation"></div>
-        </div> */}
       <div className="mb-4 md:-ml-[8px]">
         <img
           src="/assets/karmetplace_logo.png"
@@ -98,16 +27,9 @@ export const Footer = () => {
               Uint Studio
             </a>
           </div>
-          {/* <div className="">
-            Powered by{' '}
-            <a href="https://reservoir.tools/" className="">
-              Reservoir
-            </a>
-          </div> */}
         </div>
         <div className="flex items-end justify-between md:justify-end gap-6">
           <div className="text-left text-[14px] text-[var(--colors-gray12)] flex flex-col justify-end mt-6 md:mt-0">
-            {/* <div className=" hidden md:block">.</div> */}
             <a
               target="_blank"
               rel="noopener noreferrer"

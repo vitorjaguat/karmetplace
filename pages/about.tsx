@@ -26,24 +26,6 @@ const AboutPage: NextPage = () => {
         }}
       >
         <div className="max-w-[1000px] flex flex-col items-center pb-32">
-          {/* <div className="w-full flex flex-col md:flex-row md:justify-between items-center gap-4 md:gap-20 mt-3">
-            <Box css={{ color: '$gray11', my: '60px' }}>
-              <div className="">
-                <img
-                  src="/assets/karmetplace_logo.png"
-                  width={isSmallDevice ? 400 : 500}
-                  // height={36}
-                  alt="The Sphere Karmetplace"
-                />
-              </div>
-            </Box>
-            <div className="text-center md:text-right">
-              <div className="text-2xl">
-                The Sphere Karmetplace: A Platform for Live Art and
-                Choreographed Value Distribution
-              </div>
-            </div>
-          </div> */}
           <div className="text-xl md:text-2xl mt-8 md:mt-16 max-w-[800px]">
             <div className="">
               Launched in December 2023, The Sphere Karmetplace emerges as a

@@ -125,19 +125,6 @@ const AboutPage: NextPage = () => {
       >
         <div className="w-full max-w-[1000px] flex flex-col items-center px-1 md:px-0">
           <div className="w-full flex flex-col md:flex-row justify-between items-center gap-8 md:gap-20 "></div>
-          {/* <div className="text-lg mt-8 max-w-[800px]">
-            <div className="">
-              Launched in December 2023, The Sphere Karmetplace emerges as a
-              unique platform, fostering the connection between live art, its
-              creators, and the audiences that support them.
-            </div>
-            <div className="">
-              Developed by Vitor Butkus (Uint Studio) and powered by the
-              Reservoir Protocol, this marketplace is dedicated to the
-              circulation of live art seeds and derivatives within a
-              collaborative spirit of art creation.
-            </div>
-          </div> */}
           <div className="py-6 mt-10 mb-24 text-left">
             <Faq data={data} styles={styles} config={config} />
           </div>
