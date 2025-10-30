@@ -63,6 +63,17 @@ type ActivityTypes = Exclude<
 >
 
 const IndexPage: NextPage<Props> = ({ assetId, ssr }) => {
+  return (
+    <Layout>
+      <div className="relative  z-[1000000000000000]" id="maintainance">
+        <div className="mt-20 h-full w-full flex flex-col justify-center items-center text-white">
+          <p>System maintenance in progress.</p>
+          <p>The Sphere Karmetplace is recalibrating — stay tuned.</p>
+        </div>
+      </div>
+    </Layout>
+  )
+
   const assetIdPieces = assetId ? assetId.toString().split(':') : []
   let collectionId = assetIdPieces[0]
   const id = assetIdPieces[1]
@@ -81,19 +92,6 @@ const IndexPage: NextPage<Props> = ({ assetId, ssr }) => {
   const { proxyApi } = useMarketplaceChain()
   const contract = collectionId ? collectionId?.split(':')[0] : undefined
 
-  //Prevent that users access non-greenlisted addresses: (see getServerSideProps below)
-  // useEffect(() => {
-  //   if (
-  //     collectionId !== '0x69b377c8dddc25ae26c422d39b45744bb67aab4b' &&
-  //     collectionId !== '0xe27f011e8eb90b4d42fa7658fbe44e240d9c5f03' &&
-  //     collectionId !== '0x01a8c25b7f28443875d982c8236c59699ce70dd9' &&
-  //     collectionId !== '0x9523e213d3929be2c6f48e5dafe2b8a3d4fd3e39'
-  //   ) {
-  //     router.replace('/404')
-  //     return
-  //   }
-  // }, [])
-
   const { data: tokens, mutate } = useDynamicTokens(
     {
       tokens: [`${contract}:${id}`],
@@ -105,7 +103,6 @@ const IndexPage: NextPage<Props> = ({ assetId, ssr }) => {
       fallbackData: [ssr.tokens ? ssr.tokens : {}],
     }
   )
-  // console.log(tokens)
 
   const token = tokens && tokens[0] ? tokens[0] : undefined
   const is1155 = token?.token?.kind === 'erc1155'
@@ -477,13 +474,6 @@ const IndexPage: NextPage<Props> = ({ assetId, ssr }) => {
                     href={`/portfolio/${account.address || ''}`}
                     legacyBehavior={true}
                   >
-                    {/* <Anchor
-                      color="primary"
-                      weight="normal"
-                      css={{ ml: '$1', fontSize: 12 }}
-                    >
-                      Sell
-                    </Anchor> */}
                     <div
                       className={
                         'px-5 py-1 text-sm font-bold rounded-lg flex items-center cursor-pointer duration-300' +
@@ -655,85 +645,92 @@ import { chain } from 'lodash'
 import ReactMarkdown from 'react-markdown'
 
 export const getServerSideProps: GetServerSideProps<{
-  assetId?: string
-  ssr: SSRProps
+  // assetId?: string
+  // ssr: SSRProps
 }> = async ({ params, res }) => {
-  const assetId = params?.assetId ? params.assetId.toString().split(':') : []
-  let collectionId = assetId[0]
+  // const assetId = params?.assetId ? params.assetId.toString().split(':') : []
+  // let collectionId = assetId[0]
 
-  //preventing that users access non-greenlisted addresses:
-  if (!filterContractsTheSphere.includes(collectionId as string)) {
-    return {
-      redirect: {
-        destination: '/404',
-        permanent: false,
-      },
-    }
-  }
+  // //preventing that users access non-greenlisted addresses:
+  // if (!filterContractsTheSphere.includes(collectionId as string)) {
+  //   return {
+  //     redirect: {
+  //       destination: '/404',
+  //       permanent: false,
+  //     },
+  //   }
+  // }
 
-  const id = assetId[1]
-  const { reservoirBaseUrl } =
-    supportedChains.find((chain) => params?.chain === chain.routePrefix) ||
-    DefaultChain
+  // const id = assetId[1]
+  // const { reservoirBaseUrl } =
+  //   supportedChains.find((chain) => params?.chain === chain.routePrefix) ||
+  //   DefaultChain
 
-  const contract = collectionId ? collectionId?.split(':')[0] : undefined
+  // const contract = collectionId ? collectionId?.split(':')[0] : undefined
 
-  const headers = {
-    headers: {
-      'x-api-key': process.env.RESERVOIR_API_KEY || '',
-    },
-  }
+  // const headers = {
+  //   headers: {
+  //     'x-api-key': process.env.RESERVOIR_API_KEY || '',
+  //   },
+  // }
 
-  let tokensQuery: paths['/tokens/v6']['get']['parameters']['query'] = {
-    tokens: [`${contract}:${id}`],
-    includeAttributes: true,
-    includeTopBid: true,
-    normalizeRoyalties: NORMALIZE_ROYALTIES,
-    includeDynamicPricing: true,
-  }
+  // let tokensQuery: paths['/tokens/v6']['get']['parameters']['query'] = {
+  //   tokens: [`${contract}:${id}`],
+  //   includeAttributes: true,
+  //   includeTopBid: true,
+  //   normalizeRoyalties: NORMALIZE_ROYALTIES,
+  //   includeDynamicPricing: true,
+  // }
 
-  let tokens: SSRProps['tokens'] = null
-  let collection: SSRProps['collection'] = null
+  // let tokens: SSRProps['tokens'] = null
+  // let collection: SSRProps['collection'] = null
 
-  try {
-    const tokensPromise = fetcher(
-      `${reservoirBaseUrl}/tokens/v6`,
-      tokensQuery,
-      headers
-    )
+  // try {
+  //   const tokensPromise = fetcher(
+  //     `${reservoirBaseUrl}/tokens/v6`,
+  //     tokensQuery,
+  //     headers
+  //   )
 
-    const tokensResponse = await tokensPromise
-    tokens = tokensResponse.data
-      ? (tokensResponse.data as Props['ssr']['tokens'])
-      : {}
+  //   const tokensResponse = await tokensPromise
+  //   tokens = tokensResponse.data
+  //     ? (tokensResponse.data as Props['ssr']['tokens'])
+  //     : {}
 
-    let collectionQuery: paths['/collections/v7']['get']['parameters']['query'] =
-      {
-        id: tokens?.tokens?.[0]?.token?.collection?.id,
-        normalizeRoyalties: NORMALIZE_ROYALTIES,
-      }
+  //   let collectionQuery: paths['/collections/v7']['get']['parameters']['query'] =
+  //     {
+  //       id: tokens?.tokens?.[0]?.token?.collection?.id,
+  //       normalizeRoyalties: NORMALIZE_ROYALTIES,
+  //     }
 
-    const collectionsPromise = fetcher(
-      `${reservoirBaseUrl}/collections/v7`,
-      collectionQuery,
-      headers
-    )
+  //   const collectionsPromise = fetcher(
+  //     `${reservoirBaseUrl}/collections/v7`,
+  //     collectionQuery,
+  //     headers
+  //   )
 
-    const collectionsResponse = await collectionsPromise
-    collection = collectionsResponse.data
-      ? (collectionsResponse.data as Props['ssr']['collection'])
-      : {}
+  //   const collectionsResponse = await collectionsPromise
+  //   collection = collectionsResponse.data
+  //     ? (collectionsResponse.data as Props['ssr']['collection'])
+  //     : {}
 
-    res.setHeader(
-      'Cache-Control',
-      'public, s-maxage=30, stale-while-revalidate=60'
-    )
-  } catch (e) {}
+  //   res.setHeader(
+  //     'Cache-Control',
+  //     'public, s-maxage=30, stale-while-revalidate=60'
+  //   )
+  // } catch (e) {}
+
+  // return {
+  //   props: {
+  //     assetId: params?.assetId as string,
+  //     ssr: { collection, tokens },
+  //   },
+  // }
 
   return {
     props: {
-      assetId: params?.assetId as string,
-      ssr: { collection, tokens },
+      // assetId: '1',
+      // ssr: { collection: '', tokens: '' },
     },
   }
 }

@@ -28,7 +28,8 @@ const Layout: FC<Props> = ({ children }) => {
         >
           <Navbar />
           {!router.pathname.includes('/portfolio') &&
-            !router.pathname.includes('/collection') && <Header />}
+            !router.pathname.includes('/collection') &&
+            !router.pathname.includes('/asset') && <Header />}
           <main>{children}</main>
           {!router.pathname.includes('/portfolio') && <Footer />}
         </Box>

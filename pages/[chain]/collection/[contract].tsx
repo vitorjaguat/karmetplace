@@ -377,7 +377,6 @@ const CollectionPage: NextPage<Props> = ({ id, ssr }) => {
     method: 'GET',
     headers: { accept: '*/*', 'x-api-key': 'demo-api-key' },
   }
-  // console.log(collectionChain)
   useEffect(() => {
     let collection
     console.log(id)
@@ -391,25 +390,6 @@ const CollectionPage: NextPage<Props> = ({ id, ssr }) => {
       .then((response) => setOwners(response?.owners))
       .catch((err) => console.error(err))
   }, [id])
-
-  // console.log(owners)
-
-  //owners' ENS:
-  // const [ensNames, setEnsNames] = useState<string[]>([])
-  // useEffect(() => {
-  //   let ensNames: string[] = []
-  //   owners.map((owner) => {
-  //     const ensName: string = useEnsName({ address: owner.address })
-  //       .data as string
-  //     ensNames.push(ensName)
-  //   })
-  //   setEnsNames(ensNames)
-  // }, [owners])
-  // const { data, isError, isLoading } = useEnsName({
-  //   address: '0x95aa6CF80aa61c3433215c7b8330C065eD29CE97',
-  //   chainId: 1,
-  // })
-  // console.log(data, isError, isLoading)
 
   return (
     <Layout>
